@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 import { isSupabaseConfigured } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 
@@ -5,32 +7,37 @@ export type WorkspaceIdentity = {
   userId: string;
   email: string;
   fullName: string;
-  organizationId: string | null;
+  organizationId: string;
   organizationName: string;
 };
 
-export async function getWorkspaceIdentity(): Promise<WorkspaceIdentity | null> {
-  if (!isSupabaseConfigured()) {
-    return null;
-  }
+export const getWorkspaceIdentity = cache(
+  async function getWorkspaceIdentity(): Promise<WorkspaceIdentity | null> {
+    if (!isSupabaseConfigured()) {
+      return null;
+    }
 
-  const supabase = await createClient();
-  const { data } = await supabase.auth.getClaims();
-  const claims = data?.claims;
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  if (!claims?.sub) {
-    return null;
-  }
+    if (!user) {
+      return null;
+    }
 
-  const { data: profile } = await supabase
-    .from("users")
-    .select("full_name, organization_id")
-    .eq("id", claims.sub)
-    .maybeSingle();
+    const { data: profile } = await supabase
+      .from("users")
+      .select("full_name, organization_id")
+      .eq("id", user.id)
+      .maybeSingle();
 
-  let organizationName = "Minha empresa";
+    if (!profile?.organization_id) {
+      return null;
+    }
 
-  if (profile?.organization_id) {
+    let organizationName = "Minha empresa";
+
     const { data: organization } = await supabase
       .from("organizations")
       .select("name")
@@ -38,20 +45,20 @@ export async function getWorkspaceIdentity(): Promise<WorkspaceIdentity | null> 
       .maybeSingle();
 
     organizationName = organization?.name ?? organizationName;
-  }
 
-  const email =
-    typeof claims.email === "string" ? claims.email : "usuario@moducore.com";
+    const email =
+      typeof user.email === "string" ? user.email : "usuario@moducore.com";
 
-  return {
-    userId: claims.sub,
-    email,
-    fullName:
-      profile?.full_name ??
-      (typeof claims.user_metadata?.full_name === "string"
-        ? claims.user_metadata.full_name
-        : email.split("@")[0]),
-    organizationId: profile?.organization_id ?? null,
-    organizationName,
-  };
-}
+    return {
+      userId: user.id,
+      email,
+      fullName:
+        profile.full_name ??
+        (typeof user.user_metadata?.full_name === "string"
+          ? user.user_metadata.full_name
+          : email.split("@")[0]),
+      organizationId: profile.organization_id,
+      organizationName,
+    };
+  },
+);

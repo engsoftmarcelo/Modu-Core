@@ -38,6 +38,17 @@ yarn-error.log*
 # vercel
 .vercel
 
+# supabase local
+/supabase/.branches/
+/supabase/.temp/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local ai tools
+.claude/
+.cline/
+.cursor/
+.cursorrules
+.aider*

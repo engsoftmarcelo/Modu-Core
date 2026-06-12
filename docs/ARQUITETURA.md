@@ -25,6 +25,8 @@ src/
   features/
     agenda/
     crm/
+      customers/          regras, consultas, acoes e componentes de clientes
+      leads/              funil, regras, consultas, acoes e componentes de leads
     dashboard/
     matriculas/
     ordens-servico/
@@ -57,6 +59,34 @@ layout protegido faz uma segunda verificacao no servidor antes de renderizar.
 Configuracao, consultas e componentes especificos devem ficar dentro de
 `src/features/<modulo>`. Componentes realmente compartilhados ficam em
 `src/components`.
+
+### CRUD de clientes
+
+O dominio de clientes usa Server Components para leitura e Server Actions para
+criacao, atualizacao e exclusao. O mesmo schema Zod valida criacao e edicao.
+Todas as operacoes incluem o `organization_id` da sessao e continuam protegidas
+pelas politicas de RLS do banco.
+
+### CRUD de leads
+
+Os leads seguem o mesmo fluxo de Server Components e Server Actions, com seis
+etapas comerciais: novo, em contato, proposta enviada, negociacao, fechado e
+perdido. O responsavel inicial e o usuario que cria a oportunidade, e o resumo
+do funil e calculado apenas com registros da organizacao autenticada.
+
+O pipeline kanban exibe as cinco etapas ativas do processo comercial. A
+movimentacao usa atualizacao otimista no cliente e persiste a nova etapa por
+Server Action. Alem de arrastar no desktop, cada card oferece um seletor para
+uso por toque ou teclado.
+
+### Tarefas e follow-ups
+
+O dominio de tarefas fica em `features/tarefas` e usa a tabela `tasks` existente.
+Cada registro pode ser vinculado a um cliente ou a um lead, nunca aos dois ao
+mesmo tempo. As Server Actions validam que o registro relacionado pertence a
+organizacao autenticada antes de persistir o vinculo. O responsavel inicial e o
+usuario atual, e prazo, prioridade e status alimentam tanto a lista operacional
+quanto os indicadores do dashboard.
 
 ## Proximas fronteiras
 

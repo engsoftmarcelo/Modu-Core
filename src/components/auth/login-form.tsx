@@ -3,10 +3,8 @@
 import Link from "next/link";
 import { useActionState } from "react";
 
-import {
-  initialAuthState,
-  loginAction,
-} from "@/app/(auth)/actions";
+import { loginAction } from "@/app/(auth)/actions";
+import { initialAuthState } from "@/app/(auth)/auth-state";
 import { SubmitButton } from "@/components/auth/submit-button";
 
 const inputClassName =

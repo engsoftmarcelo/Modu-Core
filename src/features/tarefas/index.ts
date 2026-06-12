@@ -9,8 +9,8 @@ export const tarefasModule = {
   icon: ListChecks,
   accent: "amber" as const,
   nextSteps: [
-    "Criar tarefas com prioridade",
-    "Definir prazo e responsavel",
-    "Relacionar tarefas a clientes",
+    "Acompanhar tarefas e follow-ups",
+    "Priorizar pendencias por prazo",
+    "Relacionar clientes e leads",
   ],
 };

@@ -123,7 +123,7 @@ export default async function DashboardPage() {
               { label: "Cadastrar cliente", href: "/crm", icon: UsersRound },
               { label: "Agendar atendimento", href: "/agenda", icon: CalendarClock },
               { label: "Criar proposta", href: "/propostas", icon: CircleDollarSign },
-              { label: "Adicionar tarefa", href: "/tarefas", icon: ListChecks },
+              { label: "Adicionar tarefa", href: "/tarefas/novo", icon: ListChecks },
             ].map((action) => {
               const Icon = action.icon;
               return (

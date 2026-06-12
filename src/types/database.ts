@@ -29,8 +29,11 @@ type CustomerRow = Timestamps & {
   id: string;
   organization_id: string;
   name: string;
+  company: string | null;
   email: string | null;
   phone: string | null;
+  whatsapp: string | null;
+  segment: string | null;
   document: string | null;
   notes: string | null;
   status: "active" | "inactive";
@@ -45,7 +48,13 @@ type LeadRow = Timestamps & {
   email: string | null;
   phone: string | null;
   source: string | null;
-  status: "new" | "contacted" | "qualified" | "won" | "lost";
+  status:
+    | "new"
+    | "contacted"
+    | "proposal_sent"
+    | "negotiation"
+    | "won"
+    | "lost";
   estimated_value: number;
   notes: string | null;
 };
@@ -85,6 +94,7 @@ type ProposalRow = Timestamps & {
   subtotal: number;
   discount: number;
   total: number;
+  services: string | null;
   notes: string | null;
 };
 
@@ -136,8 +146,11 @@ export type Database = {
           id?: string;
           organization_id: string;
           name: string;
+          company?: string | null;
           email?: string | null;
           phone?: string | null;
+          whatsapp?: string | null;
+          segment?: string | null;
           document?: string | null;
           notes?: string | null;
           status?: "active" | "inactive";
@@ -156,7 +169,13 @@ export type Database = {
           email?: string | null;
           phone?: string | null;
           source?: string | null;
-          status?: "new" | "contacted" | "qualified" | "won" | "lost";
+          status?:
+            | "new"
+            | "contacted"
+            | "proposal_sent"
+            | "negotiation"
+            | "won"
+            | "lost";
           estimated_value?: number;
           notes?: string | null;
           created_at?: string;
@@ -208,6 +227,7 @@ export type Database = {
           subtotal?: number;
           discount?: number;
           total?: number;
+          services?: string | null;
           notes?: string | null;
           created_at?: string;
           updated_at?: string;

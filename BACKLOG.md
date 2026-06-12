@@ -12,17 +12,20 @@ abaixo representa prioridade recomendada.
 - [x] Criar migracao inicial com RLS multiempresa.
 - [x] Implementar login, cadastro, logout e protecao de rotas.
 - [x] Documentar escopo e arquitetura.
-- [ ] Criar projeto no painel do Supabase e aplicar a migracao.
-- [ ] Configurar as variaveis de ambiente locais e de producao.
-- [ ] Publicar o repositorio remoto no GitHub.
+- [x] Configurar Supabase local e aplicar as migracoes.
+- [x] Configurar as variaveis de ambiente locais.
+- [x] Publicar o repositorio remoto no GitHub.
+- [ ] Configurar Supabase e variaveis de ambiente de producao.
 
 ## P1 - CRM funcional
 
-- [ ] CRUD de clientes.
-- [ ] CRUD de leads.
-- [ ] Funil visual por status.
+- [x] CRUD de clientes.
+- [x] CRUD de leads.
+- [x] Resumo visual do funil por status.
+- [x] Pipeline kanban de leads.
 - [ ] Historico de interacoes.
-- [ ] Busca e filtros.
+- [x] Busca e filtros de clientes.
+- [x] Busca e filtros de leads.
 - [ ] Importacao de clientes por CSV.
 
 ## P1 - Agenda e tarefas
@@ -30,12 +33,14 @@ abaixo representa prioridade recomendada.
 - [ ] Agenda diaria e semanal.
 - [ ] Criacao e edicao de compromissos.
 - [ ] Vinculo entre compromisso e cliente.
-- [ ] CRUD de tarefas.
-- [ ] Prioridade, prazo e responsavel.
+- [x] CRUD de tarefas e follow-ups.
+- [x] Prioridade, prazo e responsavel.
+- [x] Vinculo de tarefas com clientes e leads.
 - [ ] Visao de pendencias no dashboard.
 
 ## P2 - Comercial
 
+- [x] Tela de proposta simples (cliente, servicos, valor, prazo, status).
 - [ ] Catalogo de servicos.
 - [ ] Criacao de propostas com itens.
 - [ ] Geracao de PDF.

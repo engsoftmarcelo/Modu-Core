@@ -1,8 +1,10 @@
 # ModuCore
 
-Plataforma SaaS modular para pequenos negocios de servico em Belo Horizonte.
+O ModuCore é um SaaS modular feito para facilitar a vida de pequenos negócios de serviços. Ele junta as ferramentas do dia a dia da empresa em um lugar só, incluindo um CRM de clientes, gestão de leads num quadro kanban, controle de tarefas e criação de propostas.
 
-## Stack
+O código está dividido por domínios na pasta `features` e isola as rotas públicas da área logada. O banco de dados fica no Supabase com isolamento multiempresa configurado via Row Level Security (RLS).
+
+## Stack Principal
 
 - Next.js 16
 - React 19
@@ -10,44 +12,26 @@ Plataforma SaaS modular para pequenos negocios de servico em Belo Horizonte.
 - Tailwind CSS 4
 - Supabase
 
-## Primeiros passos
+## Como rodar
 
-1. Instale as dependencias:
-
+1. Instale as dependências:
 ```bash
 npm install
 ```
 
-2. Copie `.env.example` para `.env.local` e preencha as credenciais do projeto
-   Supabase.
+2. Copie o arquivo de variáveis de ambiente e preencha os dados do Supabase:
+```bash
+cp .env.example .env.local
+```
 
-3. Aplique `supabase/migrations/202606070001_initial_schema.sql` no SQL Editor
-   do Supabase ou com a Supabase CLI.
+3. Rode as migrações pra preparar o banco local com a CLI do Supabase:
+```bash
+npx supabase migration up --local
+```
 
-4. Inicie o projeto:
-
+4. Suba o servidor:
 ```bash
 npm run dev
 ```
 
-A aplicacao estara disponivel em `http://localhost:3000`.
-
-## Scripts
-
-```bash
-npm run dev
-npm run lint
-npm run typecheck
-npm run build
-```
-
-## Documentacao
-
-- [Escopo](docs/ESCOPO.md)
-- [Arquitetura](docs/ARQUITETURA.md)
-- [Backlog](BACKLOG.md)
-
-## Estrutura
-
-As rotas publicas ficam em `src/app/(auth)` e as rotas internas em
-`src/app/(app)`. Cada dominio possui uma pasta propria em `src/features`.
+Acesse em `http://localhost:3000`.

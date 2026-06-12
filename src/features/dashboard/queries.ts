@@ -42,7 +42,7 @@ export async function getDashboardMetrics(
       .from("leads")
       .select("*", { count: "exact", head: true })
       .eq("organization_id", organizationId)
-      .in("status", ["new", "contacted", "qualified"]),
+      .in("status", ["new", "contacted", "proposal_sent", "negotiation"]),
     supabase
       .from("tasks")
       .select("*", { count: "exact", head: true })

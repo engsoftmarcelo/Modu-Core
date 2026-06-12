@@ -6,15 +6,7 @@ import { redirect } from "next/navigation";
 import { isSupabaseConfigured } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 
-export type AuthState = {
-  status: "idle" | "error" | "success";
-  message: string;
-};
-
-export const initialAuthState: AuthState = {
-  status: "idle",
-  message: "",
-};
+import type { AuthState } from "./auth-state";
 
 function getString(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
