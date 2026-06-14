@@ -10,13 +10,14 @@ import {
   type TaskPriority,
   type TaskRelationOptions,
   type TaskStatus,
+  type TaskStatusFilter,
   type TaskWithRelation,
 } from "./types";
 
 export type TaskListFilters = {
   priority?: TaskPriority | "all";
   query?: string;
-  status?: TaskStatus | "all";
+  status?: TaskStatusFilter;
 };
 
 export type TaskStats = {
@@ -113,7 +114,9 @@ export async function getTasks(filters: TaskListFilters = {}) {
     .order("created_at", { ascending: false })
     .limit(100);
 
-  if (filters.status && filters.status !== "all") {
+  if (filters.status === "open") {
+    query = query.in("status", ["pending", "in_progress"]);
+  } else if (filters.status && filters.status !== "all") {
     query = query.eq("status", filters.status);
   }
 
@@ -253,6 +256,12 @@ export const getTaskById = cache(async function getTaskById(taskId: string) {
 
 export function isTaskStatus(value: string | undefined): value is TaskStatus {
   return taskStatuses.includes(value as TaskStatus);
+}
+
+export function isTaskStatusFilter(
+  value: string | undefined,
+): value is TaskStatusFilter {
+  return value === "all" || value === "open" || isTaskStatus(value);
 }
 
 export function isTaskPriority(

@@ -2,6 +2,7 @@ import type { Database } from "@/types/database";
 
 export type Task = Database["public"]["Tables"]["tasks"]["Row"];
 export type TaskStatus = Task["status"];
+export type TaskStatusFilter = TaskStatus | "open" | "all";
 export type TaskPriority = Task["priority"];
 export type TaskRelationType = "customer" | "lead";
 

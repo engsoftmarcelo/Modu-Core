@@ -19,6 +19,7 @@ abaixo representa prioridade recomendada.
 
 ## P1 - CRM funcional
 
+- [x] Dashboard do CRM com indicadores comerciais.
 - [x] CRUD de clientes.
 - [x] CRUD de leads.
 - [x] Resumo visual do funil por status.

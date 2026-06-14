@@ -77,6 +77,7 @@ export async function createLeadAction(
   }
 
   revalidatePath("/crm/leads");
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect(`/crm/leads/${data.id}?created=1`);
 }
@@ -129,6 +130,7 @@ export async function updateLeadAction(
 
   revalidatePath("/crm/leads");
   revalidatePath(`/crm/leads/${leadId}`);
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect(`/crm/leads/${leadId}?updated=1`);
 }
@@ -160,6 +162,7 @@ export async function deleteLeadAction(leadId: string) {
   }
 
   revalidatePath("/crm/leads");
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect("/crm/leads?deleted=1");
 }
@@ -195,6 +198,7 @@ export async function moveLeadStageAction(
   }
 
   revalidatePath("/crm/leads");
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
 
   return { error: null };

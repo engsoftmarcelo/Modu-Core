@@ -10,8 +10,9 @@ import {
   Megaphone,
 } from "lucide-react";
 import {
+  type ChangeEvent,
   type DragEvent,
-  type FormEvent,
+  useOptimistic,
   useState,
   useTransition,
 } from "react";
@@ -75,8 +76,17 @@ function isKanbanStatus(status: Lead["status"]): status is LeadKanbanStatus {
 
 export function LeadKanban({ leads }: LeadKanbanProps) {
   const router = useRouter();
-  const [items, setItems] = useState(() =>
+  const [items, moveOptimisticLead] = useOptimistic(
     leads.filter((lead) => isKanbanStatus(lead.status)),
+    (
+      current,
+      update: { leadId: string; nextStatus: LeadKanbanStatus },
+    ) =>
+      current.map((item) =>
+        item.id === update.leadId
+          ? { ...item, status: update.nextStatus }
+          : item,
+      ),
   );
   const [draggedLeadId, setDraggedLeadId] = useState<string | null>(null);
   const [dragOverStatus, setDragOverStatus] =
@@ -97,25 +107,15 @@ export function LeadKanban({ leads }: LeadKanbanProps) {
       return;
     }
 
-    const previousStatus = lead.status;
     setErrorMessage(null);
-    setItems((current) =>
-      current.map((item) =>
-        item.id === leadId ? { ...item, status: nextStatus } : item,
-      ),
-    );
     setDraggedLeadId(null);
     setDragOverStatus(null);
 
     startTransition(async () => {
+      moveOptimisticLead({ leadId, nextStatus });
       const result = await moveLeadStageAction(leadId, nextStatus);
 
       if (result.error) {
-        setItems((current) =>
-          current.map((item) =>
-            item.id === leadId ? { ...item, status: previousStatus } : item,
-          ),
-        );
         setErrorMessage(result.error);
         return;
       }
@@ -137,7 +137,7 @@ export function LeadKanban({ leads }: LeadKanbanProps) {
   }
 
   function handleStatusChange(
-    event: FormEvent<HTMLSelectElement>,
+    event: ChangeEvent<HTMLSelectElement>,
     leadId: string,
   ) {
     moveLead(leadId, event.currentTarget.value as LeadKanbanStatus);

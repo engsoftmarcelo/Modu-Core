@@ -103,6 +103,7 @@ export async function createProposalAction(
   }
 
   revalidatePath("/propostas");
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect(`/propostas/${data.id}?created=1`);
 }
@@ -167,6 +168,7 @@ export async function updateProposalAction(
 
   revalidatePath("/propostas");
   revalidatePath(`/propostas/${proposalId}`);
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect(`/propostas/${proposalId}?updated=1`);
 }
@@ -203,6 +205,7 @@ export async function updateProposalStatusAction(
 
   revalidatePath("/propostas");
   revalidatePath(`/propostas/${proposalId}`);
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
 
   return { error: null };
@@ -233,6 +236,7 @@ export async function deleteProposalAction(proposalId: string) {
   }
 
   revalidatePath("/propostas");
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect("/propostas?deleted=1");
 }

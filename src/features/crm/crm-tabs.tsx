@@ -1,17 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { Target, UsersRound } from "lucide-react";
+import { LayoutDashboard, Target, UsersRound } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
 const tabs = [
   {
+    href: "/crm/dashboard",
+    label: "Dashboard",
+    icon: LayoutDashboard,
+    isActive: (pathname: string) => pathname.startsWith("/crm/dashboard"),
+  },
+  {
     href: "/crm",
     label: "Clientes",
     icon: UsersRound,
-    isActive: (pathname: string) => !pathname.startsWith("/crm/leads"),
+    isActive: (pathname: string) =>
+      !pathname.startsWith("/crm/leads") &&
+      !pathname.startsWith("/crm/dashboard"),
   },
   {
     href: "/crm/leads",
@@ -27,7 +35,7 @@ export function CrmTabs() {
   return (
     <nav
       aria-label="Areas do CRM"
-      className="inline-flex rounded-xl border border-slate-200 bg-white p-1 shadow-sm"
+      className="inline-flex max-w-full overflow-x-auto rounded-xl border border-slate-200 bg-white p-1 shadow-sm"
     >
       {tabs.map((tab) => {
         const Icon = tab.icon;

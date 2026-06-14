@@ -9,13 +9,13 @@ import {
   taskStatuses,
   taskStatusLabels,
   type TaskPriority,
-  type TaskStatus,
+  type TaskStatusFilter,
 } from "../types";
 
 type TaskSearchProps = {
   priority: TaskPriority | "all";
   query: string;
-  status: TaskStatus | "all";
+  status: TaskStatusFilter;
 };
 
 export function TaskSearch({ priority, query, status }: TaskSearchProps) {
@@ -47,6 +47,7 @@ export function TaskSearch({ priority, query, status }: TaskSearchProps) {
           className="min-w-0 flex-1 bg-transparent text-sm font-semibold text-slate-700 outline-none"
         >
           <option value="all">Todos os status</option>
+          <option value="open">Em aberto</option>
           {taskStatuses.map((taskStatus) => (
             <option key={taskStatus} value={taskStatus}>
               {taskStatusLabels[taskStatus]}

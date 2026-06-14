@@ -9,7 +9,7 @@ const items = [
   {
     key: "open",
     label: "Em aberto",
-    href: "/tarefas?status=pending",
+    href: "/tarefas?status=open",
     icon: ListChecks,
     iconClassName: "bg-amber-50 text-amber-700",
   },

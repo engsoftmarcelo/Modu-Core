@@ -79,6 +79,14 @@ movimentacao usa atualizacao otimista no cliente e persiste a nova etapa por
 Server Action. Alem de arrastar no desktop, cada card oferece um seletor para
 uso por toque ou teclado.
 
+### Dashboard do CRM
+
+O dashboard comercial fica em `/crm/dashboard` e consulta apenas agregados da
+organizacao autenticada. Os indicadores usam os status atuais de leads,
+propostas e tarefas: novos, propostas enviadas, propostas aceitas, valor
+estimado em negociacao e tarefas ainda abertas. Cada card aponta para a lista
+filtrada que explica o numero exibido.
+
 ### Tarefas e follow-ups
 
 O dominio de tarefas fica em `features/tarefas` e usa a tabela `tasks` existente.

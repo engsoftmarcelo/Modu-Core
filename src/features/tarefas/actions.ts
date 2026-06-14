@@ -120,6 +120,7 @@ export async function createTaskAction(
   }
 
   revalidatePath("/tarefas");
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect(`/tarefas/${data.id}?created=1`);
 }
@@ -184,6 +185,7 @@ export async function updateTaskAction(
 
   revalidatePath("/tarefas");
   revalidatePath(`/tarefas/${taskId}`);
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect(`/tarefas/${taskId}?updated=1`);
 }
@@ -220,6 +222,7 @@ export async function updateTaskStatusAction(
 
   revalidatePath("/tarefas");
   revalidatePath(`/tarefas/${taskId}`);
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
 
   return { error: null };
@@ -250,6 +253,7 @@ export async function deleteTaskAction(taskId: string) {
   }
 
   revalidatePath("/tarefas");
+  revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
   redirect("/tarefas?deleted=1");
 }

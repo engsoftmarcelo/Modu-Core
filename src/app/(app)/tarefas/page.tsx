@@ -10,11 +10,11 @@ import {
   getTasks,
   getTaskStats,
   isTaskPriority,
-  isTaskStatus,
+  isTaskStatusFilter,
 } from "@/features/tarefas/queries";
 import type {
   TaskPriority,
-  TaskStatus,
+  TaskStatusFilter,
 } from "@/features/tarefas/types";
 
 export const metadata: Metadata = { title: "Tarefas" };
@@ -31,7 +31,7 @@ type TasksPageProps = {
 export default async function TasksPage({ searchParams }: TasksPageProps) {
   const params = await searchParams;
   const query = String(params.q ?? "").trim().slice(0, 80);
-  const status: TaskStatus | "all" = isTaskStatus(params.status)
+  const status: TaskStatusFilter = isTaskStatusFilter(params.status)
     ? params.status
     : "all";
   const priority: TaskPriority | "all" = isTaskPriority(params.priority)
