@@ -34,6 +34,8 @@ abaixo representa prioridade recomendada.
 - [ ] Agenda diaria e semanal.
 - [ ] Criacao e edicao de compromissos.
 - [ ] Vinculo entre compromisso e cliente.
+- [x] CRUD de servicos (nome, duracao, preco, descricao, ativo/inativo).
+- [x] CRUD de profissionais (especialidade, horario, servicos que realiza).
 - [x] CRUD de tarefas e follow-ups.
 - [x] Prioridade, prazo e responsavel.
 - [x] Vinculo de tarefas com clientes e leads.
@@ -42,7 +44,7 @@ abaixo representa prioridade recomendada.
 ## P2 - Comercial
 
 - [x] Tela de proposta simples (cliente, servicos, valor, prazo, status).
-- [ ] Catalogo de servicos.
+- [x] Catalogo de servicos.
 - [ ] Criacao de propostas com itens.
 - [ ] Geracao de PDF.
 - [ ] Envio por link.

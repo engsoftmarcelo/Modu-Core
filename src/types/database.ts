@@ -108,6 +108,22 @@ type ServiceRow = Timestamps & {
   active: boolean;
 };
 
+type ProfessionalRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  name: string;
+  specialty: string | null;
+  available_hours: string | null;
+  active: boolean;
+};
+
+type ProfessionalServiceRow = {
+  organization_id: string;
+  professional_id: string;
+  service_id: string;
+  created_at: string;
+};
+
 type TableDefinition<Row, Insert, Update = Partial<Insert>> = {
   Row: Row;
   Insert: Insert;
@@ -245,6 +261,28 @@ export type Database = {
           active?: boolean;
           created_at?: string;
           updated_at?: string;
+        }
+      >;
+      professionals: TableDefinition<
+        ProfessionalRow,
+        {
+          id?: string;
+          organization_id: string;
+          name: string;
+          specialty?: string | null;
+          available_hours?: string | null;
+          active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      professional_services: TableDefinition<
+        ProfessionalServiceRow,
+        {
+          organization_id: string;
+          professional_id: string;
+          service_id: string;
+          created_at?: string;
         }
       >;
     };

@@ -38,3 +38,16 @@ export function formatDate(value: string) {
     timeZone: "UTC",
   }).format(new Date(value));
 }
+
+export function formatDuration(minutes: number | null) {
+  if (!minutes || minutes <= 0) {
+    return "Sem duracao";
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+
+  if (hours && rest) return `${hours}h ${rest}min`;
+  if (hours) return `${hours}h`;
+  return `${rest}min`;
+}
