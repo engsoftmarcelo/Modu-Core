@@ -76,6 +76,8 @@ type AppointmentRow = Timestamps & {
   id: string;
   organization_id: string;
   customer_id: string | null;
+  professional_id: string | null;
+  service_id: string | null;
   title: string;
   starts_at: string;
   ends_at: string;
@@ -221,6 +223,8 @@ export type Database = {
           id?: string;
           organization_id: string;
           customer_id?: string | null;
+          professional_id?: string | null;
+          service_id?: string | null;
           title: string;
           starts_at: string;
           ends_at: string;

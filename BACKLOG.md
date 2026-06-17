@@ -31,9 +31,9 @@ abaixo representa prioridade recomendada.
 
 ## P1 - Agenda e tarefas
 
-- [ ] Agenda diaria e semanal.
-- [ ] Criacao e edicao de compromissos.
-- [ ] Vinculo entre compromisso e cliente.
+- [x] Agenda diaria e semanal com grade de horarios.
+- [x] Criacao, edicao e cancelamento de agendamentos.
+- [x] Vinculo de agendamento com cliente, profissional e servico.
 - [x] CRUD de servicos (nome, duracao, preco, descricao, ativo/inativo).
 - [x] CRUD de profissionais (especialidade, horario, servicos que realiza).
 - [x] CRUD de tarefas e follow-ups.
