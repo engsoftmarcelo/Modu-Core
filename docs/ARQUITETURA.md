@@ -43,6 +43,16 @@ src/
 
 Todas as tabelas operacionais possuem `organization_id`. As politicas de Row
 Level Security usam `current_organization_id()` para impedir acesso cruzado.
+`organization_memberships` define a organizacao ativa e o papel do usuario.
+Relacionamentos entre entidades de negocio usam FKs compostas com
+`organization_id`, impedindo vinculos acidentais entre empresas.
+
+As duas excecoes de leitura sao intencionais: o usuario pode descobrir as
+organizacoes e associacoes das quais ele proprio faz parte para alternar o
+espaco ativo. Dados operacionais, usuarios de outras empresas e anexos no
+Storage continuam filtrados pela organizacao selecionada. A migracao
+`202606120025` valida essas invariantes e falha se uma politica tenant perder o
+filtro por `current_organization_id()`.
 
 ### Cadastro
 
@@ -96,9 +106,32 @@ organizacao autenticada antes de persistir o vinculo. O responsavel inicial e o
 usuario atual, e prazo, prioridade e status alimentam tanto a lista operacional
 quanto os indicadores do dashboard.
 
+### Propostas
+
+`proposal_items` e a fonte canonica do escopo e dos valores. A tela simples
+continua com um unico campo de servicos, mas salva cabecalho e item por uma RPC
+transacional. Subtotal, resumo e total sao recalculados por trigger.
+
+### Matriculas e frequencia
+
+O ciclo academico e o pagamento usam status independentes. O banco valida
+capacidade da turma, matricula ativa, periodo e dia da semana antes de aceitar
+uma frequencia.
+
+### Ordens de servico
+
+Conclusoes exigem aceite e aprovador, recebem horario do banco e nao podem ser
+alteradas enquanto a ordem estiver concluida. Criacao, mudanca de status,
+orcamento, conclusao e reabertura sao registrados em `work_order_events`.
+
+### Testes do banco
+
+As invariantes de RLS, privilegios e dominio possuem testes pgTAP em
+`supabase/tests/database_integrity.test.sql`. O procedimento completo esta em
+`docs/AUDITORIA_BANCO.md`.
+
 ## Proximas fronteiras
 
 - Gerar os tipos do banco com Supabase CLI em CI.
-- Adicionar testes unitarios para regras de dominio.
-- Adicionar testes end-to-end para login e isolamento multiempresa.
-- Criar camada de validacao com Zod quando os primeiros CRUDs forem iniciados.
+- Executar os testes pgTAP e o build em CI.
+- Adicionar testes end-to-end de login e fluxos completos no deploy de preview.

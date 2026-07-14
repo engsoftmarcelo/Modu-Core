@@ -216,7 +216,7 @@ export function ProposalForm({
         <textarea
           id="services"
           name="services"
-          defaultValue={proposal?.services ?? ""}
+          defaultValue={proposal?.service_summary ?? ""}
           maxLength={2000}
           rows={6}
           placeholder="Liste os servicos incluidos, escopo e entregaveis..."

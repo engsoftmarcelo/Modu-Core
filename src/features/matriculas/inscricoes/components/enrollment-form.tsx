@@ -15,6 +15,8 @@ import {
   updateEnrollmentAction,
 } from "../actions";
 import {
+  enrollmentPaymentStatusLabels,
+  enrollmentPaymentStatuses,
   enrollmentStatusLabels,
   enrollmentStatuses,
   initialEnrollmentFormState,
@@ -164,6 +166,30 @@ export function EnrollmentForm({
             {enrollmentStatuses.map((status) => (
               <option key={status} value={status}>
                 {enrollmentStatusLabels[status]}
+              </option>
+            ))}
+          </select>
+        </Field>
+
+        <Field
+          label="Pagamento"
+          name="paymentStatus"
+          required
+          error={state.errors.paymentStatus}
+        >
+          <select
+            id="paymentStatus"
+            name="paymentStatus"
+            defaultValue={enrollment?.payment_status ?? "pending"}
+            className={cn(
+              controlClassName,
+              state.errors.paymentStatus && "border-red-300",
+            )}
+            required
+          >
+            {enrollmentPaymentStatuses.map((status) => (
+              <option key={status} value={status}>
+                {enrollmentPaymentStatusLabels[status]}
               </option>
             ))}
           </select>

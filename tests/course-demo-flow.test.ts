@@ -45,6 +45,7 @@ const identity = {
   fullName: "Dono da Escola",
   organizationId,
   organizationName: "Escola Horizonte",
+  role: "owner" as const,
   userId: "00000000-0000-4000-8000-000000000002",
 };
 
@@ -220,6 +221,7 @@ describe("demo guiada de cursos", () => {
       formData([
         ["studentId", studentId],
         ["courseClassId", classId],
+        ["paymentStatus", "paid"],
         ["status", "enrolled"],
         ["demo", "1"],
       ]),

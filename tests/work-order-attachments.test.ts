@@ -61,6 +61,7 @@ beforeEach(() => {
     fullName: "Dono da Empresa",
     organizationId,
     organizationName: "Servicos Demo",
+    role: "owner",
     userId,
   });
 });

@@ -40,6 +40,7 @@ const identity = {
   fullName: "Dono da Empresa",
   organizationId,
   organizationName: "Servicos Demo",
+  role: "owner" as const,
   userId: "00000000-0000-4000-8000-000000000002",
 };
 

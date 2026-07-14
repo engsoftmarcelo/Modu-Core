@@ -1,13 +1,15 @@
 import { z } from "zod";
 
-import { enrollmentStatuses } from "./types";
+import { enrollmentPaymentStatuses, enrollmentStatuses } from "./types";
 
 const enrollmentStatusSchema = z.enum(enrollmentStatuses);
+const enrollmentPaymentStatusSchema = z.enum(enrollmentPaymentStatuses);
 
 export const enrollmentSchema = z.object({
   studentId: z.uuid("Selecione um aluno valido."),
   courseClassId: z.uuid("Selecione uma turma valida."),
   status: enrollmentStatusSchema,
+  paymentStatus: enrollmentPaymentStatusSchema,
 });
 
 export type EnrollmentFormValues = z.infer<typeof enrollmentSchema>;
@@ -17,5 +19,6 @@ export function parseEnrollmentForm(formData: FormData) {
     studentId: String(formData.get("studentId") ?? ""),
     courseClassId: String(formData.get("courseClassId") ?? ""),
     status: String(formData.get("status") ?? ""),
+    paymentStatus: String(formData.get("paymentStatus") ?? ""),
   });
 }

@@ -109,7 +109,7 @@ export function ProposalList({
                       {proposal.title}
                     </Link>
                     <p className="mt-1 max-w-sm truncate text-sm text-slate-500">
-                      {proposal.services || "Servicos nao descritos"}
+                      {proposal.service_summary || "Servicos nao descritos"}
                     </p>
                   </td>
                   <td className="px-5 py-4">

@@ -25,6 +25,13 @@ type UserRow = Timestamps & {
   role: "owner" | "admin" | "member";
 };
 
+type OrganizationMembershipRow = Timestamps & {
+  organization_id: string;
+  user_id: string;
+  role: "owner" | "admin" | "member";
+  is_default: boolean;
+};
+
 type CustomerRow = Timestamps & {
   id: string;
   organization_id: string;
@@ -96,8 +103,21 @@ type ProposalRow = Timestamps & {
   subtotal: number;
   discount: number;
   total: number;
-  services: string | null;
+  service_summary: string | null;
   notes: string | null;
+};
+
+type ProposalItemRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  proposal_id: string;
+  service_id: string | null;
+  description: string;
+  quantity: number;
+  unit_price: number;
+  discount: number;
+  total: number;
+  position: number;
 };
 
 type ServiceRow = Timestamps & {
@@ -126,9 +146,20 @@ type ProfessionalServiceRow = {
   created_at: string;
 };
 
+type ProfessionalAvailabilityRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  professional_id: string;
+  weekday: number;
+  starts_at: string;
+  ends_at: string;
+  active: boolean;
+};
+
 type StudentRow = Timestamps & {
   id: string;
   organization_id: string;
+  customer_id: string | null;
   name: string;
   whatsapp: string | null;
   email: string | null;
@@ -152,6 +183,7 @@ type CourseClassRow = Timestamps & {
   id: string;
   organization_id: string;
   course_id: string;
+  professional_id: string | null;
   teacher: string;
   start_date: string;
   end_date: string;
@@ -163,10 +195,11 @@ type CourseClassRow = Timestamps & {
 type EnrollmentStatus =
   | "interested"
   | "enrolled"
-  | "paid"
   | "in_progress"
   | "completed"
   | "cancelled";
+
+type EnrollmentPaymentStatus = "pending" | "paid" | "refunded" | "waived";
 
 type EnrollmentRow = Timestamps & {
   id: string;
@@ -174,6 +207,7 @@ type EnrollmentRow = Timestamps & {
   student_id: string;
   course_class_id: string;
   status: EnrollmentStatus;
+  payment_status: EnrollmentPaymentStatus;
 };
 
 type AttendanceStatus = "present" | "absent";
@@ -199,6 +233,7 @@ type WorkOrderRow = Timestamps & {
   id: string;
   organization_id: string;
   customer_id: string | null;
+  professional_id: string | null;
   address: string;
   service_type: string;
   description: string;
@@ -215,6 +250,23 @@ type WorkOrderRow = Timestamps & {
   completion_notes: string | null;
   completion_accepted: boolean;
   completed_at: string | null;
+};
+
+type WorkOrderEventRow = {
+  id: string;
+  organization_id: string;
+  work_order_id: string;
+  actor_id: string | null;
+  event_type:
+    | "created"
+    | "status_changed"
+    | "quote_updated"
+    | "completed"
+    | "reopened";
+  from_status: WorkOrderStatus | null;
+  to_status: WorkOrderStatus | null;
+  metadata: Json;
+  created_at: string;
 };
 
 type WorkOrderChecklistItemKey =
@@ -278,6 +330,17 @@ export type Database = {
           organization_id: string;
           full_name: string;
           role?: "owner" | "admin" | "member";
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      organization_memberships: TableDefinition<
+        OrganizationMembershipRow,
+        {
+          organization_id: string;
+          user_id: string;
+          role?: "owner" | "admin" | "member";
+          is_default?: boolean;
           created_at?: string;
           updated_at?: string;
         }
@@ -370,9 +433,24 @@ export type Database = {
           valid_until?: string | null;
           subtotal?: number;
           discount?: number;
-          total?: number;
-          services?: string | null;
+          service_summary?: string | null;
           notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      proposal_items: TableDefinition<
+        ProposalItemRow,
+        {
+          id?: string;
+          organization_id: string;
+          proposal_id: string;
+          service_id?: string | null;
+          description: string;
+          quantity?: number;
+          unit_price?: number;
+          discount?: number;
+          position?: number;
           created_at?: string;
           updated_at?: string;
         }
@@ -413,11 +491,26 @@ export type Database = {
           created_at?: string;
         }
       >;
+      professional_availability: TableDefinition<
+        ProfessionalAvailabilityRow,
+        {
+          id?: string;
+          organization_id: string;
+          professional_id: string;
+          weekday: number;
+          starts_at: string;
+          ends_at: string;
+          active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
       students: TableDefinition<
         StudentRow,
         {
           id?: string;
           organization_id: string;
+          customer_id?: string | null;
           name: string;
           whatsapp?: string | null;
           email?: string | null;
@@ -449,6 +542,7 @@ export type Database = {
           id?: string;
           organization_id: string;
           course_id: string;
+          professional_id?: string | null;
           teacher: string;
           start_date: string;
           end_date: string;
@@ -467,6 +561,7 @@ export type Database = {
           student_id: string;
           course_class_id: string;
           status?: EnrollmentStatus;
+          payment_status?: EnrollmentPaymentStatus;
           created_at?: string;
           updated_at?: string;
         }
@@ -490,6 +585,7 @@ export type Database = {
           id?: string;
           organization_id: string;
           customer_id?: string | null;
+          professional_id?: string | null;
           address: string;
           service_type: string;
           description: string;
@@ -507,6 +603,20 @@ export type Database = {
           completed_at?: string | null;
           created_at?: string;
           updated_at?: string;
+        }
+      >;
+      work_order_events: TableDefinition<
+        WorkOrderEventRow,
+        {
+          id?: string;
+          organization_id: string;
+          work_order_id: string;
+          actor_id?: string | null;
+          event_type: WorkOrderEventRow["event_type"];
+          from_status?: WorkOrderStatus | null;
+          to_status?: WorkOrderStatus | null;
+          metadata?: Json;
+          created_at?: string;
         }
       >;
       work_order_checklist_items: TableDefinition<
@@ -543,9 +653,75 @@ export type Database = {
     };
     Views: Record<string, never>;
     Functions: {
+      add_organization_member: {
+        Args: {
+          target_user_id: string;
+          target_role?: "owner" | "admin" | "member";
+        };
+        Returns: undefined;
+      };
       current_organization_id: {
         Args: Record<PropertyKey, never>;
         Returns: string;
+      };
+      current_user_can_administer: {
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
+      current_user_can_write: {
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
+      current_user_is_owner: {
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
+      current_user_role: {
+        Args: Record<PropertyKey, never>;
+        Returns: "owner" | "admin" | "member" | null;
+      };
+      delete_proposal: {
+        Args: { p_proposal_id: string };
+        Returns: boolean;
+      };
+      remove_organization_member: {
+        Args: { target_user_id: string };
+        Returns: undefined;
+      };
+      save_simple_proposal: {
+        Args: {
+          p_proposal_id: string | null;
+          p_customer_id: string;
+          p_proposal_title: string;
+          p_service_description: string;
+          p_proposal_value: number;
+          p_valid_until_date: string;
+          p_proposal_status: ProposalRow["status"];
+          p_proposal_notes: string;
+        };
+        Returns: string;
+      };
+      set_organization_member_role: {
+        Args: {
+          target_user_id: string;
+          target_role: "owner" | "admin" | "member";
+        };
+        Returns: undefined;
+      };
+      set_proposal_status: {
+        Args: {
+          p_proposal_id: string;
+          p_proposal_status: ProposalRow["status"];
+        };
+        Returns: boolean;
+      };
+      switch_organization: {
+        Args: { target_organization_id: string };
+        Returns: undefined;
+      };
+      user_has_organization_membership: {
+        Args: { target_organization_id: string };
+        Returns: boolean;
       };
     };
     Enums: {

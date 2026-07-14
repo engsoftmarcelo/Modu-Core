@@ -9,6 +9,7 @@ import {
   CalendarClock,
   CheckCircle2,
   ChevronLeft,
+  CircleDollarSign,
   GraduationCap,
   Pencil,
   UserRound,
@@ -16,9 +17,15 @@ import {
 
 import { Card } from "@/components/ui/card";
 import { CourseDemoProgress } from "@/features/matriculas/demo/course-demo-progress";
-import { EnrollmentStatusBadge } from "@/features/matriculas/inscricoes/components/enrollment-status-badge";
+import {
+  EnrollmentPaymentStatusBadge,
+  EnrollmentStatusBadge,
+} from "@/features/matriculas/inscricoes/components/enrollment-status-badge";
 import { getEnrollmentById } from "@/features/matriculas/inscricoes/queries";
-import { enrollmentStatusLabels } from "@/features/matriculas/inscricoes/types";
+import {
+  enrollmentPaymentStatusLabels,
+  enrollmentStatusLabels,
+} from "@/features/matriculas/inscricoes/types";
 import { MatriculasTabs } from "@/features/matriculas/matriculas-tabs";
 import { formatDateTime } from "@/lib/utils";
 
@@ -103,8 +110,11 @@ export default async function EnrollmentDetailsPage({
             <h1 className="truncate text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
               {enrollment.studentName ?? "Matricula"}
             </h1>
-            <div className="mt-2">
+            <div className="mt-2 flex flex-wrap gap-2">
               <EnrollmentStatusBadge status={enrollment.status} />
+              <EnrollmentPaymentStatusBadge
+                status={enrollment.payment_status}
+              />
             </div>
           </div>
         </div>
@@ -143,6 +153,11 @@ export default async function EnrollmentDetailsPage({
               icon={BadgeCheck}
               label="Status"
               value={enrollmentStatusLabels[enrollment.status]}
+            />
+            <InfoItem
+              icon={CircleDollarSign}
+              label="Pagamento"
+              value={enrollmentPaymentStatusLabels[enrollment.payment_status]}
             />
           </div>
         </Card>

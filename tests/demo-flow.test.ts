@@ -49,6 +49,7 @@ const identity = {
   fullName: "Dono da Empresa",
   organizationId,
   organizationName: "Studio Demo",
+  role: "owner" as const,
 };
 
 const getWorkspaceIdentityMock = vi.mocked(getWorkspaceIdentity);

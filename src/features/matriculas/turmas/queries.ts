@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { CourseClass, CourseClassWithCourse } from "./types";
 
 const classColumns =
-  "id, organization_id, course_id, teacher, start_date, end_date, weekdays, class_time, capacity, created_at, updated_at";
+  "id, organization_id, course_id, professional_id, teacher, start_date, end_date, weekdays, class_time, capacity, created_at, updated_at";
 
 async function attachCourseNames(
   classes: CourseClass[],

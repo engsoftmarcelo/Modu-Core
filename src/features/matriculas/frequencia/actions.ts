@@ -42,7 +42,7 @@ async function getEnrolledStudentIds(courseClassId: string, organizationId: stri
     .select("student_id")
     .eq("organization_id", organizationId)
     .eq("course_class_id", courseClassId)
-    .in("status", ["enrolled", "paid", "in_progress", "completed"]);
+    .in("status", ["enrolled", "in_progress", "completed"]);
 
   if (error) {
     return null;

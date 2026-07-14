@@ -12,7 +12,10 @@ import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 
 import type { EnrollmentWithRelations } from "../types";
-import { EnrollmentStatusBadge } from "./enrollment-status-badge";
+import {
+  EnrollmentPaymentStatusBadge,
+  EnrollmentStatusBadge,
+} from "./enrollment-status-badge";
 
 export function EnrollmentList({
   count,
@@ -55,13 +58,14 @@ export function EnrollmentList({
       </div>
 
       <div className="hidden overflow-x-auto lg:block">
-        <table className="w-full min-w-[900px] border-collapse text-left">
+        <table className="w-full min-w-[980px] border-collapse text-left">
           <thead>
             <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
               <th className="px-6 py-4">Aluno</th>
               <th className="px-5 py-4">Turma</th>
               <th className="px-5 py-4">Professor</th>
               <th className="px-5 py-4">Status</th>
+              <th className="px-5 py-4">Pagamento</th>
               <th className="px-5 py-4">Criada em</th>
               <th className="px-6 py-4 text-right">Acoes</th>
             </tr>
@@ -88,6 +92,11 @@ export function EnrollmentList({
                 </td>
                 <td className="px-5 py-4">
                   <EnrollmentStatusBadge status={enrollment.status} />
+                </td>
+                <td className="px-5 py-4">
+                  <EnrollmentPaymentStatusBadge
+                    status={enrollment.payment_status}
+                  />
                 </td>
                 <td className="px-5 py-4 text-sm font-semibold text-slate-600">
                   {formatDate(enrollment.created_at)}
@@ -132,6 +141,9 @@ export function EnrollmentList({
                   {enrollment.studentName ?? "Aluno nao informado"}
                 </p>
                 <EnrollmentStatusBadge status={enrollment.status} />
+                <EnrollmentPaymentStatusBadge
+                  status={enrollment.payment_status}
+                />
               </div>
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs font-medium text-slate-500">
                 <span className="inline-flex items-center gap-1.5">

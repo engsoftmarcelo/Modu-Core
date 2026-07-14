@@ -6,7 +6,6 @@ import type { AttendanceStudent, AttendanceStatus } from "./types";
 
 const attendanceEnrollmentStatuses = [
   "enrolled",
-  "paid",
   "in_progress",
   "completed",
 ] as const;

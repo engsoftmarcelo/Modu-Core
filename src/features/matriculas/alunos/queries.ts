@@ -29,7 +29,7 @@ export async function getStudents(filters: StudentListFilters = {}) {
   let query = supabase
     .from("students")
     .select(
-      "id, organization_id, name, whatsapp, email, cpf, notes, status, created_at, updated_at",
+      "id, organization_id, customer_id, name, whatsapp, email, cpf, notes, status, created_at, updated_at",
       { count: "exact" },
     )
     .eq("organization_id", identity.organizationId)
@@ -78,7 +78,7 @@ export const getStudentById = cache(async function getStudentById(
   const { data, error } = await supabase
     .from("students")
     .select(
-      "id, organization_id, name, whatsapp, email, cpf, notes, status, created_at, updated_at",
+      "id, organization_id, customer_id, name, whatsapp, email, cpf, notes, status, created_at, updated_at",
     )
     .eq("id", studentId)
     .eq("organization_id", identity.organizationId)

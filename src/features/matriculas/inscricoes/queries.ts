@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { Enrollment, EnrollmentWithRelations } from "./types";
 
 const enrollmentColumns =
-  "id, organization_id, student_id, course_class_id, status, created_at, updated_at";
+  "id, organization_id, student_id, course_class_id, status, payment_status, created_at, updated_at";
 
 async function attachRelations(
   enrollments: Enrollment[],

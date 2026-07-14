@@ -45,6 +45,7 @@ const identity = {
   fullName: "Dono da Empresa",
   organizationId,
   organizationName: "Empresa BH",
+  role: "owner" as const,
 };
 
 const getWorkspaceIdentityMock = vi.mocked(getWorkspaceIdentity);
@@ -267,9 +268,9 @@ describe("fluxos principais do CRM", () => {
 
   it("cria uma proposta apenas para um cliente da organizacao", async () => {
     const lookup = createLookupClient(customerId);
-    const database = createInsertClient(proposalId);
+    const rpc = vi.fn().mockResolvedValue({ data: proposalId, error: null });
     queueClient(lookup.client);
-    queueClient(database.client);
+    queueClient({ rpc });
 
     await createProposalAction(
       initialProposalFormState,
@@ -290,18 +291,15 @@ describe("fluxos principais do CRM", () => {
       "organization_id",
       organizationId,
     );
-    expect(database.from).toHaveBeenCalledWith("proposals");
-    expect(database.insert).toHaveBeenCalledWith({
-      organization_id: organizationId,
-      customer_id: customerId,
-      title: "Projeto de implantacao",
-      services: "Diagnostico, configuracao e treinamento.",
-      subtotal: 18900,
-      discount: 0,
-      total: 18900,
-      valid_until: "2026-06-30",
-      status: "sent",
-      notes: "Pagamento em duas parcelas.",
+    expect(rpc).toHaveBeenCalledWith("save_simple_proposal", {
+      p_customer_id: customerId,
+      p_proposal_id: null,
+      p_proposal_notes: "Pagamento em duas parcelas.",
+      p_proposal_status: "sent",
+      p_proposal_title: "Projeto de implantacao",
+      p_proposal_value: 18900,
+      p_service_description: "Diagnostico, configuracao e treinamento.",
+      p_valid_until_date: "2026-06-30",
     });
     expect(revalidatePathMock).toHaveBeenCalledWith("/crm/dashboard");
     expect(redirectMock).toHaveBeenCalledWith(

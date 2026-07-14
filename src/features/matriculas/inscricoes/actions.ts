@@ -98,6 +98,7 @@ export async function createEnrollmentAction(
       organization_id: organizationId,
       student_id: values.studentId,
       course_class_id: values.courseClassId,
+      payment_status: values.paymentStatus,
       status: values.status,
     })
     .select("id")
@@ -151,6 +152,7 @@ export async function updateEnrollmentAction(
     .update({
       student_id: values.studentId,
       course_class_id: values.courseClassId,
+      payment_status: values.paymentStatus,
       status: values.status,
     })
     .eq("id", enrollmentId)

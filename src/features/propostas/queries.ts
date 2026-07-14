@@ -24,7 +24,7 @@ export type ProposalStats = {
 };
 
 const proposalColumns =
-  "id, organization_id, customer_id, title, status, valid_until, subtotal, discount, total, services, notes, created_at, updated_at";
+  "id, organization_id, customer_id, title, status, valid_until, subtotal, discount, total, service_summary, notes, created_at, updated_at";
 
 function sanitizeSearchTerm(value: string) {
   return value
@@ -96,7 +96,7 @@ export async function getProposals(filters: ProposalListFilters = {}) {
 
   if (searchTerm) {
     query = query.or(
-      `title.ilike.%${searchTerm}%,services.ilike.%${searchTerm}%`,
+      `title.ilike.%${searchTerm}%,service_summary.ilike.%${searchTerm}%`,
     );
   }
 

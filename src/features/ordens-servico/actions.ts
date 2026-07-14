@@ -125,6 +125,12 @@ export async function createWorkOrderAction(
     });
   }
 
+  if (["quoted", "approved", "in_progress"].includes(values.status)) {
+    return validationError({
+      status: ["Crie a ordem como solicitada e registre o orcamento primeiro."],
+    });
+  }
+
   if (
     !(await customerBelongsToOrganization(
       values.customerId,

@@ -13,11 +13,12 @@ function formData(values: Record<string, string>) {
 }
 
 describe("schema de matriculas", () => {
-  it("aceita aluno, turma e status da matricula", () => {
+  it("aceita aluno, turma, status academico e pagamento", () => {
     const parsed = parseEnrollmentForm(
       formData({
         studentId: "00000000-0000-4000-8000-000000000201",
         courseClassId: "00000000-0000-4000-8000-000000000301",
+        paymentStatus: "paid",
         status: "enrolled",
       }),
     );
@@ -26,6 +27,7 @@ describe("schema de matriculas", () => {
     if (parsed.success) {
       expect(parsed.data).toMatchObject({
         courseClassId: "00000000-0000-4000-8000-000000000301",
+        paymentStatus: "paid",
         status: "enrolled",
         studentId: "00000000-0000-4000-8000-000000000201",
       });
@@ -37,6 +39,7 @@ describe("schema de matriculas", () => {
       formData({
         studentId: "aluno",
         courseClassId: "turma",
+        paymentStatus: "desconhecido",
         status: "aguardando",
       }),
     );
@@ -48,6 +51,7 @@ describe("schema de matriculas", () => {
       expect(errors.studentId).toContain("Selecione um aluno valido.");
       expect(errors.courseClassId).toContain("Selecione uma turma valida.");
       expect(errors.status).toBeDefined();
+      expect(errors.paymentStatus).toBeDefined();
     }
   });
 });

@@ -3,6 +3,7 @@ import type { Database } from "@/types/database";
 export type Enrollment = Database["public"]["Tables"]["enrollments"]["Row"];
 
 export type EnrollmentStatus = Enrollment["status"];
+export type EnrollmentPaymentStatus = Enrollment["payment_status"];
 
 export type EnrollmentWithRelations = Enrollment & {
   className: string | null;
@@ -26,7 +27,6 @@ export const initialEnrollmentFormState: EnrollmentFormState = {
 export const enrollmentStatuses = [
   "interested",
   "enrolled",
-  "paid",
   "in_progress",
   "completed",
   "cancelled",
@@ -35,8 +35,24 @@ export const enrollmentStatuses = [
 export const enrollmentStatusLabels: Record<EnrollmentStatus, string> = {
   interested: "Interessado",
   enrolled: "Matriculado",
-  paid: "Pago",
   in_progress: "Em andamento",
   completed: "Concluido",
   cancelled: "Cancelado",
+};
+
+export const enrollmentPaymentStatuses = [
+  "pending",
+  "paid",
+  "refunded",
+  "waived",
+] as const;
+
+export const enrollmentPaymentStatusLabels: Record<
+  EnrollmentPaymentStatus,
+  string
+> = {
+  pending: "Pendente",
+  paid: "Pago",
+  refunded: "Reembolsado",
+  waived: "Isento",
 };

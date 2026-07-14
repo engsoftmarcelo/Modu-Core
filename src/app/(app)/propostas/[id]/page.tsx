@@ -138,7 +138,7 @@ export default async function ProposalDetailsPage({
               <h2 className="font-bold text-ink-950">Servicos</h2>
             </div>
             <p className="mt-5 whitespace-pre-wrap text-sm leading-7 text-slate-600">
-              {proposal.services || "Nenhum servico descrito."}
+              {proposal.service_summary || "Nenhum servico descrito."}
             </p>
           </Card>
 

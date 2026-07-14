@@ -7,7 +7,7 @@ import { z } from "zod";
 import { getWorkspaceIdentity } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 
-import { nullable, parseProposalForm } from "./schema";
+import { parseProposalForm } from "./schema";
 import {
   proposalStatuses,
   type ProposalFormState,
@@ -79,24 +79,21 @@ export async function createProposalAction(
   }
 
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("proposals")
-    .insert({
-      organization_id: identity.organizationId,
-      customer_id: values.customerId,
-      title: values.title,
-      services: values.services,
-      subtotal: values.value,
-      discount: 0,
-      total: values.value,
-      valid_until: values.validUntil,
-      status: values.status,
-      notes: nullable(values.notes),
-    })
-    .select("id")
-    .single();
+  const { data: proposalId, error } = await supabase.rpc(
+    "save_simple_proposal",
+    {
+      p_customer_id: values.customerId,
+      p_proposal_id: null,
+      p_proposal_notes: values.notes,
+      p_proposal_status: values.status,
+      p_proposal_title: values.title,
+      p_proposal_value: values.value,
+      p_service_description: values.services,
+      p_valid_until_date: values.validUntil,
+    },
+  );
 
-  if (error || !data) {
+  if (error || !proposalId) {
     return databaseError(
       "Nao foi possivel criar a proposta. Tente novamente em instantes.",
     );
@@ -105,7 +102,7 @@ export async function createProposalAction(
   revalidatePath("/propostas");
   revalidatePath("/crm/dashboard");
   revalidatePath("/dashboard");
-  redirect(`/propostas/${data.id}?created=1`);
+  redirect(`/propostas/${proposalId}?created=1`);
 }
 
 export async function updateProposalAction(
@@ -142,25 +139,21 @@ export async function updateProposalAction(
   }
 
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("proposals")
-    .update({
-      customer_id: values.customerId,
-      title: values.title,
-      services: values.services,
-      subtotal: values.value,
-      discount: 0,
-      total: values.value,
-      valid_until: values.validUntil,
-      status: values.status,
-      notes: nullable(values.notes),
-    })
-    .eq("id", proposalId)
-    .eq("organization_id", identity.organizationId)
-    .select("id")
-    .maybeSingle();
+  const { data: savedProposalId, error } = await supabase.rpc(
+    "save_simple_proposal",
+    {
+      p_customer_id: values.customerId,
+      p_proposal_id: proposalId,
+      p_proposal_notes: values.notes,
+      p_proposal_status: values.status,
+      p_proposal_title: values.title,
+      p_proposal_value: values.value,
+      p_service_description: values.services,
+      p_valid_until_date: values.validUntil,
+    },
+  );
 
-  if (error || !data) {
+  if (error || !savedProposalId) {
     return databaseError(
       "Nao foi possivel atualizar a proposta. Confira se ela ainda existe.",
     );
@@ -192,14 +185,12 @@ export async function updateProposalStatusAction(
 
   const supabase = await createClient();
   const { data, error } = await supabase
-    .from("proposals")
-    .update({ status: parsedStatus.data })
-    .eq("id", parsedId.data)
-    .eq("organization_id", identity.organizationId)
-    .select("id")
-    .maybeSingle();
+    .rpc("set_proposal_status", {
+      p_proposal_id: parsedId.data,
+      p_proposal_status: parsedStatus.data,
+    });
 
-  if (error || !data) {
+  if (error || data !== true) {
     return { error: "Nao foi possivel atualizar o status da proposta." };
   }
 
@@ -224,14 +215,9 @@ export async function deleteProposalAction(proposalId: string) {
 
   const supabase = await createClient();
   const { data, error } = await supabase
-    .from("proposals")
-    .delete()
-    .eq("id", proposalId)
-    .eq("organization_id", identity.organizationId)
-    .select("id")
-    .maybeSingle();
+    .rpc("delete_proposal", { p_proposal_id: proposalId });
 
-  if (error || !data) {
+  if (error || data !== true) {
     return { error: "Nao foi possivel excluir a proposta. Tente novamente." };
   }
 

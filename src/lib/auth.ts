@@ -9,6 +9,7 @@ export type WorkspaceIdentity = {
   fullName: string;
   organizationId: string;
   organizationName: string;
+  role: "owner" | "admin" | "member";
 };
 
 export const getWorkspaceIdentity = cache(
@@ -28,7 +29,7 @@ export const getWorkspaceIdentity = cache(
 
     const { data: profile } = await supabase
       .from("users")
-      .select("full_name, organization_id")
+      .select("full_name, organization_id, role")
       .eq("id", user.id)
       .maybeSingle();
 
@@ -59,6 +60,7 @@ export const getWorkspaceIdentity = cache(
           : email.split("@")[0]),
       organizationId: profile.organization_id,
       organizationName,
+      role: profile.role,
     };
   },
 );

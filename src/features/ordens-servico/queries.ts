@@ -21,7 +21,7 @@ export type WorkOrderListFilters = {
 };
 
 const workOrderColumns =
-  "id, organization_id, customer_id, address, service_type, description, technician_name, visit_date, status, quote_materials, quote_labor, quote_discount, quote_total, quote_term, quoted_at, completion_approved_by, completion_notes, completion_accepted, completed_at, created_at, updated_at";
+  "id, organization_id, customer_id, professional_id, address, service_type, description, technician_name, visit_date, status, quote_materials, quote_labor, quote_discount, quote_total, quote_term, quoted_at, completion_approved_by, completion_notes, completion_accepted, completed_at, created_at, updated_at";
 
 const workOrderChecklistColumns =
   "id, organization_id, work_order_id, item_key, label, position, completed, completed_at, created_at, updated_at";
