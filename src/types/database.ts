@@ -187,6 +187,69 @@ type AttendanceRecordRow = Timestamps & {
   status: AttendanceStatus;
 };
 
+type WorkOrderStatus =
+  | "requested"
+  | "quoted"
+  | "approved"
+  | "in_progress"
+  | "completed"
+  | "cancelled";
+
+type WorkOrderRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  customer_id: string | null;
+  address: string;
+  service_type: string;
+  description: string;
+  technician_name: string;
+  visit_date: string;
+  status: WorkOrderStatus;
+  quote_materials: number;
+  quote_labor: number;
+  quote_discount: number;
+  quote_total: number;
+  quote_term: string | null;
+  quoted_at: string | null;
+  completion_approved_by: string | null;
+  completion_notes: string | null;
+  completion_accepted: boolean;
+  completed_at: string | null;
+};
+
+type WorkOrderChecklistItemKey =
+  | "arrived_on_site"
+  | "assessed_problem"
+  | "took_photos"
+  | "performed_service"
+  | "customer_approved"
+  | "finished";
+
+type WorkOrderChecklistItemRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  work_order_id: string;
+  item_key: WorkOrderChecklistItemKey;
+  label: string;
+  position: number;
+  completed: boolean;
+  completed_at: string | null;
+};
+
+type WorkOrderAttachmentStatus = "pending" | "ready";
+
+type WorkOrderAttachmentRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  work_order_id: string;
+  uploaded_by: string | null;
+  storage_path: string;
+  file_name: string;
+  mime_type: "image/jpeg" | "image/png" | "image/webp";
+  file_size: number;
+  upload_status: WorkOrderAttachmentStatus;
+};
+
 type TableDefinition<Row, Insert, Update = Partial<Insert>> = {
   Row: Row;
   Insert: Insert;
@@ -417,6 +480,62 @@ export type Database = {
           student_id: string;
           class_date: string;
           status: AttendanceStatus;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      work_orders: TableDefinition<
+        WorkOrderRow,
+        {
+          id?: string;
+          organization_id: string;
+          customer_id?: string | null;
+          address: string;
+          service_type: string;
+          description: string;
+          technician_name: string;
+          visit_date: string;
+          status?: WorkOrderStatus;
+          quote_materials?: number;
+          quote_labor?: number;
+          quote_discount?: number;
+          quote_term?: string | null;
+          quoted_at?: string | null;
+          completion_approved_by?: string | null;
+          completion_notes?: string | null;
+          completion_accepted?: boolean;
+          completed_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      work_order_checklist_items: TableDefinition<
+        WorkOrderChecklistItemRow,
+        {
+          id?: string;
+          organization_id: string;
+          work_order_id: string;
+          item_key: WorkOrderChecklistItemKey;
+          label: string;
+          position: number;
+          completed?: boolean;
+          completed_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      work_order_attachments: TableDefinition<
+        WorkOrderAttachmentRow,
+        {
+          id?: string;
+          organization_id: string;
+          work_order_id: string;
+          uploaded_by?: string | null;
+          storage_path: string;
+          file_name: string;
+          mime_type: "image/jpeg" | "image/png" | "image/webp";
+          file_size: number;
+          upload_status?: WorkOrderAttachmentStatus;
           created_at?: string;
           updated_at?: string;
         }
