@@ -280,4 +280,17 @@ describe("acoes de ordens de servico", () => {
     expect(deleteOrder).toHaveBeenCalledAfter(remove);
     expect(redirectMock).toHaveBeenCalledWith("/ordens-servico?deleted=1");
   });
+
+  it("bloqueia membros antes de consultar ou remover anexos", async () => {
+    getWorkspaceIdentityMock.mockResolvedValue({
+      ...identity,
+      role: "member",
+    });
+
+    await expect(deleteWorkOrderAction(workOrderId)).resolves.toEqual({
+      error: "Apenas administradores podem excluir ordens de servico.",
+    });
+
+    expect(createClientMock).not.toHaveBeenCalled();
+  });
 });

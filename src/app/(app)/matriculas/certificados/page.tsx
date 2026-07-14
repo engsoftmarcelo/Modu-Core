@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Award, CheckCircle2, RotateCcw } from "lucide-react";
+import { Award, CheckCircle2, Plus, RotateCcw } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -76,6 +76,7 @@ export default async function CertificatesPage({
               name="enrollmentId"
               defaultValue={params.enrollmentId ?? ""}
               className="min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition focus:border-violet-500 focus:ring-4 focus:ring-violet-100"
+              disabled={!options.length}
               required
             >
               <option value="">Selecione uma matricula</option>
@@ -103,7 +104,8 @@ export default async function CertificatesPage({
 
           <button
             type="submit"
-            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+            disabled={!options.length}
+            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
           >
             Gerar certificado
           </button>
@@ -144,12 +146,24 @@ export default async function CertificatesPage({
               <Award className="size-7" />
             </span>
             <h2 className="mt-5 text-xl font-bold text-ink-950">
-              Selecione uma matricula
+              {options.length
+                ? "Selecione uma matricula"
+                : "Nenhuma matricula disponivel para certificado."}
             </h2>
             <p className="mt-2 text-sm leading-6 text-slate-500">
-              A previa do certificado aparece depois que voce escolher a
-              matricula do aluno.
+              {options.length
+                ? "A previa do certificado aparece depois que voce escolher a matricula do aluno."
+                : "Crie uma matricula para vincular aluno e curso antes de emitir o certificado."}
             </p>
+            {!options.length ? (
+              <Link
+                href="/matriculas/inscricoes/novo"
+                className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+              >
+                <Plus className="size-4" />
+                Criar primeira matricula
+              </Link>
+            ) : null}
           </div>
         </Card>
       )}

@@ -1,6 +1,7 @@
 import { cache } from "react";
 
 import { isSupabaseConfigured } from "@/lib/env";
+import type { WorkspaceRole } from "@/lib/permissions";
 import { createClient } from "@/lib/supabase/server";
 
 export type WorkspaceIdentity = {
@@ -9,7 +10,7 @@ export type WorkspaceIdentity = {
   fullName: string;
   organizationId: string;
   organizationName: string;
-  role: "owner" | "admin" | "member";
+  role: WorkspaceRole;
 };
 
 export const getWorkspaceIdentity = cache(

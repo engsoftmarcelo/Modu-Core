@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation";
 import {
   Building2,
   CircleDollarSign,
+  Eye,
   ExternalLink,
   GripVertical,
   Megaphone,
+  Plus,
+  Target,
 } from "lucide-react";
 import {
   type ChangeEvent,
@@ -18,6 +21,8 @@ import {
 } from "react";
 
 import { moveLeadStageAction } from "@/features/crm/leads/actions";
+import { EmptyState } from "@/components/ui/empty-state";
+import { FeedbackMessage } from "@/components/ui/feedback-message";
 import {
   leadKanbanLabels,
   leadKanbanStatuses,
@@ -28,6 +33,11 @@ import {
 type LeadKanbanProps = {
   leads: Lead[];
 };
+
+type ActionFeedback = {
+  message: string;
+  tone: "error" | "success";
+} | null;
 
 const columnStyles: Record<
   LeadKanbanStatus,
@@ -91,8 +101,43 @@ export function LeadKanban({ leads }: LeadKanbanProps) {
   const [draggedLeadId, setDraggedLeadId] = useState<string | null>(null);
   const [dragOverStatus, setDragOverStatus] =
     useState<LeadKanbanStatus | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<ActionFeedback>(null);
   const [isPending, startTransition] = useTransition();
+
+  if (!items.length) {
+    const hasLostLeads = leads.some((lead) => lead.status === "lost");
+
+    return (
+      <EmptyState
+        icon={Target}
+        tone="violet"
+        title={
+          hasLostLeads
+            ? "Nenhuma oportunidade ativa no funil."
+            : "Seu funil ainda esta vazio."
+        }
+        description={
+          hasLostLeads
+            ? "Cadastre um novo lead para retomar o fluxo comercial ou consulte as oportunidades perdidas."
+            : "Cadastre o primeiro lead para acompanhar cada oportunidade do contato inicial ao fechamento."
+        }
+        primaryAction={{
+          href: "/crm/leads/novo",
+          icon: Plus,
+          label: "Cadastrar primeiro lead",
+        }}
+        secondaryAction={
+          hasLostLeads
+            ? {
+                href: "/crm/leads?view=list&status=lost",
+                icon: Eye,
+                label: "Ver leads perdidos",
+              }
+            : undefined
+        }
+      />
+    );
+  }
 
   function moveLead(leadId: string, nextStatus: LeadKanbanStatus) {
     if (isPending) {
@@ -107,7 +152,7 @@ export function LeadKanban({ leads }: LeadKanbanProps) {
       return;
     }
 
-    setErrorMessage(null);
+    setFeedback(null);
     setDraggedLeadId(null);
     setDragOverStatus(null);
 
@@ -116,10 +161,14 @@ export function LeadKanban({ leads }: LeadKanbanProps) {
       const result = await moveLeadStageAction(leadId, nextStatus);
 
       if (result.error) {
-        setErrorMessage(result.error);
+        setFeedback({ message: result.error, tone: "error" });
         return;
       }
 
+      setFeedback({
+        message: "Lead movido com sucesso.",
+        tone: "success",
+      });
       router.refresh();
     });
   }
@@ -157,13 +206,10 @@ export function LeadKanban({ leads }: LeadKanbanProps) {
         </Link>
       </div>
 
-      {errorMessage ? (
-        <div
-          role="alert"
-          className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
-        >
-          {errorMessage}
-        </div>
+      {feedback ? (
+        <FeedbackMessage className="mb-4" tone={feedback.tone}>
+          {feedback.message}
+        </FeedbackMessage>
       ) : null}
 
       <div className="overflow-x-auto pb-4">

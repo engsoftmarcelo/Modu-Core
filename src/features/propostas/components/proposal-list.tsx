@@ -11,6 +11,7 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { CollectionEmptyState } from "@/components/ui/empty-state";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
 import type { ProposalWithCustomer } from "../types";
@@ -36,32 +37,27 @@ function isPastDeadline(proposal: ProposalWithCustomer, todayKey: string) {
 
 export function ProposalList({
   count,
+  hasFilters = false,
   proposals,
 }: {
   count: number;
+  hasFilters?: boolean;
   proposals: ProposalWithCustomer[];
 }) {
   if (!proposals.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
-            <FileText className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhuma proposta encontrada
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Ajuste os filtros ou crie a primeira proposta para um cliente.
-          </p>
-          <Link
-            href="/propostas/novo"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            Criar proposta
-          </Link>
-        </div>
-      </Card>
+      <CollectionEmptyState
+        hasFilters={hasFilters}
+        icon={FileText}
+        tone="green"
+        emptyTitle="Voce ainda nao criou nenhuma proposta."
+        emptyDescription="Crie a primeira proposta para apresentar servicos, valores e prazos de forma profissional."
+        filteredTitle="Nenhuma proposta corresponde aos filtros."
+        filteredDescription="Revise o titulo ou o status selecionado para ampliar os resultados."
+        createHref="/propostas/novo"
+        createLabel="Criar primeira proposta"
+        clearHref="/propostas"
+      />
     );
   }
 

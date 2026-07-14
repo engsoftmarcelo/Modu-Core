@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/ui/logo";
 import { MobileWhatsAppCta } from "@/components/ui/mobile-whatsapp-cta";
+import { getSalesWhatsAppHref } from "@/lib/sales-whatsapp";
 
 import { DiagnosticForm } from "./diagnostic-form";
 
@@ -25,12 +26,10 @@ const highlights = [
   "Direcione a conversa para agenda, CRM, cobranca, OS ou matricula.",
 ];
 
-const whatsappNumber =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "") || "5531999998888";
-const whatsappText = encodeURIComponent(
+const whatsappHref = getSalesWhatsAppHref(
   "Ola! Quero fazer um diagnostico rapido para meu negocio.",
+  "#diagnostico",
 );
-const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
 
 export default function DiagnosticPage() {
   return (
@@ -86,7 +85,7 @@ export default function DiagnosticPage() {
         </div>
       </section>
 
-      <section className="px-5 py-16 sm:px-8 lg:px-10">
+      <section id="diagnostico" className="scroll-mt-6 px-5 py-16 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-5xl">
           <div className="mb-8 max-w-2xl">
             <p className="text-sm font-bold uppercase text-brand-600">

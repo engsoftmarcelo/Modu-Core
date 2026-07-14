@@ -39,6 +39,8 @@ import {
   WorkOrderDemoProgress,
 } from "@/features/ordens-servico/demo/work-order-demo-progress";
 import { getWorkOrderById } from "@/features/ordens-servico/queries";
+import { getWorkspaceIdentity } from "@/lib/auth";
+import { canAdministerWorkspace } from "@/lib/permissions";
 import { formatDate, formatDateTime } from "@/lib/utils";
 
 type WorkOrderDetailsPageProps = {
@@ -105,7 +107,10 @@ export default async function WorkOrderDetailsPage({
   searchParams,
 }: WorkOrderDetailsPageProps) {
   const [{ id }, notice] = await Promise.all([params, searchParams]);
-  const workOrder = await getWorkOrderById(id);
+  const [workOrder, identity] = await Promise.all([
+    getWorkOrderById(id),
+    getWorkspaceIdentity(),
+  ]);
 
   if (!workOrder) {
     notFound();
@@ -138,6 +143,7 @@ export default async function WorkOrderDetailsPage({
     notice.created === "1" &&
     (!demoMode || demoProgress.currentStep === 2);
   const showUpdatedNotice = notice.updated === "1";
+  const canDelete = canAdministerWorkspace(identity?.role);
 
   return (
     <div className="mx-auto max-w-6xl space-y-5 pb-24 lg:space-y-6 lg:pb-0">
@@ -466,18 +472,20 @@ export default async function WorkOrderDetailsPage({
             </div>
           </Card>
 
-          <Card className="border-red-100 p-5 sm:p-6">
-            <h2 className="font-bold text-ink-950">Zona de cuidado</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-500">
-              A exclusao remove esta ordem definitivamente.
-            </p>
-            <div className="mt-5">
-              <DeleteWorkOrderButton
-                serviceType={workOrder.service_type}
-                workOrderId={workOrder.id}
-              />
-            </div>
-          </Card>
+          {canDelete ? (
+            <Card className="border-red-100 p-5 sm:p-6">
+              <h2 className="font-bold text-ink-950">Zona de cuidado</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                A exclusao remove esta ordem definitivamente.
+              </p>
+              <div className="mt-5">
+                <DeleteWorkOrderButton
+                  serviceType={workOrder.service_type}
+                  workOrderId={workOrder.id}
+                />
+              </div>
+            </Card>
+          ) : null}
         </aside>
       </div>
 

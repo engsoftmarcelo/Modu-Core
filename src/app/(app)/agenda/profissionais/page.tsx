@@ -74,7 +74,11 @@ export default async function ProfessionalsPage({
 
       <ProfessionalSummary stats={stats} />
       <ProfessionalSearch query={query} situation={situation} />
-      <ProfessionalList professionals={professionals} count={count} />
+      <ProfessionalList
+        professionals={professionals}
+        count={count}
+        hasFilters={Boolean(query) || situation !== "all"}
+      />
     </div>
   );
 }

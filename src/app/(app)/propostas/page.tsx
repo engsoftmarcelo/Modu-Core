@@ -71,7 +71,11 @@ export default async function ProposalsPage({
 
       <ProposalSummary stats={stats} />
       <ProposalSearch query={query} status={status} />
-      <ProposalList proposals={proposals} count={count} />
+      <ProposalList
+        proposals={proposals}
+        count={count}
+        hasFilters={Boolean(query) || status !== "all"}
+      />
     </div>
   );
 }

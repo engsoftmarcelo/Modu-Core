@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { isSupabaseConfigured } from "@/lib/env";
+import { resolveSiteOrigin } from "@/lib/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 import type { AuthState } from "./auth-state";
@@ -91,10 +92,19 @@ export async function signUpAction(
   }
 
   const requestHeaders = await headers();
-  const origin =
-    requestHeaders.get("origin") ??
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    "http://localhost:3000";
+  const origin = resolveSiteOrigin({
+    configuredSiteUrl: process.env.NEXT_PUBLIC_SITE_URL,
+    environment: process.env.NODE_ENV,
+    requestOrigin: requestHeaders.get("origin"),
+  });
+
+  if (!origin) {
+    return {
+      status: "error",
+      message: "Cadastro temporariamente indisponivel. Tente novamente mais tarde.",
+    };
+  }
+
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
     email,

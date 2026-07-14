@@ -22,6 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/ui/logo";
 import { MobileWhatsAppCta } from "@/components/ui/mobile-whatsapp-cta";
+import { getSalesWhatsAppHref } from "@/lib/sales-whatsapp";
 
 import { PrintButton } from "./print-button";
 
@@ -31,12 +32,9 @@ export const metadata: Metadata = {
     "Apresentacao comercial da ModuCore com problema, solucao, prints, implantacao, preco e proximos passos.",
 };
 
-const whatsappNumber =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "") || "5531999998888";
-const whatsappText = encodeURIComponent(
+const whatsappHref = getSalesWhatsAppHref(
   "Ola! Vi a apresentacao comercial da ModuCore e quero conversar sobre meu sistema.",
 );
-const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
 
 const problems = [
   "Atendimentos e vendas ficam espalhados entre WhatsApp, caderno e planilha.",

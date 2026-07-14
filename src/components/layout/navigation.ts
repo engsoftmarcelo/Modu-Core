@@ -31,10 +31,18 @@ export const utilityNavigation: NavigationItem[] = [
   },
 ];
 
+const mobilePrimaryHrefs = new Set([
+  "/inicio",
+  "/dashboard",
+  "/crm",
+  "/agenda",
+]);
+
 export const mobileNavigation: NavigationItem[] = [
-  primaryNavigation[0],
-  primaryNavigation.find((item) => item.href === "/dashboard")!,
-  primaryNavigation.find((item) => item.href === "/crm")!,
-  primaryNavigation.find((item) => item.href === "/agenda")!,
-  utilityNavigation[0],
+  ...primaryNavigation.filter((item) => mobilePrimaryHrefs.has(item.href)),
+];
+
+export const mobileMoreNavigation: NavigationItem[] = [
+  ...primaryNavigation.filter((item) => !mobilePrimaryHrefs.has(item.href)),
+  ...utilityNavigation,
 ];

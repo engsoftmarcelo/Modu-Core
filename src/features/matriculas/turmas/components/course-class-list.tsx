@@ -5,11 +5,13 @@ import {
   Clock3,
   Eye,
   Pencil,
+  Plus,
   UserRound,
   UsersRound,
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { formatDate } from "@/lib/utils";
 
 import type { CourseClassWithCourse } from "../types";
@@ -34,25 +36,17 @@ export function CourseClassList({
 }) {
   if (!classes.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-violet-50 text-violet-700">
-            <CalendarDays className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhuma turma encontrada
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Crie uma turma para demonstrar calendario, vagas e matriculas.
-          </p>
-          <Link
-            href="/matriculas/turmas/novo"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            Criar turma
-          </Link>
-        </div>
-      </Card>
+      <EmptyState
+        icon={CalendarDays}
+        tone="violet"
+        title="Nenhuma turma criada ainda."
+        description="Crie a primeira turma para definir professor, datas, horarios, vagas e receber matriculas."
+        primaryAction={{
+          href: "/matriculas/turmas/novo",
+          icon: Plus,
+          label: "Criar primeira turma",
+        }}
+      />
     );
   }
 

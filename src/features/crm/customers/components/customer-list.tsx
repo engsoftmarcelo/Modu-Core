@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { CollectionEmptyState } from "@/components/ui/empty-state";
 import { getInitials } from "@/lib/utils";
 
 import type { Customer } from "../types";
@@ -23,31 +24,26 @@ function whatsAppHref(value: string) {
 export function CustomerList({
   customers,
   count,
+  hasFilters = false,
 }: {
   customers: Customer[];
   count: number;
+  hasFilters?: boolean;
 }) {
   if (!customers.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-brand-50 text-brand-600">
-            <UserRound className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhum cliente encontrado
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Ajuste os filtros ou cadastre o primeiro cliente para iniciar sua base.
-          </p>
-          <Link
-            href="/crm/novo"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            Cadastrar cliente
-          </Link>
-        </div>
-      </Card>
+      <CollectionEmptyState
+        hasFilters={hasFilters}
+        icon={UserRound}
+        tone="blue"
+        emptyTitle="Voce ainda nao cadastrou nenhum cliente."
+        emptyDescription="Cadastre seu primeiro cliente para comecar a organizar contatos, atendimentos e proximos retornos."
+        filteredTitle="Nenhum cliente corresponde a sua busca."
+        filteredDescription="Revise o nome, o contato ou o status selecionado e tente novamente."
+        createHref="/crm/novo"
+        createLabel="Cadastrar primeiro cliente"
+        clearHref="/crm"
+      />
     );
   }
 

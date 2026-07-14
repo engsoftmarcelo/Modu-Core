@@ -63,7 +63,11 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
       )}
 
       <CourseSearch query={query} active={active} />
-      <CourseList courses={courses} count={count} />
+      <CourseList
+        courses={courses}
+        count={count}
+        hasFilters={Boolean(query) || active !== "all"}
+      />
     </div>
   );
 }

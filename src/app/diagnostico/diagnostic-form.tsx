@@ -3,8 +3,9 @@
 import { type FormEvent } from "react";
 import { CheckCircle2, MessageCircle } from "lucide-react";
 
-const whatsappNumber =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "") || "5531999998888";
+import { getSalesWhatsAppNumber } from "@/lib/sales-whatsapp";
+
+const whatsappNumber = getSalesWhatsAppNumber();
 
 const spreadsheetOptions = ["Sim", "Nao", "As vezes"] as const;
 const moduleOptions = ["Agenda", "CRM", "Cobranca", "OS", "Matricula"] as const;
@@ -16,6 +17,10 @@ function fieldValue(formData: FormData, field: string) {
 export function DiagnosticForm() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!whatsappNumber) {
+      return;
+    }
 
     const formData = new FormData(event.currentTarget);
     const modules = formData.getAll("modules").map(String);
@@ -146,9 +151,10 @@ export function DiagnosticForm() {
       <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
         <button
           type="submit"
-          className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 text-base font-black text-white shadow-lg shadow-emerald-950/15 transition hover:bg-emerald-700 sm:w-auto"
+          disabled={!whatsappNumber}
+          className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 text-base font-black text-white shadow-lg shadow-emerald-950/15 transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-slate-400 disabled:shadow-none sm:w-auto"
         >
-          Enviar pelo WhatsApp
+          {whatsappNumber ? "Enviar pelo WhatsApp" : "Canal indisponivel"}
           <MessageCircle className="size-5" />
         </button>
         <p className="flex items-center gap-2 text-sm font-semibold text-slate-500">

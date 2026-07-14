@@ -4,10 +4,10 @@ import {
   ClipboardList,
   Eye,
   Pencil,
-  Plus,
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { CollectionEmptyState } from "@/components/ui/empty-state";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
 import type { WorkOrderWithCustomer } from "../types";
@@ -15,6 +15,7 @@ import { WorkOrderStatusBadge } from "./work-order-status-badge";
 
 type WorkOrderListProps = {
   count: number;
+  hasFilters?: boolean;
   workOrders: WorkOrderWithCustomer[];
 };
 
@@ -22,30 +23,25 @@ function workOrderCode(id: string) {
   return id.slice(0, 8).toUpperCase();
 }
 
-export function WorkOrderList({ count, workOrders }: WorkOrderListProps) {
+export function WorkOrderList({
+  count,
+  hasFilters = false,
+  workOrders,
+}: WorkOrderListProps) {
   if (!workOrders.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
-            <ClipboardList className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhuma ordem encontrada
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Abra a primeira ordem para organizar cliente, visita, tecnico e
-            andamento do servico.
-          </p>
-          <Link
-            href="/ordens-servico/novo"
-            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            <Plus className="size-4" />
-            Nova ordem
-          </Link>
-        </div>
-      </Card>
+      <CollectionEmptyState
+        hasFilters={hasFilters}
+        icon={ClipboardList}
+        tone="green"
+        emptyTitle="Voce ainda nao criou nenhuma ordem de servico."
+        emptyDescription="Abra a primeira ordem para organizar cliente, visita, tecnico e andamento do servico."
+        filteredTitle="Nenhuma ordem corresponde aos filtros."
+        filteredDescription="Revise o servico, endereco, tecnico ou status para ampliar os resultados."
+        createHref="/ordens-servico/novo"
+        createLabel="Criar primeira ordem"
+        clearHref="/ordens-servico"
+      />
     );
   }
 
@@ -58,7 +54,7 @@ export function WorkOrderList({ count, workOrders }: WorkOrderListProps) {
         </span>
       </div>
 
-      <div className="divide-y divide-slate-100 md:hidden">
+      <div className="divide-y divide-slate-100 lg:hidden">
         {workOrders.map((workOrder) => (
           <Link
             key={workOrder.id}
@@ -92,7 +88,7 @@ export function WorkOrderList({ count, workOrders }: WorkOrderListProps) {
         ))}
       </div>
 
-      <div className="hidden overflow-x-auto md:block">
+      <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[980px] text-left">
           <thead className="bg-slate-50 text-xs font-bold uppercase text-slate-400">
             <tr>
@@ -155,7 +151,7 @@ export function WorkOrderList({ count, workOrders }: WorkOrderListProps) {
                       href={`/ordens-servico/${workOrder.id}`}
                       aria-label={`Ver ordem de ${workOrder.service_type}`}
                       title="Ver ordem"
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-emerald-50 hover:text-emerald-700"
+                      className="grid size-11 place-items-center rounded-xl text-slate-400 transition hover:bg-emerald-50 hover:text-emerald-700"
                     >
                       <Eye className="size-4" />
                     </Link>
@@ -163,7 +159,7 @@ export function WorkOrderList({ count, workOrders }: WorkOrderListProps) {
                       href={`/ordens-servico/${workOrder.id}/editar`}
                       aria-label={`Editar ordem de ${workOrder.service_type}`}
                       title="Editar ordem"
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-slate-100 hover:text-ink-950"
+                      className="grid size-11 place-items-center rounded-xl text-slate-400 transition hover:bg-slate-100 hover:text-ink-950"
                     >
                       <Pencil className="size-4" />
                     </Link>

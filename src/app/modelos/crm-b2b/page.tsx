@@ -18,6 +18,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/ui/logo";
 import { MobileWhatsAppCta } from "@/components/ui/mobile-whatsapp-cta";
+import { getSalesWhatsAppHref } from "@/lib/sales-whatsapp";
 
 export const metadata: Metadata = {
   title: "CRM B2B para servicos",
@@ -25,12 +26,9 @@ export const metadata: Metadata = {
     "Sistema para servicos B2B com leads, propostas, tarefas e acompanhamento comercial.",
 };
 
-const whatsappNumber =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "") || "5531999998888";
-const whatsappText = encodeURIComponent(
+const whatsappHref = getSalesWhatsAppHref(
   "Ola! Quero ver a demo do CRM B2B da ModuCore.",
 );
-const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
 
 const features = [
   {

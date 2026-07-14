@@ -72,7 +72,11 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
 
       <ServiceSummary stats={stats} />
       <ServiceSearch query={query} situation={situation} />
-      <ServiceList services={services} count={count} />
+      <ServiceList
+        services={services}
+        count={count}
+        hasFilters={Boolean(query) || situation !== "all"}
+      />
     </div>
   );
 }

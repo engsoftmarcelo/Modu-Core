@@ -19,14 +19,12 @@ export default async function HomePage() {
   return (
     <div className="space-y-8">
       <section className="relative overflow-hidden rounded-3xl bg-ink-950 px-6 py-8 text-white sm:px-8 sm:py-10">
-        <div className="absolute -right-16 -top-20 size-72 rounded-full bg-violet-500/25 blur-3xl" />
-        <div className="absolute bottom-0 right-1/3 size-44 rounded-full bg-brand-500/15 blur-3xl" />
         <div className="relative max-w-3xl">
           <Badge className="border border-white/10 bg-white/10 text-brand-100">
             <Sparkles className="mr-1.5 size-3.5" />
             Base da operacao
           </Badge>
-          <h1 className="mt-5 text-3xl font-bold tracking-[-0.045em] sm:text-5xl">
+          <h1 className="mt-5 text-3xl font-bold sm:text-5xl">
             Bom ter voce aqui, {firstName}.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
@@ -49,7 +47,7 @@ export default async function HomePage() {
             <p className="text-sm font-bold uppercase tracking-[0.14em] text-brand-600">
               Modulos
             </p>
-            <h2 className="mt-2 text-2xl font-bold tracking-[-0.035em] text-ink-950">
+            <h2 className="mt-2 text-2xl font-bold text-ink-950">
               Monte a operacao que voce precisa
             </h2>
           </div>

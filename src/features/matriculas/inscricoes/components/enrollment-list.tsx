@@ -5,10 +5,12 @@ import {
   Eye,
   GraduationCap,
   Pencil,
+  Plus,
   UserRound,
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { formatDate } from "@/lib/utils";
 
 import type { EnrollmentWithRelations } from "../types";
@@ -26,26 +28,17 @@ export function EnrollmentList({
 }) {
   if (!enrollments.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
-            <BadgeCheck className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhuma matricula criada
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Vincule um aluno a uma turma para demonstrar o controle comercial e
-            academico.
-          </p>
-          <Link
-            href="/matriculas/inscricoes/novo"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            Criar matricula
-          </Link>
-        </div>
-      </Card>
+      <EmptyState
+        icon={BadgeCheck}
+        tone="green"
+        title="Nenhuma matricula criada ainda."
+        description="Matricule um aluno em uma turma para acompanhar pagamento, andamento e conclusao do curso."
+        primaryAction={{
+          href: "/matriculas/inscricoes/novo",
+          icon: Plus,
+          label: "Criar primeira matricula",
+        }}
+      />
     );
   }
 

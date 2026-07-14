@@ -23,7 +23,7 @@ export default async function AppLayout({
       <Sidebar organizationName={identity.organizationName} />
       <div className="lg:pl-72">
         <Topbar fullName={identity.fullName} email={identity.email} />
-        <main className="mx-auto w-full max-w-[1600px] px-4 pb-28 pt-6 sm:px-6 lg:px-8 lg:pb-10 lg:pt-8">
+        <main className="mx-auto min-w-0 w-full max-w-[1600px] px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-6 sm:px-6 lg:px-8 lg:pb-10 lg:pt-8">
           {children}
         </main>
       </div>

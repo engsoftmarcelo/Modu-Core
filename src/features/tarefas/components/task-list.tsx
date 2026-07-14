@@ -12,6 +12,7 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { CollectionEmptyState } from "@/components/ui/empty-state";
 import { formatDateTime } from "@/lib/utils";
 
 import type { TaskWithRelation } from "../types";
@@ -38,32 +39,27 @@ function isOverdue(task: TaskWithRelation) {
 
 export function TaskList({
   count,
+  hasFilters = false,
   tasks,
 }: {
   count: number;
+  hasFilters?: boolean;
   tasks: TaskWithRelation[];
 }) {
   if (!tasks.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-amber-50 text-amber-700">
-            <ListChecks className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhuma tarefa encontrada
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Ajuste os filtros ou registre o primeiro follow-up da operacao.
-          </p>
-          <Link
-            href="/tarefas/novo"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            Criar tarefa
-          </Link>
-        </div>
-      </Card>
+      <CollectionEmptyState
+        hasFilters={hasFilters}
+        icon={ListChecks}
+        tone="amber"
+        emptyTitle="Nenhuma tarefa por aqui ainda."
+        emptyDescription="Crie a primeira tarefa para organizar retornos, pendencias e proximos passos da equipe."
+        filteredTitle="Nenhuma tarefa corresponde aos filtros."
+        filteredDescription="Altere a busca, o status ou a prioridade para encontrar outras tarefas."
+        createHref="/tarefas/novo"
+        createLabel="Criar primeira tarefa"
+        clearHref="/tarefas"
+      />
     );
   }
 

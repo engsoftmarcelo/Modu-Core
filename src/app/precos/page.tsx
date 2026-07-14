@@ -15,6 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/ui/logo";
 import { MobileWhatsAppCta } from "@/components/ui/mobile-whatsapp-cta";
+import { getSalesWhatsAppHref } from "@/lib/sales-whatsapp";
 
 export const metadata: Metadata = {
   title: "Precos",
@@ -22,12 +23,9 @@ export const metadata: Metadata = {
     "Pacotes comerciais da ModuCore com setup, mensalidade e customizacao para sistemas personalizados.",
 };
 
-const whatsappNumber =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "") || "5531999998888";
-const whatsappText = encodeURIComponent(
+const whatsappHref = getSalesWhatsAppHref(
   "Ola! Quero entender os planos da ModuCore para meu negocio.",
 );
-const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
 
 const packages = [
   {

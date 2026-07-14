@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { getWorkspaceIdentity } from "@/lib/auth";
+import { canAdministerWorkspace } from "@/lib/permissions";
 import { createClient } from "@/lib/supabase/server";
 
 import {
@@ -475,6 +476,12 @@ export async function deleteWorkOrderAction(workOrderId: string) {
 
   if (!identity?.organizationId) {
     return { error: "Sua organizacao nao foi encontrada." };
+  }
+
+  if (!canAdministerWorkspace(identity.role)) {
+    return {
+      error: "Apenas administradores podem excluir ordens de servico.",
+    };
   }
 
   const supabase = await createClient();

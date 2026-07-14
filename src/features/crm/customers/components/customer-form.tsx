@@ -6,6 +6,7 @@ import { LoaderCircle, Save } from "lucide-react";
 import { useFormStatus } from "react-dom";
 
 import { Button } from "@/components/ui/button";
+import { FeedbackMessage } from "@/components/ui/feedback-message";
 import { cn } from "@/lib/utils";
 
 import {
@@ -199,12 +200,9 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
       </Field>
 
       {state.message && (
-        <p
-          role="alert"
-          className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
-        >
+        <FeedbackMessage tone="error">
           {state.message}
-        </p>
+        </FeedbackMessage>
       )}
 
       <div className="flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">

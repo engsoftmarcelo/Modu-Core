@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { CollectionEmptyState } from "@/components/ui/empty-state";
 import { getInitials } from "@/lib/utils";
 
 import type { Student } from "../types";
@@ -20,32 +21,27 @@ export function studentWhatsAppHref(value: string) {
 
 export function StudentList({
   count,
+  hasFilters = false,
   students,
 }: {
   count: number;
+  hasFilters?: boolean;
   students: Student[];
 }) {
   if (!students.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-violet-50 text-violet-700">
-            <UserRound className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhum aluno encontrado
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Cadastre o primeiro aluno para demonstrar o fluxo de matriculas.
-          </p>
-          <Link
-            href="/matriculas/novo"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            Cadastrar aluno
-          </Link>
-        </div>
-      </Card>
+      <CollectionEmptyState
+        hasFilters={hasFilters}
+        icon={UserRound}
+        tone="violet"
+        emptyTitle="Voce ainda nao cadastrou nenhum aluno."
+        emptyDescription="Cadastre o primeiro aluno para iniciar matriculas, frequencia e emissao de certificados."
+        filteredTitle="Nenhum aluno corresponde a sua busca."
+        filteredDescription="Revise o nome, contato, CPF ou status selecionado e tente novamente."
+        createHref="/matriculas/novo"
+        createLabel="Cadastrar primeiro aluno"
+        clearHref="/matriculas"
+      />
     );
   }
 

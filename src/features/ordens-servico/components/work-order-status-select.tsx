@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
+import { FeedbackMessage } from "@/components/ui/feedback-message";
+
 import { updateWorkOrderStatusAction } from "../actions";
 import {
   workOrderStatusLabels,
@@ -16,6 +18,11 @@ type WorkOrderStatusSelectProps = {
   workOrderId: string;
 };
 
+type ActionFeedback = {
+  message: string;
+  tone: "error" | "success";
+} | null;
+
 export function WorkOrderStatusSelect({
   initialStatus,
   serviceType,
@@ -23,7 +30,7 @@ export function WorkOrderStatusSelect({
 }: WorkOrderStatusSelectProps) {
   const router = useRouter();
   const [status, setStatus] = useState(initialStatus);
-  const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState<ActionFeedback>(null);
   const [isPending, startTransition] = useTransition();
   const availableStatuses = workOrderStatuses.filter(
     (workOrderStatus) =>
@@ -33,17 +40,21 @@ export function WorkOrderStatusSelect({
   function handleChange(nextStatus: WorkOrderStatus) {
     const previousStatus = status;
     setStatus(nextStatus);
-    setError("");
+    setFeedback(null);
 
     startTransition(async () => {
       const result = await updateWorkOrderStatusAction(workOrderId, nextStatus);
 
       if (result.error) {
         setStatus(previousStatus);
-        setError(result.error);
+        setFeedback({ message: result.error, tone: "error" });
         return;
       }
 
+      setFeedback({
+        message: "Ordem atualizada com sucesso.",
+        tone: "success",
+      });
       router.refresh();
     });
   }
@@ -58,6 +69,7 @@ export function WorkOrderStatusSelect({
             handleChange(event.target.value as WorkOrderStatus)
           }
           disabled={isPending}
+          aria-busy={isPending}
           className="min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 disabled:cursor-wait disabled:opacity-60"
         >
           {availableStatuses.map((workOrderStatus) => (
@@ -67,11 +79,17 @@ export function WorkOrderStatusSelect({
           ))}
         </select>
       </label>
-      {error ? (
-        <p role="alert" className="mt-2 text-xs font-medium text-red-600">
-          {error}
-        </p>
-      ) : null}
+      <div className="min-h-6 pt-2">
+        {isPending ? (
+          <FeedbackMessage tone="loading" variant="inline">
+            Salvando...
+          </FeedbackMessage>
+        ) : feedback ? (
+          <FeedbackMessage tone={feedback.tone} variant="inline">
+            {feedback.message}
+          </FeedbackMessage>
+        ) : null}
+      </div>
     </div>
   );
 }

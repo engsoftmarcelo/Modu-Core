@@ -1,7 +1,16 @@
 begin;
+set local role postgres;
 
 create extension if not exists pgtap with schema extensions;
-set local search_path = public, extensions;
+select namespace.nspname as pgtap_schema
+from pg_proc as procedure
+join pg_namespace as namespace on namespace.oid = procedure.pronamespace
+where procedure.proname = 'plan'
+  and pg_get_function_identity_arguments(procedure.oid) = 'integer'
+order by namespace.nspname
+limit 1
+\gset
+set search_path = public, :"pgtap_schema";
 
 select plan(15);
 

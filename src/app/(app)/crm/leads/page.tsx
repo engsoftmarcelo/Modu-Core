@@ -85,7 +85,11 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
         <>
           <LeadPipelineSummary stats={stats} />
           <LeadSearch query={query} status={status} />
-          <LeadList leads={leads} count={count} />
+          <LeadList
+            leads={leads}
+            count={count}
+            hasFilters={Boolean(query) || status !== "all"}
+          />
         </>
       )}
     </div>

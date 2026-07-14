@@ -76,7 +76,13 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
 
       <TaskSummary stats={stats} />
       <TaskSearch query={query} status={status} priority={priority} />
-      <TaskList tasks={tasks} count={count} />
+      <TaskList
+        tasks={tasks}
+        count={count}
+        hasFilters={
+          Boolean(query) || status !== "all" || priority !== "all"
+        }
+      />
     </div>
   );
 }

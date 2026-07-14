@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import {
   Building2,
   CalendarClock,
-  CheckCircle2,
   ChevronLeft,
   Mail,
   MessageCircle,
@@ -16,6 +15,7 @@ import {
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { FeedbackMessage } from "@/components/ui/feedback-message";
 import { CrmTabs } from "@/features/crm/crm-tabs";
 import { CustomerHistory } from "@/features/crm/customers/components/customer-history";
 import { DeleteCustomerButton } from "@/features/crm/customers/components/delete-customer-button";
@@ -73,12 +73,11 @@ export default async function CustomerDetailsPage({
       </Link>
 
       {(notice.created === "1" || notice.updated === "1") && (
-        <div className="flex items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
-          <CheckCircle2 className="size-5 shrink-0" />
+        <FeedbackMessage tone="success">
           {notice.created === "1"
-            ? "Cliente criado com sucesso."
+            ? "Cliente cadastrado com sucesso."
             : "Cliente atualizado com sucesso."}
-        </div>
+        </FeedbackMessage>
       )}
 
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">

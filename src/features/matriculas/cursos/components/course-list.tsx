@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BookOpenCheck, ChevronRight, Clock3, Eye, Pencil, Wallet } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { CollectionEmptyState } from "@/components/ui/empty-state";
 import { formatCurrency } from "@/lib/utils";
 
 import { courseModalityLabels, type Course } from "../types";
@@ -10,31 +11,26 @@ import { CourseActiveBadge } from "./course-active-badge";
 export function CourseList({
   count,
   courses,
+  hasFilters = false,
 }: {
   count: number;
   courses: Course[];
+  hasFilters?: boolean;
 }) {
   if (!courses.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-violet-50 text-violet-700">
-            <BookOpenCheck className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhum curso encontrado
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Cadastre o primeiro curso para montar turmas e vender a demo.
-          </p>
-          <Link
-            href="/matriculas/cursos/novo"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            Cadastrar curso
-          </Link>
-        </div>
-      </Card>
+      <CollectionEmptyState
+        hasFilters={hasFilters}
+        icon={BookOpenCheck}
+        tone="violet"
+        emptyTitle="Voce ainda nao cadastrou nenhum curso."
+        emptyDescription="Cadastre o primeiro curso para depois criar turmas, receber matriculas e acompanhar alunos."
+        filteredTitle="Nenhum curso corresponde aos filtros."
+        filteredDescription="Tente outro nome ou altere a situacao para encontrar mais cursos."
+        createHref="/matriculas/cursos/novo"
+        createLabel="Cadastrar primeiro curso"
+        clearHref="/matriculas/cursos"
+      />
     );
   }
 

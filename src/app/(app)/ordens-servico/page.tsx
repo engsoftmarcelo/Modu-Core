@@ -30,7 +30,7 @@ export default async function WorkOrdersPage({
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
           <Badge tone="green">
             <ClipboardList className="mr-1.5 size-3.5" />
@@ -44,17 +44,17 @@ export default async function WorkOrdersPage({
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:flex">
+        <div className="grid grid-cols-2 gap-3 md:flex md:shrink-0">
           <Link
             href="/ordens-servico/demo"
-            className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm font-bold text-emerald-800 transition hover:bg-emerald-100 sm:px-5"
+            className="inline-flex min-h-14 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm font-bold text-emerald-800 transition hover:bg-emerald-100 sm:px-5"
           >
             <PlayCircle className="size-5" />
             Demo guiada
           </Link>
           <Link
             href="/ordens-servico/novo"
-            className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl bg-ink-950 px-4 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700 sm:px-6 sm:text-base"
+            className="inline-flex min-h-14 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-ink-950 px-4 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700 sm:px-6 sm:text-base"
           >
             <Plus className="size-5" />
             Nova ordem
@@ -70,7 +70,11 @@ export default async function WorkOrdersPage({
       ) : null}
 
       <WorkOrderSearch query={query} status={status} />
-      <WorkOrderList workOrders={workOrders} count={count} />
+      <WorkOrderList
+        workOrders={workOrders}
+        count={count}
+        hasFilters={Boolean(query) || status !== "all"}
+      />
     </div>
   );
 }

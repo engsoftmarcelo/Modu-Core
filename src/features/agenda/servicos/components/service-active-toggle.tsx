@@ -4,6 +4,7 @@ import { LoaderCircle, Power } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
+import { FeedbackMessage } from "@/components/ui/feedback-message";
 import { cn } from "@/lib/utils";
 
 import { updateServiceActiveAction } from "../actions";
@@ -14,25 +15,34 @@ type ServiceActiveToggleProps = {
   serviceName: string;
 };
 
+type ActionFeedback = {
+  message: string;
+  tone: "error" | "success";
+} | null;
+
 export function ServiceActiveToggle({
   active,
   serviceId,
   serviceName,
 }: ServiceActiveToggleProps) {
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState<ActionFeedback>(null);
   const [isPending, startTransition] = useTransition();
 
   function handleToggle() {
-    setError("");
+    setFeedback(null);
     startTransition(async () => {
       const result = await updateServiceActiveAction(serviceId, !active);
 
       if (result.error) {
-        setError(result.error);
+        setFeedback({ message: result.error, tone: "error" });
         return;
       }
 
+      setFeedback({
+        message: "Servico atualizado com sucesso.",
+        tone: "success",
+      });
       router.refresh();
     });
   }
@@ -43,6 +53,7 @@ export function ServiceActiveToggle({
         type="button"
         onClick={handleToggle}
         disabled={isPending}
+        aria-busy={isPending}
         aria-label={`${active ? "Desativar" : "Ativar"} ${serviceName}`}
         className={cn(
           "inline-flex min-h-10 items-center gap-2 rounded-xl border px-3 text-sm font-semibold transition disabled:cursor-wait disabled:opacity-60",
@@ -56,12 +67,12 @@ export function ServiceActiveToggle({
         ) : (
           <Power className="size-4" />
         )}
-        {active ? "Ativo" : "Inativo"}
+        {isPending ? "Salvando..." : active ? "Ativo" : "Inativo"}
       </button>
-      {error ? (
-        <p role="alert" className="mt-2 text-xs font-medium text-red-600">
-          {error}
-        </p>
+      {feedback ? (
+        <FeedbackMessage className="mt-2" tone={feedback.tone} variant="inline">
+          {feedback.message}
+        </FeedbackMessage>
       ) : null}
     </div>
   );

@@ -1,12 +1,14 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { isSupabaseConfigured } from "@/lib/env";
+import { getSafeInternalPath } from "@/lib/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export async function GET(request: NextRequest) {
   const code = request.nextUrl.searchParams.get("code");
-  const nextPath = request.nextUrl.searchParams.get("next") ?? "/inicio";
-  const safeNextPath = nextPath.startsWith("/") ? nextPath : "/inicio";
+  const safeNextPath = getSafeInternalPath(
+    request.nextUrl.searchParams.get("next"),
+  );
 
   if (code && isSupabaseConfigured()) {
     const supabase = await createClient();

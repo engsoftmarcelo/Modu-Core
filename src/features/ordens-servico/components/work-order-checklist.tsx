@@ -187,9 +187,19 @@ export function WorkOrderChecklist({
           })}
         </div>
       ) : (
-        <p className="px-5 py-6 text-sm text-slate-500 sm:px-6">
-          Nenhuma etapa foi cadastrada para esta ordem.
-        </p>
+        <div className="grid min-h-36 place-items-center px-5 py-7 text-center sm:px-6">
+          <div className="max-w-sm">
+            <span className="mx-auto grid size-11 place-items-center rounded-xl bg-slate-100 text-slate-500">
+              <ListChecks className="size-5" aria-hidden="true" />
+            </span>
+            <p className="mt-3 text-sm font-bold text-ink-950">
+              Checklist sem etapas.
+            </p>
+            <p className="mt-1 text-sm leading-6 text-slate-500">
+              Esta ordem ainda nao possui etapas para acompanhar.
+            </p>
+          </div>
+        </div>
       )}
 
       {errorMessage ? (

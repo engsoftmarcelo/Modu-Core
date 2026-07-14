@@ -5,6 +5,8 @@ import {
   Award,
   CalendarCheck2,
   CheckCircle2,
+  Plus,
+  UserPlus,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -106,6 +108,7 @@ export default async function AttendancePage({
               name="classId"
               defaultValue={selectedClassId ?? ""}
               className="min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+              disabled={!classes.length}
               required
             >
               <option value="">Selecione uma turma</option>
@@ -133,7 +136,8 @@ export default async function AttendancePage({
 
           <button
             type="submit"
-            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+            disabled={!classes.length}
+            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
           >
             Carregar alunos
           </button>
@@ -141,7 +145,26 @@ export default async function AttendancePage({
       </Card>
 
       <Card className={cn("p-5 sm:p-6", !selectedClassId && "text-center")}>
-        {!selectedClassId ? (
+        {!classes.length ? (
+          <div className="mx-auto max-w-md py-10 text-center">
+            <span className="mx-auto grid size-16 place-items-center rounded-xl bg-violet-50 text-violet-700 ring-8 ring-violet-100">
+              <CalendarCheck2 className="size-7" aria-hidden="true" />
+            </span>
+            <h2 className="mt-6 text-xl font-bold text-ink-950">
+              Nenhuma turma disponivel para chamada.
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-slate-500">
+              Crie uma turma antes de registrar a frequencia dos alunos.
+            </p>
+            <Link
+              href="/matriculas/turmas/novo"
+              className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+            >
+              <Plus className="size-4" />
+              Criar primeira turma
+            </Link>
+          </div>
+        ) : !selectedClassId ? (
           <div className="mx-auto max-w-md py-10">
             <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-brand-50 text-brand-700">
               <CalendarCheck2 className="size-7" />
@@ -177,12 +200,19 @@ export default async function AttendancePage({
               <CalendarCheck2 className="size-7" />
             </span>
             <h2 className="mt-5 text-xl font-bold text-ink-950">
-              Nenhum aluno para chamada
+              Esta turma ainda nao tem alunos para chamada.
             </h2>
             <p className="mt-2 text-sm leading-6 text-slate-500">
-              Esta turma ainda nao tem alunos com status Matriculado, Pago, Em
-              andamento ou Concluido.
+              Matricule um aluno para registrar presenca e acompanhar a
+              frequencia das aulas.
             </p>
+            <Link
+              href="/matriculas/inscricoes/novo"
+              className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+            >
+              <UserPlus className="size-4" />
+              Criar matricula
+            </Link>
           </div>
         )}
       </Card>

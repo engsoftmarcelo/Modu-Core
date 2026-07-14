@@ -427,10 +427,15 @@ export function WorkOrderAttachments({
         </div>
       ) : (
         <div className="grid min-h-32 place-items-center px-5 py-7 text-center sm:px-6">
-          <div>
-            <FileImage className="mx-auto size-7 text-slate-300" />
-            <p className="mt-2 text-sm font-semibold text-slate-500">
-              Nenhuma foto anexada.
+          <div className="max-w-sm">
+            <span className="mx-auto grid size-11 place-items-center rounded-xl bg-slate-100 text-slate-500">
+              <FileImage className="size-5" aria-hidden="true" />
+            </span>
+            <p className="mt-3 text-sm font-bold text-ink-950">
+              Nenhuma foto anexada ainda.
+            </p>
+            <p className="mt-1 text-sm leading-6 text-slate-500">
+              Adicione imagens do local, do problema ou do servico concluido.
             </p>
           </div>
         </div>

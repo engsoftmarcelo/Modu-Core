@@ -66,7 +66,11 @@ export default async function MatriculasPage({
       )}
 
       <StudentSearch query={query} status={status} />
-      <StudentList students={students} count={count} />
+      <StudentList
+        students={students}
+        count={count}
+        hasFilters={Boolean(query) || status !== "all"}
+      />
     </div>
   );
 }

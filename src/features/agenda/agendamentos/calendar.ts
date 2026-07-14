@@ -6,7 +6,7 @@ export const SP_OFFSET = "-03:00";
 
 export const DAY_START_HOUR = 7;
 export const DAY_END_HOUR = 22;
-export const HOUR_HEIGHT = 56; // px por hora
+export const HOUR_HEIGHT = 60; // px por hora
 export const GRID_HEIGHT = (DAY_END_HOUR - DAY_START_HOUR) * HOUR_HEIGHT;
 
 export type CalendarView = "day" | "week";

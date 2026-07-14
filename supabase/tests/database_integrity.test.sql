@@ -1,7 +1,18 @@
 begin;
+set local role postgres;
 
 create extension if not exists pgtap with schema extensions;
-set local search_path = public, extensions;
+select namespace.nspname as pgtap_schema
+from pg_proc as procedure
+join pg_namespace as namespace on namespace.oid = procedure.pronamespace
+where procedure.proname = 'plan'
+  and pg_get_function_identity_arguments(procedure.oid) = 'integer'
+order by namespace.nspname
+limit 1
+\gset
+set search_path = public, :"pgtap_schema";
+grant usage on schema :"pgtap_schema" to authenticated;
+grant execute on all functions in schema :"pgtap_schema" to authenticated;
 
 select plan(45);
 
@@ -396,7 +407,7 @@ select ok(
   'proposal writes are restricted to RPCs'
 );
 
-reset role;
+set local role postgres;
 update public.organization_memberships
 set role = 'member'
 where user_id = '90000000-0000-4000-8000-000000000001'
@@ -442,7 +453,7 @@ select throws_ok(
   '42501'
 );
 
-reset role;
+set local role postgres;
 update public.organization_memberships
 set role = 'owner'
 where user_id = '90000000-0000-4000-8000-000000000001'

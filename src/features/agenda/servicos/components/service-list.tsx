@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronRight, Clock, Eye, Pencil, Scissors } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { CollectionEmptyState } from "@/components/ui/empty-state";
 import { formatCurrency, formatDuration } from "@/lib/utils";
 
 import type { Service } from "../types";
@@ -11,31 +12,26 @@ import { ServiceStatusBadge } from "./service-status-badge";
 export function ServiceList({
   services,
   count,
+  hasFilters = false,
 }: {
   services: Service[];
   count: number;
+  hasFilters?: boolean;
 }) {
   if (!services.length) {
     return (
-      <Card className="grid min-h-80 place-items-center px-6 py-12 text-center">
-        <div className="max-w-md">
-          <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-violet-50 text-violet-700">
-            <Scissors className="size-7" />
-          </span>
-          <h2 className="mt-5 text-xl font-bold text-ink-950">
-            Nenhum servico encontrado
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Ajuste os filtros ou cadastre o primeiro servico do seu catalogo.
-          </p>
-          <Link
-            href="/agenda/servicos/novo"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
-          >
-            Cadastrar servico
-          </Link>
-        </div>
-      </Card>
+      <CollectionEmptyState
+        hasFilters={hasFilters}
+        icon={Scissors}
+        tone="violet"
+        emptyTitle="Seu catalogo de servicos ainda esta vazio."
+        emptyDescription="Cadastre o primeiro servico com duracao e preco para usa-lo na agenda e nas propostas."
+        filteredTitle="Nenhum servico corresponde aos filtros."
+        filteredDescription="Revise o nome ou a situacao selecionada para encontrar outros servicos."
+        createHref="/agenda/servicos/novo"
+        createLabel="Cadastrar primeiro servico"
+        clearHref="/agenda/servicos"
+      />
     );
   }
 

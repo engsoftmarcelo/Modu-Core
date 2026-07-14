@@ -1,7 +1,8 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { useRouter } from "next/navigation";
 import { describe, expect, it, vi } from "vitest";
 
+import { moveLeadStageAction } from "@/features/crm/leads/actions";
 import { LeadKanban } from "@/features/crm/leads/components/lead-kanban";
 import type { Lead } from "@/features/crm/leads/types";
 
@@ -30,6 +31,20 @@ const lead: Lead = {
 };
 
 describe("LeadKanban", () => {
+  it("mostra uma proxima acao quando o funil ainda esta vazio", () => {
+    render(<LeadKanban leads={[]} />);
+
+    expect(
+      screen.getByRole("heading", { name: "Seu funil ainda esta vazio." }),
+    ).toBeTruthy();
+    expect(
+      screen
+        .getByRole("link", { name: "Cadastrar primeiro lead" })
+        .getAttribute("href"),
+    ).toBe("/crm/leads/novo");
+    expect(screen.queryByText("Solte um lead aqui")).toBeNull();
+  });
+
   it("sincroniza o estado local quando o servidor devolve uma nova etapa", async () => {
     vi.mocked(useRouter).mockReturnValue({
       back: vi.fn(),
@@ -66,5 +81,33 @@ describe("LeadKanban", () => {
 
       expect(updatedSelect.value).toBe("contacted");
     });
+  });
+
+  it("confirma quando uma mudanca de etapa e salva", async () => {
+    const refresh = vi.fn();
+    vi.mocked(useRouter).mockReturnValue({
+      back: vi.fn(),
+      forward: vi.fn(),
+      refresh,
+      push: vi.fn(),
+      replace: vi.fn(),
+      prefetch: vi.fn(),
+    });
+    vi.mocked(moveLeadStageAction).mockResolvedValue({ error: null });
+
+    render(<LeadKanban leads={[lead]} />);
+
+    fireEvent.change(
+      screen.getByRole("combobox", {
+        name: "Mover Lead do kanban para outra etapa",
+      }),
+      { target: { value: "contacted" } },
+    );
+
+    const feedback = await screen.findByRole("status");
+
+    expect(feedback.textContent).toContain("Lead movido com sucesso.");
+    expect(moveLeadStageAction).toHaveBeenCalledWith(lead.id, "contacted");
+    expect(refresh).toHaveBeenCalledTimes(1);
   });
 });

@@ -63,7 +63,11 @@ export default async function CrmPage({ searchParams }: CrmPageProps) {
       )}
 
       <CustomerSearch query={query} status={status} />
-      <CustomerList customers={customers} count={count} />
+      <CustomerList
+        customers={customers}
+        count={count}
+        hasFilters={Boolean(query) || status !== "all"}
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { CalendarCheck2, CheckCircle2 } from "lucide-react";
+import { CalendarCheck2, CalendarPlus2, CheckCircle2 } from "lucide-react";
 
+import { EmptyState } from "@/components/ui/empty-state";
 import { AgendaTabs } from "@/features/agenda/agenda-tabs";
 import { AppointmentCalendar } from "@/features/agenda/agendamentos/components/appointment-calendar";
 import { AppointmentToolbar } from "@/features/agenda/agendamentos/components/appointment-toolbar";
@@ -65,7 +66,29 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps) {
         </span>
       </div>
 
-      <AppointmentCalendar view={view} days={days} appointments={appointments} />
+      {appointments.length ? (
+        <AppointmentCalendar
+          view={view}
+          days={days}
+          appointments={appointments}
+        />
+      ) : (
+        <EmptyState
+          icon={CalendarPlus2}
+          tone="violet"
+          title="Agenda livre neste periodo."
+          description={
+            view === "day"
+              ? "Nao ha atendimentos marcados neste dia. Aproveite o espaco para agendar o proximo cliente."
+              : "Nao ha atendimentos marcados nesta semana. Crie o primeiro para comecar a organizar a agenda."
+          }
+          primaryAction={{
+            href: `/agenda/agendamentos/novo?date=${dateKey}`,
+            icon: CalendarPlus2,
+            label: "Criar agendamento",
+          }}
+        />
+      )}
     </div>
   );
 }
