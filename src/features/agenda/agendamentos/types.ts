@@ -6,6 +6,8 @@ export type AppointmentStatus = Appointment["status"];
 
 export type AppointmentWithRelations = Appointment & {
   customerName: string | null;
+  customerWhatsapp: string | null;
+  customerPhone: string | null;
   professionalName: string | null;
   serviceName: string | null;
 };

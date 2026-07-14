@@ -11,16 +11,19 @@ import {
   ListPlus,
   Pencil,
   Phone,
-  StickyNote,
   Tag,
   UserRound,
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { CrmTabs } from "@/features/crm/crm-tabs";
+import { CustomerHistory } from "@/features/crm/customers/components/customer-history";
 import { DeleteCustomerButton } from "@/features/crm/customers/components/delete-customer-button";
 import { CustomerStatusBadge } from "@/features/crm/customers/components/customer-status-badge";
-import { getCustomerById } from "@/features/crm/customers/queries";
+import {
+  getCustomerById,
+  getCustomerHistory,
+} from "@/features/crm/customers/queries";
 import { formatDateTime, getInitials } from "@/lib/utils";
 
 type CustomerDetailsPageProps = {
@@ -48,7 +51,10 @@ export default async function CustomerDetailsPage({
   searchParams,
 }: CustomerDetailsPageProps) {
   const [{ id }, notice] = await Promise.all([params, searchParams]);
-  const customer = await getCustomerById(id);
+  const [customer, history] = await Promise.all([
+    getCustomerById(id),
+    getCustomerHistory(id),
+  ]);
 
   if (!customer) {
     notFound();
@@ -150,17 +156,7 @@ export default async function CustomerDetailsPage({
             </div>
           </Card>
 
-          <Card className="p-5 sm:p-6">
-            <div className="flex items-center gap-3">
-              <span className="grid size-10 place-items-center rounded-xl bg-violet-50 text-violet-700">
-                <StickyNote className="size-5" />
-              </span>
-              <h2 className="font-bold text-ink-950">Observacoes</h2>
-            </div>
-            <p className="mt-5 whitespace-pre-wrap text-sm leading-7 text-slate-600">
-              {customer.notes || "Nenhuma observacao registrada."}
-            </p>
-          </Card>
+          <CustomerHistory customerNotes={customer.notes} history={history} />
         </div>
 
         <div className="space-y-5">

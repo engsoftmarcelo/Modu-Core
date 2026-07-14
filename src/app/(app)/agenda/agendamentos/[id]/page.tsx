@@ -19,12 +19,14 @@ import { AppointmentStatusBadge } from "@/features/agenda/agendamentos/component
 import { AppointmentStatusSelect } from "@/features/agenda/agendamentos/components/appointment-status-select";
 import { CancelAppointmentButton } from "@/features/agenda/agendamentos/components/cancel-appointment-button";
 import { DeleteAppointmentButton } from "@/features/agenda/agendamentos/components/delete-appointment-button";
+import { WhatsappMessages } from "@/features/agenda/agendamentos/components/whatsapp-messages";
 import {
   longDayLabel,
   spDateKey,
   spTime,
 } from "@/features/agenda/agendamentos/calendar";
 import { getAppointmentById } from "@/features/agenda/agendamentos/queries";
+import { getWorkspaceIdentity } from "@/lib/auth";
 import { formatDuration } from "@/lib/utils";
 
 type AppointmentDetailsPageProps = {
@@ -46,7 +48,10 @@ export default async function AppointmentDetailsPage({
   searchParams,
 }: AppointmentDetailsPageProps) {
   const [{ id }, notice] = await Promise.all([params, searchParams]);
-  const appointment = await getAppointmentById(id);
+  const [appointment, identity] = await Promise.all([
+    getAppointmentById(id),
+    getWorkspaceIdentity(),
+  ]);
 
   if (!appointment) {
     notFound();
@@ -58,6 +63,7 @@ export default async function AppointmentDetailsPage({
       60_000,
   );
   const timeRange = `${spTime(appointment.starts_at)} - ${spTime(appointment.ends_at)}`;
+  const dayLabel = longDayLabel(spDateKey(appointment.starts_at));
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
@@ -91,7 +97,7 @@ export default async function AppointmentDetailsPage({
               <AppointmentStatusBadge status={appointment.status} />
             </div>
             <p className="mt-2 capitalize text-slate-500">
-              {longDayLabel(spDateKey(appointment.starts_at))} - {timeRange}
+              {dayLabel} - {timeRange}
             </p>
           </div>
         </div>
@@ -181,6 +187,17 @@ export default async function AppointmentDetailsPage({
         </div>
 
         <div className="space-y-5">
+          <WhatsappMessages
+            contact={appointment.customerWhatsapp ?? appointment.customerPhone}
+            customerId={appointment.customer_id}
+            customerName={appointment.customerName}
+            serviceName={appointment.serviceName}
+            professionalName={appointment.professionalName}
+            dayLabel={dayLabel}
+            timeLabel={spTime(appointment.starts_at)}
+            businessName={identity?.organizationName ?? "nossa equipe"}
+          />
+
           <Card className="p-5 sm:p-6">
             <h2 className="font-bold text-ink-950">Andamento</h2>
             <p className="mt-2 text-sm leading-6 text-slate-500">

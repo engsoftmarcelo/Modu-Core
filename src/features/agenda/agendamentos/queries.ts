@@ -42,7 +42,7 @@ async function attachRelations(
       customerIds.length
         ? supabase
             .from("customers")
-            .select("id, name")
+            .select("id, name, whatsapp, phone")
             .eq("organization_id", organizationId)
             .in("id", customerIds)
         : Promise.resolve({ data: [], error: null }),
@@ -70,8 +70,8 @@ async function attachRelations(
     throw new Error("Nao foi possivel carregar os vinculos dos agendamentos.");
   }
 
-  const customerNames = new Map(
-    (customersResult.data ?? []).map((row) => [row.id, row.name]),
+  const customersById = new Map(
+    (customersResult.data ?? []).map((row) => [row.id, row]),
   );
   const professionalNames = new Map(
     (professionalsResult.data ?? []).map((row) => [row.id, row.name]),
@@ -80,18 +80,24 @@ async function attachRelations(
     (servicesResult.data ?? []).map((row) => [row.id, row.name]),
   );
 
-  return appointments.map((appointment) => ({
-    ...appointment,
-    customerName: appointment.customer_id
-      ? customerNames.get(appointment.customer_id) ?? null
-      : null,
-    professionalName: appointment.professional_id
-      ? professionalNames.get(appointment.professional_id) ?? null
-      : null,
-    serviceName: appointment.service_id
-      ? serviceNames.get(appointment.service_id) ?? null
-      : null,
-  }));
+  return appointments.map((appointment) => {
+    const customer = appointment.customer_id
+      ? customersById.get(appointment.customer_id) ?? null
+      : null;
+
+    return {
+      ...appointment,
+      customerName: customer?.name ?? null,
+      customerWhatsapp: customer?.whatsapp ?? null,
+      customerPhone: customer?.phone ?? null,
+      professionalName: appointment.professional_id
+        ? professionalNames.get(appointment.professional_id) ?? null
+        : null,
+      serviceName: appointment.service_id
+        ? serviceNames.get(appointment.service_id) ?? null
+        : null,
+    };
+  });
 }
 
 export async function getAppointmentsInRange(

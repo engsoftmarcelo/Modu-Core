@@ -5,6 +5,29 @@ import { createClient } from "@/lib/supabase/server";
 
 import type { Customer, CustomerStatus } from "./types";
 
+type CustomerHistoryAppointment = {
+  id: string;
+  title: string;
+  starts_at: string;
+  status: "scheduled" | "confirmed" | "completed" | "cancelled";
+  notes: string | null;
+  professionalName: string | null;
+  serviceName: string | null;
+};
+
+export type CustomerServiceHistoryItem = {
+  name: string;
+  count: number;
+  lastDoneAt: string;
+};
+
+export type CustomerHistory = {
+  pastAppointments: CustomerHistoryAppointment[];
+  servicesDone: CustomerServiceHistoryItem[];
+  appointmentNotes: string[];
+  nextReturn: CustomerHistoryAppointment | null;
+};
+
 export type CustomerListFilters = {
   query?: string;
   status?: CustomerStatus | "all";
@@ -91,4 +114,171 @@ export const getCustomerById = cache(async function getCustomerById(
   }
 
   return data;
+});
+
+const historyAppointmentColumns =
+  "id, customer_id, professional_id, service_id, title, starts_at, status, notes";
+
+async function attachCustomerHistoryRelations(
+  appointments: {
+    id: string;
+    customer_id: string | null;
+    professional_id: string | null;
+    service_id: string | null;
+    title: string;
+    starts_at: string;
+    status: "scheduled" | "confirmed" | "completed" | "cancelled";
+    notes: string | null;
+  }[],
+  organizationId: string,
+): Promise<CustomerHistoryAppointment[]> {
+  const professionalIds = [
+    ...new Set(
+      appointments.flatMap((item) =>
+        item.professional_id ? [item.professional_id] : [],
+      ),
+    ),
+  ];
+  const serviceIds = [
+    ...new Set(
+      appointments.flatMap((item) => (item.service_id ? [item.service_id] : [])),
+    ),
+  ];
+  const supabase = await createClient();
+
+  const [professionalsResult, servicesResult] = await Promise.all([
+    professionalIds.length
+      ? supabase
+          .from("professionals")
+          .select("id, name")
+          .eq("organization_id", organizationId)
+          .in("id", professionalIds)
+      : Promise.resolve({ data: [], error: null }),
+    serviceIds.length
+      ? supabase
+          .from("services")
+          .select("id, name")
+          .eq("organization_id", organizationId)
+          .in("id", serviceIds)
+      : Promise.resolve({ data: [], error: null }),
+  ]);
+
+  if (professionalsResult.error || servicesResult.error) {
+    throw new Error("Nao foi possivel carregar os vinculos do historico.");
+  }
+
+  const professionalNames = new Map(
+    (professionalsResult.data ?? []).map((row) => [row.id, row.name]),
+  );
+  const serviceNames = new Map(
+    (servicesResult.data ?? []).map((row) => [row.id, row.name]),
+  );
+
+  return appointments.map((appointment) => ({
+    id: appointment.id,
+    title: appointment.title,
+    starts_at: appointment.starts_at,
+    status: appointment.status,
+    notes: appointment.notes,
+    professionalName: appointment.professional_id
+      ? professionalNames.get(appointment.professional_id) ?? null
+      : null,
+    serviceName: appointment.service_id
+      ? serviceNames.get(appointment.service_id) ?? null
+      : null,
+  }));
+}
+
+export const getCustomerHistory = cache(async function getCustomerHistory(
+  customerId: string,
+): Promise<CustomerHistory> {
+  const identity = await getWorkspaceIdentity();
+
+  if (!identity?.organizationId) {
+    return {
+      pastAppointments: [],
+      servicesDone: [],
+      appointmentNotes: [],
+      nextReturn: null,
+    };
+  }
+
+  const supabase = await createClient();
+  const now = new Date().toISOString();
+
+  const [pastResult, nextResult, completedResult] = await Promise.all([
+    supabase
+      .from("appointments")
+      .select(historyAppointmentColumns)
+      .eq("organization_id", identity.organizationId)
+      .eq("customer_id", customerId)
+      .lt("starts_at", now)
+      .order("starts_at", { ascending: false })
+      .limit(8),
+    supabase
+      .from("appointments")
+      .select(historyAppointmentColumns)
+      .eq("organization_id", identity.organizationId)
+      .eq("customer_id", customerId)
+      .gte("starts_at", now)
+      .neq("status", "cancelled")
+      .order("starts_at", { ascending: true })
+      .limit(1),
+    supabase
+      .from("appointments")
+      .select(historyAppointmentColumns)
+      .eq("organization_id", identity.organizationId)
+      .eq("customer_id", customerId)
+      .eq("status", "completed")
+      .lt("starts_at", now)
+      .order("starts_at", { ascending: false })
+      .limit(100),
+  ]);
+
+  if (pastResult.error || nextResult.error || completedResult.error) {
+    throw new Error("Nao foi possivel carregar o historico do cliente.");
+  }
+
+  const [pastAppointments, nextAppointments, completedAppointments] =
+    await Promise.all([
+      attachCustomerHistoryRelations(pastResult.data ?? [], identity.organizationId),
+      attachCustomerHistoryRelations(nextResult.data ?? [], identity.organizationId),
+      attachCustomerHistoryRelations(
+        completedResult.data ?? [],
+        identity.organizationId,
+      ),
+    ]);
+
+  const servicesDoneByName = new Map<string, CustomerServiceHistoryItem>();
+
+  completedAppointments.forEach((appointment) => {
+    const name = appointment.serviceName ?? appointment.title;
+    const current = servicesDoneByName.get(name);
+
+    if (current) {
+      servicesDoneByName.set(name, {
+        ...current,
+        count: current.count + 1,
+      });
+      return;
+    }
+
+    servicesDoneByName.set(name, {
+      name,
+      count: 1,
+      lastDoneAt: appointment.starts_at,
+    });
+  });
+
+  const appointmentNotes = pastAppointments
+    .map((appointment) => appointment.notes?.trim())
+    .filter((note): note is string => Boolean(note))
+    .slice(0, 4);
+
+  return {
+    pastAppointments,
+    servicesDone: [...servicesDoneByName.values()],
+    appointmentNotes,
+    nextReturn: nextAppointments[0] ?? null,
+  };
 });

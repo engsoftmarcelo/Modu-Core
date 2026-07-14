@@ -126,6 +126,67 @@ type ProfessionalServiceRow = {
   created_at: string;
 };
 
+type StudentRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  name: string;
+  whatsapp: string | null;
+  email: string | null;
+  cpf: string | null;
+  notes: string | null;
+  status: "active" | "inactive";
+};
+
+type CourseRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  name: string;
+  description: string | null;
+  workload_hours: number;
+  price: number;
+  modality: "presencial" | "online" | "hibrido";
+  active: boolean;
+};
+
+type CourseClassRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  course_id: string;
+  teacher: string;
+  start_date: string;
+  end_date: string;
+  weekdays: string[];
+  class_time: string;
+  capacity: number;
+};
+
+type EnrollmentStatus =
+  | "interested"
+  | "enrolled"
+  | "paid"
+  | "in_progress"
+  | "completed"
+  | "cancelled";
+
+type EnrollmentRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  student_id: string;
+  course_class_id: string;
+  status: EnrollmentStatus;
+};
+
+type AttendanceStatus = "present" | "absent";
+
+type AttendanceRecordRow = Timestamps & {
+  id: string;
+  organization_id: string;
+  course_class_id: string;
+  student_id: string;
+  class_date: string;
+  status: AttendanceStatus;
+};
+
 type TableDefinition<Row, Insert, Update = Partial<Insert>> = {
   Row: Row;
   Insert: Insert;
@@ -287,6 +348,77 @@ export type Database = {
           professional_id: string;
           service_id: string;
           created_at?: string;
+        }
+      >;
+      students: TableDefinition<
+        StudentRow,
+        {
+          id?: string;
+          organization_id: string;
+          name: string;
+          whatsapp?: string | null;
+          email?: string | null;
+          cpf?: string | null;
+          notes?: string | null;
+          status?: "active" | "inactive";
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      courses: TableDefinition<
+        CourseRow,
+        {
+          id?: string;
+          organization_id: string;
+          name: string;
+          description?: string | null;
+          workload_hours?: number;
+          price?: number;
+          modality?: "presencial" | "online" | "hibrido";
+          active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      course_classes: TableDefinition<
+        CourseClassRow,
+        {
+          id?: string;
+          organization_id: string;
+          course_id: string;
+          teacher: string;
+          start_date: string;
+          end_date: string;
+          weekdays?: string[];
+          class_time: string;
+          capacity: number;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      enrollments: TableDefinition<
+        EnrollmentRow,
+        {
+          id?: string;
+          organization_id: string;
+          student_id: string;
+          course_class_id: string;
+          status?: EnrollmentStatus;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      attendance_records: TableDefinition<
+        AttendanceRecordRow,
+        {
+          id?: string;
+          organization_id: string;
+          course_class_id: string;
+          student_id: string;
+          class_date: string;
+          status: AttendanceStatus;
+          created_at?: string;
+          updated_at?: string;
         }
       >;
     };

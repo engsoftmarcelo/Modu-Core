@@ -24,7 +24,7 @@ abaixo representa prioridade recomendada.
 - [x] CRUD de leads.
 - [x] Resumo visual do funil por status.
 - [x] Pipeline kanban de leads.
-- [ ] Historico de interacoes.
+- [x] Historico de interacoes.
 - [x] Busca e filtros de clientes.
 - [x] Busca e filtros de leads.
 - [ ] Importacao de clientes por CSV.
@@ -34,6 +34,7 @@ abaixo representa prioridade recomendada.
 - [x] Agenda diaria e semanal com grade de horarios.
 - [x] Criacao, edicao e cancelamento de agendamentos.
 - [x] Vinculo de agendamento com cliente, profissional e servico.
+- [x] Mensagens prontas de WhatsApp no agendamento (confirmacao, lembrete, reagendamento, retorno, cobranca).
 - [x] CRUD de servicos (nome, duracao, preco, descricao, ativo/inativo).
 - [x] CRUD de profissionais (especialidade, horario, servicos que realiza).
 - [x] CRUD de tarefas e follow-ups.
@@ -59,6 +60,7 @@ abaixo representa prioridade recomendada.
 
 ## P3 - Qualidade e operacao
 
+- [x] Teste automatizado do fluxo critico da demo.
 - [ ] Testes end-to-end dos fluxos criticos.
 - [ ] Observabilidade e captura de erros.
 - [ ] Auditoria de alteracoes importantes.
