@@ -24,13 +24,13 @@ export function WorkOrderSearch({ query, status }: WorkOrderSearchProps) {
     >
       <label className="relative">
         <span className="sr-only">Buscar ordens</span>
-        <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-slate-400" />
+        <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-slate-500" />
         <input
           name="query"
           defaultValue={query}
           maxLength={80}
           placeholder="Servico, endereco ou tecnico"
-          className="min-h-12 w-full rounded-xl border border-slate-200 bg-white pr-4 pl-11 text-base text-ink-950 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+          className="min-h-12 w-full rounded-xl border border-slate-200 bg-white pr-4 pl-11 text-base text-ink-950 outline-none transition placeholder:text-slate-500 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
         />
       </label>
 

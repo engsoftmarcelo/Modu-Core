@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { CheckCircle2, FileText, Plus } from "lucide-react";
+import { FileText, Plus } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { Notice } from "@/components/ui/notice";
+import { PageHeader } from "@/components/ui/page-header";
 import { ProposalList } from "@/features/propostas/components/proposal-list";
 import { ProposalSearch } from "@/features/propostas/components/proposal-search";
 import { ProposalSummary } from "@/features/propostas/components/proposal-summary";
@@ -38,35 +38,17 @@ export default async function ProposalsPage({
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <Badge tone="green">
-            <FileText className="mr-1.5 size-3.5" />
-            Comercial
-          </Badge>
-          <h1 className="mt-4 text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
-            Propostas
-          </h1>
-          <p className="mt-2 max-w-2xl text-base leading-7 text-slate-500">
-            Crie propostas para seus clientes e acompanhe envio, aceite e prazo
-            em um so lugar.
-          </p>
-        </div>
-
-        <Link
-          href="/propostas/novo"
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
-        >
-          <Plus className="size-5" />
-          Nova proposta
-        </Link>
-      </div>
+      <PageHeader
+        eyebrow="Comercial"
+        icon={FileText}
+        tone="green"
+        title="Propostas"
+        description="Crie propostas e acompanhe envio, aceite e prazo em um so lugar."
+        actions={[{ href: "/propostas/novo", icon: Plus, label: "Nova proposta" }]}
+      />
 
       {params.deleted === "1" ? (
-        <div className="flex items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
-          <CheckCircle2 className="size-5 shrink-0" />
-          Proposta excluida com sucesso.
-        </div>
+        <Notice tone="success">Proposta excluida com sucesso.</Notice>
       ) : null}
 
       <ProposalSummary stats={stats} />

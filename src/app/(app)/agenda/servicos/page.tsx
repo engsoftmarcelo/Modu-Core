@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { CheckCircle2, Plus, Scissors } from "lucide-react";
+import { Plus, Scissors } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { Notice } from "@/components/ui/notice";
+import { PageHeader } from "@/components/ui/page-header";
 import { AgendaTabs } from "@/features/agenda/agenda-tabs";
 import { ServiceList } from "@/features/agenda/servicos/components/service-list";
 import { ServiceSearch } from "@/features/agenda/servicos/components/service-search";
@@ -39,35 +39,17 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
     <div className="space-y-6">
       <AgendaTabs />
 
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <Badge tone="violet">
-            <Scissors className="mr-1.5 size-3.5" />
-            Catalogo
-          </Badge>
-          <h1 className="mt-4 text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
-            Servicos
-          </h1>
-          <p className="mt-2 max-w-2xl text-base leading-7 text-slate-500">
-            Cadastre os servicos do seu negocio com duracao e preco para usar na
-            agenda e nas propostas.
-          </p>
-        </div>
-
-        <Link
-          href="/agenda/servicos/novo"
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
-        >
-          <Plus className="size-5" />
-          Novo servico
-        </Link>
-      </div>
+      <PageHeader
+        eyebrow="Catalogo"
+        icon={Scissors}
+        tone="violet"
+        title="Servicos"
+        description="Cadastre duracao e preco dos servicos usados na agenda e nas propostas."
+        actions={[{ href: "/agenda/servicos/novo", icon: Plus, label: "Novo servico" }]}
+      />
 
       {params.deleted === "1" ? (
-        <div className="flex items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
-          <CheckCircle2 className="size-5 shrink-0" />
-          Servico excluido com sucesso.
-        </div>
+        <Notice tone="success">Servico excluido com sucesso.</Notice>
       ) : null}
 
       <ServiceSummary stats={stats} />

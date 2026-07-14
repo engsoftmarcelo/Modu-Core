@@ -61,7 +61,7 @@ export function StudentList({
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[820px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+            <tr className="border-b border-slate-200 text-xs font-bold uppercase text-slate-500">
               <th className="px-6 py-4">Aluno</th>
               <th className="px-5 py-4">Contato</th>
               <th className="px-5 py-4">CPF</th>
@@ -92,18 +92,18 @@ export function StudentList({
                   <div className="space-y-1 text-sm text-slate-600">
                     {student.whatsapp && (
                       <p className="flex items-center gap-2">
-                        <MessageCircle className="size-3.5 text-slate-400" />
+                        <MessageCircle className="size-3.5 text-slate-500" />
                         {student.whatsapp}
                       </p>
                     )}
                     {student.email && (
                       <p className="flex items-center gap-2">
-                        <Mail className="size-3.5 text-slate-400" />
+                        <Mail className="size-3.5 text-slate-500" />
                         {student.email}
                       </p>
                     )}
                     {!student.whatsapp && !student.email && (
-                      <span className="text-slate-400">Sem contato</span>
+                      <span className="text-slate-500">Sem contato</span>
                     )}
                   </div>
                 </td>
@@ -118,14 +118,14 @@ export function StudentList({
                     <Link
                       href={`/matriculas/${student.id}`}
                       aria-label={`Ver ${student.name}`}
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-violet-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-violet-700"
                     >
                       <Eye className="size-[18px]" />
                     </Link>
                     <Link
                       href={`/matriculas/${student.id}/editar`}
                       aria-label={`Editar ${student.name}`}
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-violet-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-violet-700"
                     >
                       <Pencil className="size-[18px]" />
                     </Link>

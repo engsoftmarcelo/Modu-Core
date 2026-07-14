@@ -79,7 +79,7 @@ export function TaskList({
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[1040px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+            <tr className="border-b border-slate-200 text-xs font-bold uppercase text-slate-500">
               <th className="px-6 py-4">Tarefa</th>
               <th className="px-5 py-4">Relacionado</th>
               <th className="px-5 py-4">Data</th>
@@ -123,12 +123,12 @@ export function TaskList({
                         {task.relatedName}
                       </Link>
                     ) : (
-                      <span className="text-sm text-slate-400">Sem vinculo</span>
+                      <span className="text-sm text-slate-500">Sem vinculo</span>
                     )}
                   </td>
                   <td className="px-5 py-4">
                     <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                      <CalendarClock className="size-4 text-slate-400" />
+                      <CalendarClock className="size-4 text-slate-500" />
                       {task.due_at ? formatDateTime(task.due_at) : "Sem data"}
                     </p>
                     {overdue ? (
@@ -153,14 +153,14 @@ export function TaskList({
                       <Link
                         href={`/tarefas/${task.id}`}
                         aria-label={`Ver ${task.title}`}
-                        className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-amber-700"
+                        className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-amber-700"
                       >
                         <Eye className="size-[18px]" />
                       </Link>
                       <Link
                         href={`/tarefas/${task.id}/editar`}
                         aria-label={`Editar ${task.title}`}
-                        className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-amber-700"
+                        className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-amber-700"
                       >
                         <Pencil className="size-[18px]" />
                       </Link>

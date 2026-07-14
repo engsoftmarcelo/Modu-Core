@@ -47,10 +47,10 @@ export function CourseDemoProgress({
               <span
                 className={cn(
                   "relative z-10 grid size-8 shrink-0 place-items-center rounded-full border text-xs font-bold",
-                  completed && "border-emerald-600 bg-emerald-600 text-white",
+                  completed && "border-emerald-700 bg-emerald-700 text-white",
                   active && "border-ink-950 bg-ink-950 text-white",
                   !completed && !active &&
-                    "border-slate-200 bg-white text-slate-400",
+                    "border-slate-200 bg-white text-slate-500",
                 )}
               >
                 {completed ? <Check className="size-4" /> : step}

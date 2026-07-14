@@ -79,7 +79,7 @@ export default async function EditEnrollmentPage({
           <BadgeCheck className="size-7" />
         </span>
         <div>
-          <h1 className="text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+          <h1 className="text-3xl font-bold text-ink-950 sm:text-4xl">
             Editar matricula
           </h1>
           <p className="mt-2 text-slate-500">

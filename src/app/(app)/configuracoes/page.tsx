@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Building2, LogOut, ShieldCheck, UserRound } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { PageHeader } from "@/components/ui/page-header";
 import { getWorkspaceIdentity } from "@/lib/auth";
 
 export const metadata: Metadata = {
@@ -15,15 +15,12 @@ export default async function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-7">
-      <div>
-        <Badge tone="blue">Conta e empresa</Badge>
-        <h1 className="mt-4 text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
-          Configuracoes
-        </h1>
-        <p className="mt-2 text-slate-500">
-          Informacoes basicas do seu espaco no ModuCore.
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="Conta e empresa"
+        icon={Building2}
+        title="Configuracoes"
+        description="Informacoes basicas do seu espaco no ModuCore."
+      />
 
       <Card className="overflow-hidden">
         <div className="border-b border-slate-200 px-5 py-5 sm:px-6">
@@ -39,7 +36,7 @@ export default async function SettingsPage() {
         </div>
         <div className="grid gap-5 p-5 sm:grid-cols-2 sm:p-6">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
+            <p className="text-xs font-bold uppercase text-slate-500">
               Nome
             </p>
             <p className="mt-2 font-semibold text-ink-950">
@@ -47,7 +44,7 @@ export default async function SettingsPage() {
             </p>
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
+            <p className="text-xs font-bold uppercase text-slate-500">
               Seguranca
             </p>
             <p className="mt-2 inline-flex items-center gap-2 font-semibold text-emerald-700">
@@ -72,13 +69,13 @@ export default async function SettingsPage() {
         </div>
         <div className="grid gap-5 p-5 sm:grid-cols-2 sm:p-6">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
+            <p className="text-xs font-bold uppercase text-slate-500">
               Nome
             </p>
             <p className="mt-2 font-semibold text-ink-950">{identity?.fullName}</p>
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
+            <p className="text-xs font-bold uppercase text-slate-500">
               E-mail
             </p>
             <p className="mt-2 font-semibold text-ink-950">{identity?.email}</p>

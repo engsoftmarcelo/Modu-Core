@@ -9,8 +9,8 @@ import {
   UserPlus,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { PageHeader } from "@/components/ui/page-header";
 import { CourseDemoProgress } from "@/features/matriculas/demo/course-demo-progress";
 import { AttendanceForm } from "@/features/matriculas/frequencia/components/attendance-form";
 import { getAttendanceData } from "@/features/matriculas/frequencia/queries";
@@ -57,18 +57,12 @@ export default async function AttendancePage({
       <MatriculasTabs />
       {demoMode ? <CourseDemoProgress currentStep={4} /> : null}
 
-      <div>
-        <Badge tone="blue">
-          <CalendarCheck2 className="mr-1.5 size-3.5" />
-          Frequencia
-        </Badge>
-        <h1 className="mt-4 text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
-          Frequencia simples
-        </h1>
-        <p className="mt-2 max-w-2xl text-base leading-7 text-slate-500">
-          Escolha a turma, informe a data da aula e marque quem esteve presente.
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="Controle de aula"
+        icon={CalendarCheck2}
+        title="Frequencia simples"
+        description="Escolha a turma, informe a data da aula e marque quem esteve presente."
+      />
 
       {params.saved === "1" ? (
         <div className="flex flex-col gap-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
@@ -79,7 +73,7 @@ export default async function AttendancePage({
           {demoMode && demoEnrollmentId ? (
             <Link
               href={`/matriculas/certificados?demo=1&enrollmentId=${demoEnrollmentId}&date=${classDate}`}
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-ink-950 px-4 text-sm font-bold text-white transition hover:bg-brand-700"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 text-sm font-bold text-white transition hover:bg-brand-700"
             >
               <Award className="size-4" />
               Emitir certificado
@@ -137,7 +131,7 @@ export default async function AttendancePage({
           <button
             type="submit"
             disabled={!classes.length}
-            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
           >
             Carregar alunos
           </button>
@@ -158,7 +152,7 @@ export default async function AttendancePage({
             </p>
             <Link
               href="/matriculas/turmas/novo"
-              className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+              className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
             >
               <Plus className="size-4" />
               Criar primeira turma
@@ -208,7 +202,7 @@ export default async function AttendancePage({
             </p>
             <Link
               href="/matriculas/inscricoes/novo"
-              className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+              className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
             >
               <UserPlus className="size-4" />
               Criar matricula

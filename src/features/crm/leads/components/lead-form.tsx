@@ -31,7 +31,7 @@ type FieldProps = {
 };
 
 const controlClassName =
-  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100";
+  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100";
 
 function Field({ children, error, label, name, required }: FieldProps) {
   return (
@@ -155,7 +155,7 @@ export function LeadForm({ lead, mode }: LeadFormProps) {
           error={state.errors.estimatedValue}
         >
           <div className="relative">
-            <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-sm font-semibold text-slate-400">
+            <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-sm font-semibold text-slate-500">
               R$
             </span>
             <input

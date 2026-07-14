@@ -13,8 +13,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { PageHeader } from "@/components/ui/page-header";
 import { CrmTabs } from "@/features/crm/crm-tabs";
 import { CrmMetricCard } from "@/features/crm/dashboard/crm-metric-card";
 import { getCrmDashboardMetrics } from "@/features/crm/dashboard/queries";
@@ -99,29 +99,13 @@ export default async function CrmDashboardPage() {
     <div className="space-y-7">
       <CrmTabs />
 
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <Badge tone="blue">
-            <LayoutDashboard className="mr-1.5 size-3.5" />
-            Visao comercial
-          </Badge>
-          <h1 className="mt-4 text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
-            Dashboard do CRM
-          </h1>
-          <p className="mt-2 max-w-2xl text-base leading-7 text-slate-500">
-            Acompanhe oportunidades, propostas e proximos passos em uma unica
-            leitura.
-          </p>
-        </div>
-
-        <Link
-          href="/crm/leads/novo"
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
-        >
-          <Plus className="size-5" />
-          Novo lead
-        </Link>
-      </div>
+      <PageHeader
+        eyebrow="Visao comercial"
+        icon={LayoutDashboard}
+        title="Dashboard do CRM"
+        description="Acompanhe oportunidades, propostas e proximos passos em uma unica leitura."
+        actions={[{ href: "/crm/leads/novo", icon: Plus, label: "Novo lead" }]}
+      />
 
       <section aria-labelledby="crm-indicators-title">
         <div className="mb-4">

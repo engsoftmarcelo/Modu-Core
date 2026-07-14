@@ -53,7 +53,7 @@ export function EnrollmentList({
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[980px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+            <tr className="border-b border-slate-200 text-xs font-bold uppercase text-slate-500">
               <th className="px-6 py-4">Aluno</th>
               <th className="px-5 py-4">Turma</th>
               <th className="px-5 py-4">Professor</th>
@@ -99,14 +99,14 @@ export function EnrollmentList({
                     <Link
                       href={`/matriculas/inscricoes/${enrollment.id}`}
                       aria-label="Ver matricula"
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-emerald-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-emerald-700"
                     >
                       <Eye className="size-[18px]" />
                     </Link>
                     <Link
                       href={`/matriculas/inscricoes/${enrollment.id}/editar`}
                       aria-label="Editar matricula"
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-emerald-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-emerald-700"
                     >
                       <Pencil className="size-[18px]" />
                     </Link>

@@ -32,7 +32,7 @@ type FieldProps = {
 };
 
 const controlClassName =
-  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100";
+  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100";
 
 function Field({ children, error, hint, label, name, required }: FieldProps) {
   return (
@@ -43,7 +43,7 @@ function Field({ children, error, hint, label, name, required }: FieldProps) {
       </label>
       {children}
       {hint && !error?.length ? (
-        <p className="text-xs text-slate-400">{hint}</p>
+        <p className="text-xs text-slate-500">{hint}</p>
       ) : null}
       {error?.map((message) => (
         <p key={message} className="text-sm font-medium text-red-600">
@@ -192,7 +192,7 @@ export function ProfessionalForm({
                 />
                 <span className="min-w-0 flex-1 truncate">{service.name}</span>
                 {!service.active ? (
-                  <span className="shrink-0 text-xs font-medium text-slate-400">
+                  <span className="shrink-0 text-xs font-medium text-slate-500">
                     inativo
                   </span>
                 ) : null}

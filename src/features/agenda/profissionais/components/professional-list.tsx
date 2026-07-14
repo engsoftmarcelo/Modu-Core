@@ -20,7 +20,7 @@ import { ProfessionalStatusBadge } from "./professional-status-badge";
 
 function ServiceTags({ services }: { services: ProfessionalWithServices["services"] }) {
   if (!services.length) {
-    return <span className="text-sm text-slate-400">Nenhum servico</span>;
+    return <span className="text-sm text-slate-500">Nenhum servico</span>;
   }
 
   const visible = services.slice(0, 3);
@@ -80,7 +80,7 @@ export function ProfessionalList({
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[960px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+            <tr className="border-b border-slate-200 text-xs font-bold uppercase text-slate-500">
               <th className="px-6 py-4">Profissional</th>
               <th className="px-5 py-4">Servicos</th>
               <th className="px-5 py-4">Horario</th>
@@ -118,7 +118,7 @@ export function ProfessionalList({
                 </td>
                 <td className="px-5 py-4">
                   <p className="flex items-center gap-2 text-sm text-slate-600">
-                    <Clock className="size-4 shrink-0 text-slate-400" />
+                    <Clock className="size-4 shrink-0 text-slate-500" />
                     <span className="max-w-[220px] truncate">
                       {professional.available_hours || "Nao informado"}
                     </span>
@@ -136,14 +136,14 @@ export function ProfessionalList({
                     <Link
                       href={`/agenda/profissionais/${professional.id}`}
                       aria-label={`Ver ${professional.name}`}
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-violet-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-violet-700"
                     >
                       <Eye className="size-[18px]" />
                     </Link>
                     <Link
                       href={`/agenda/profissionais/${professional.id}/editar`}
                       aria-label={`Editar ${professional.name}`}
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-violet-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-violet-700"
                     >
                       <Pencil className="size-[18px]" />
                     </Link>

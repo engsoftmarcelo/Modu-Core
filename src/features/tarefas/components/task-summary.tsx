@@ -51,10 +51,10 @@ export function TaskSummary({ stats }: { stats: TaskStats }) {
                 <Icon className="size-5" />
               </span>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.1em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   {item.label}
                 </p>
-                <p className="mt-1 text-2xl font-bold tracking-[-0.04em] text-ink-950">
+                <p className="mt-1 text-2xl font-bold text-ink-950">
                   {stats[item.key]}
                 </p>
               </div>

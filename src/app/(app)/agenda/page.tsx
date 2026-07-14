@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { CalendarCheck2, CalendarPlus2, CheckCircle2 } from "lucide-react";
+import { CalendarCheck2, CalendarDays, CalendarPlus2 } from "lucide-react";
 
 import { EmptyState } from "@/components/ui/empty-state";
+import { Notice } from "@/components/ui/notice";
+import { PageHeader } from "@/components/ui/page-header";
 import { AgendaTabs } from "@/features/agenda/agenda-tabs";
 import { AppointmentCalendar } from "@/features/agenda/agendamentos/components/appointment-calendar";
 import { AppointmentToolbar } from "@/features/agenda/agendamentos/components/appointment-toolbar";
@@ -36,20 +38,16 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps) {
     <div className="space-y-6">
       <AgendaTabs />
 
-      <div>
-        <h1 className="text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
-          Agenda
-        </h1>
-        <p className="mt-2 text-slate-500">
-          Visualize os horarios, crie e gerencie os agendamentos da equipe.
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="Atendimentos"
+        icon={CalendarDays}
+        tone="violet"
+        title="Agenda"
+        description="Visualize os horarios, crie e gerencie os agendamentos da equipe."
+      />
 
       {params.deleted === "1" ? (
-        <div className="flex items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
-          <CheckCircle2 className="size-5 shrink-0" />
-          Agendamento excluido com sucesso.
-        </div>
+        <Notice tone="success">Agendamento excluido com sucesso.</Notice>
       ) : null}
 
       <AppointmentToolbar view={view} dateKey={dateKey} />

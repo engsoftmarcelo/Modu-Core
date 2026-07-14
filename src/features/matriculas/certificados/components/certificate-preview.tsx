@@ -19,10 +19,10 @@ export function CertificatePreview({
             <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-brand-50 text-brand-700 print:bg-white print:text-ink-950">
               <Award className="size-8" />
             </span>
-            <p className="mt-6 text-sm font-bold uppercase tracking-[0.22em] text-slate-500">
+            <p className="mt-6 text-sm font-bold uppercase text-slate-500">
               Certificado de conclusao
             </p>
-            <h2 className="mt-4 text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold text-ink-950 sm:text-5xl">
               {certificate.studentName}
             </h2>
           </div>
@@ -59,7 +59,7 @@ export function CertificatePreview({
 
           <div className="mx-auto mt-6 w-full max-w-sm border-t border-slate-300 pt-4">
             <p className="font-bold text-ink-950">{certificate.schoolName}</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+            <p className="mt-1 text-xs font-semibold uppercase text-slate-500">
               Nome da escola
             </p>
           </div>
@@ -79,7 +79,7 @@ function InfoItem({ icon: Icon, label, value }: InfoItemProps) {
   return (
     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 print:bg-white">
       <Icon className="size-5 text-brand-600 print:text-ink-950" />
-      <p className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
+      <p className="mt-3 text-xs font-bold uppercase text-slate-500">
         {label}
       </p>
       <p className="mt-1 font-bold text-ink-950">{value}</p>

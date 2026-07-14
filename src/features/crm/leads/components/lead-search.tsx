@@ -24,7 +24,7 @@ export function LeadSearch({ query, status }: LeadSearchProps) {
       <input type="hidden" name="view" value="list" />
 
       <label className="flex min-h-12 items-center gap-3 rounded-xl border border-slate-200 px-4 focus-within:border-brand-500 focus-within:ring-4 focus-within:ring-brand-100">
-        <Search className="size-5 shrink-0 text-slate-400" />
+        <Search className="size-5 shrink-0 text-slate-500" />
         <span className="sr-only">Buscar leads</span>
         <input
           type="search"
@@ -32,12 +32,12 @@ export function LeadSearch({ query, status }: LeadSearchProps) {
           defaultValue={query}
           maxLength={80}
           placeholder="Buscar por nome, empresa, contato ou origem"
-          className="min-w-0 flex-1 bg-transparent text-base text-ink-950 outline-none placeholder:text-slate-400"
+          className="min-w-0 flex-1 bg-transparent text-base text-ink-950 outline-none placeholder:text-slate-500"
         />
       </label>
 
       <label className="flex min-h-12 items-center gap-3 rounded-xl border border-slate-200 px-4 focus-within:border-brand-500 focus-within:ring-4 focus-within:ring-brand-100">
-        <SlidersHorizontal className="size-4 shrink-0 text-slate-400" />
+        <SlidersHorizontal className="size-4 shrink-0 text-slate-500" />
         <span className="sr-only">Filtrar por status</span>
         <select
           name="status"

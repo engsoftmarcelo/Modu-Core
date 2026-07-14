@@ -85,7 +85,7 @@ export default async function NewWorkOrderPage({
           </p>
           <Link
             href="/crm/novo"
-            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
           >
             <UserPlus className="size-4" />
             Cadastrar cliente

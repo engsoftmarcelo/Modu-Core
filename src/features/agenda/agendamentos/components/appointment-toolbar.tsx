@@ -77,7 +77,7 @@ export function AppointmentToolbar({ view, dateKey }: AppointmentToolbarProps) {
         </div>
         <Link
           href={`/agenda/agendamentos/novo?date=${dateKey}`}
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-ink-950 px-4 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
         >
           <Plus className="size-5" />
           <span className="hidden sm:inline">Novo agendamento</span>

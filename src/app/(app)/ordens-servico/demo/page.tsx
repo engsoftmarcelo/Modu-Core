@@ -104,7 +104,7 @@ export default async function WorkOrderDemoPage({
                     <Icon className="size-5" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-bold uppercase text-slate-400">
+                    <p className="text-xs font-bold uppercase text-slate-500">
                       Etapa {index + 1}
                     </p>
                     <p className="mt-1 font-bold text-ink-950">{step.label}</p>
@@ -125,19 +125,19 @@ export default async function WorkOrderDemoPage({
           <h2 className="mt-4 font-bold text-ink-950">Cenario preparado</h2>
           <dl className="mt-4 space-y-4 text-sm">
             <div>
-              <dt className="font-bold text-slate-400">Cliente</dt>
+              <dt className="font-bold text-slate-500">Cliente</dt>
               <dd className="mt-1 font-semibold text-ink-950">
                 Mariana Oliveira
               </dd>
             </div>
             <div>
-              <dt className="font-bold text-slate-400">Servico</dt>
+              <dt className="font-bold text-slate-500">Servico</dt>
               <dd className="mt-1 font-semibold leading-6 text-ink-950">
                 {workOrderDemoDefaults.serviceType}
               </dd>
             </div>
             <div>
-              <dt className="font-bold text-slate-400">Tecnico</dt>
+              <dt className="font-bold text-slate-500">Tecnico</dt>
               <dd className="mt-1 font-semibold text-ink-950">
                 {workOrderDemoDefaults.technicianName}
               </dd>

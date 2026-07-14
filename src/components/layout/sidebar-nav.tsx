@@ -23,17 +23,21 @@ function NavItem({
   return (
     <Link
       href={item.href}
+      aria-current={active ? "page" : undefined}
       className={cn(
-        "group flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-semibold transition",
+        "group relative flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-500/30",
         active
-          ? "bg-ink-950 text-white shadow-md shadow-indigo-950/10"
-          : "text-slate-500 hover:bg-slate-100 hover:text-ink-950",
+          ? "bg-slate-800 text-white"
+          : "text-slate-400 hover:bg-slate-900 hover:text-white",
       )}
     >
+      {active ? (
+        <span className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-sky-400" />
+      ) : null}
       <Icon
         className={cn(
           "size-[18px]",
-          active ? "text-violet-300" : "text-slate-400 group-hover:text-brand-600",
+          active ? "text-sky-300" : "text-slate-500 group-hover:text-sky-300",
         )}
       />
       {item.name}
@@ -45,7 +49,7 @@ export function SidebarNav() {
   return (
     <nav className="flex min-h-0 flex-1 flex-col">
       <div className="space-y-1 overflow-y-auto pr-1">
-        <p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">
+        <p className="mb-3 px-3 text-[11px] font-bold uppercase text-slate-500">
           Operacao
         </p>
         {primaryNavigation.map((item) => (
@@ -53,7 +57,7 @@ export function SidebarNav() {
         ))}
       </div>
 
-      <div className="mt-auto border-t border-slate-200 pt-4">
+      <div className="mt-auto border-t border-slate-800 pt-4">
         {utilityNavigation.map((item) => (
           <NavItem key={item.href} item={item} />
         ))}

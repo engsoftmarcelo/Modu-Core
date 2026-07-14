@@ -45,7 +45,7 @@ export function CustomerHistory({
         <section className="bg-white p-5 sm:p-6">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+              <p className="text-xs font-bold uppercase text-slate-500">
                 Agendamentos passados
               </p>
               <h3 className="mt-1 font-bold text-ink-950">
@@ -78,7 +78,7 @@ export function CustomerHistory({
                     <div className="mt-3 space-y-2 text-sm text-slate-500">
                       {appointment.professionalName && (
                         <p className="flex items-center gap-2">
-                          <UserRound className="size-4 text-slate-400" />
+                          <UserRound className="size-4 text-slate-500" />
                           {appointment.professionalName}
                         </p>
                       )}
@@ -107,7 +107,7 @@ export function CustomerHistory({
                 <CheckCircle2 className="size-5" />
               </span>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   Servicos feitos
                 </p>
                 <h3 className="font-bold text-ink-950">Historico de consumo</h3>
@@ -133,7 +133,7 @@ export function CustomerHistory({
                             ? "atendimento concluido"
                             : "atendimentos concluidos"}
                         </p>
-                        <p className="mt-1 text-xs font-semibold text-slate-400">
+                        <p className="mt-1 text-xs font-semibold text-slate-500">
                           Ultimo em {formatDateTime(service.lastDoneAt)}
                         </p>
                       </div>
@@ -155,7 +155,7 @@ export function CustomerHistory({
                 <StickyNote className="size-5" />
               </span>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   Observacoes
                 </p>
                 <h3 className="font-bold text-ink-950">Pontos importantes</h3>
@@ -191,7 +191,7 @@ export function CustomerHistory({
                 <RotateCcw className="size-5" />
               </span>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   Proximo retorno
                 </p>
                 <h3 className="font-bold text-ink-950">Agenda futura</h3>

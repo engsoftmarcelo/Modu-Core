@@ -1,24 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #eef4ff;
-  --color-brand-100: #dce8ff;
-  --color-brand-500: #4f6cf7;
-  --color-brand-600: #3f55dc;
-  --color-brand-700: #3444b8;
-  --color-ink-950: #11142a;
-  --color-violet-500: #7c5cff;
-  --font-sans: "Inter", "Segoe UI", Arial, sans-serif;
+  --color-brand-50: #f0f9ff;
+  --color-brand-100: #e0f2fe;
+  --color-brand-200: #bae6fd;
+  --color-brand-500: #0284c7;
+  --color-brand-600: #0369a1;
+  --color-brand-700: #075985;
+  --color-brand-800: #0c4a6e;
+  --color-ink-950: #0f172a;
+  --color-violet-500: #6d5bd0;
+  --font-sans: var(--font-inter), "Segoe UI", Arial, sans-serif;
+  --font-display: var(--font-calistoga), Georgia, serif;
 }
 
 :root {
-  --background: #f5f7fb;
-  --foreground: #171a2f;
-  --muted: #68708a;
-  --border: #e4e7ef;
+  --background: #f7f8fa;
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --surface: #ffffff;
+  --surface-subtle: #f8fafc;
+  --focus: #0284c7;
 }
 
 * {
+  box-sizing: border-box;
   border-color: var(--border);
 }
 
@@ -31,7 +38,31 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  line-height: 1.5;
   text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl {
+  border-radius: 0.5rem;
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--focus) 28%, transparent);
+  outline-offset: 2px;
+}
+
+:where(a, button, summary, [role="button"]):not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+:where(button, input, select, textarea):disabled {
+  cursor: not-allowed;
 }
 
 @media (max-width: 1023px) {
@@ -49,6 +80,17 @@ textarea {
 }
 
 ::selection {
-  background: #dce8ff;
-  color: #253491;
+  background: #bae6fd;
+  color: #0c4a6e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

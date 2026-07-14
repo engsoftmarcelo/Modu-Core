@@ -4,6 +4,7 @@ import {
   ArrowRight,
   CalendarClock,
   CircleDollarSign,
+  LayoutDashboard,
   ListChecks,
   Plus,
   Target,
@@ -13,6 +14,7 @@ import {
 import { MetricCard } from "@/components/dashboard/metric-card";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { PageHeader } from "@/components/ui/page-header";
 import { getDashboardMetrics } from "@/features/dashboard/queries";
 import { getWorkspaceIdentity } from "@/lib/auth";
 import { formatCurrency } from "@/lib/utils";
@@ -32,24 +34,13 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-7">
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-sm font-semibold capitalize text-slate-400">{today}</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
-            Visao geral
-          </h1>
-          <p className="mt-2 text-slate-500">
-            O essencial da operacao, sem ruido.
-          </p>
-        </div>
-        <Link
-          href="/crm"
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
-        >
-          <Plus className="size-5" />
-          Novo cliente
-        </Link>
-      </div>
+      <PageHeader
+        eyebrow={today}
+        icon={LayoutDashboard}
+        title="Visao geral"
+        description="O essencial da operacao, sem ruido."
+        actions={[{ href: "/crm/novo", icon: Plus, label: "Novo cliente" }]}
+      />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
         <MetricCard
@@ -101,7 +92,7 @@ export default async function DashboardPage() {
           </div>
           <div className="grid min-h-64 place-items-center px-6 py-10 text-center">
             <div className="max-w-sm">
-              <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-slate-100 text-slate-400">
+              <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-slate-100 text-slate-500">
                 <ListChecks className="size-6" />
               </span>
               <p className="mt-5 font-bold text-ink-950">Tudo tranquilo por aqui</p>

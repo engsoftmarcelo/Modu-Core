@@ -28,7 +28,7 @@ export default function NewCustomerPage() {
           <UserPlus className="size-6" />
         </span>
         <div>
-          <h1 className="text-3xl font-bold tracking-[-0.04em] text-ink-950">
+          <h1 className="text-3xl font-bold text-ink-950">
             Novo cliente
           </h1>
           <p className="mt-1 text-slate-500">

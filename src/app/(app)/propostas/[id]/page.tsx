@@ -88,7 +88,7 @@ export default async function ProposalDetailsPage({
           </span>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+              <h1 className="text-3xl font-bold text-ink-950 sm:text-4xl">
                 {proposal.title}
               </h1>
               <ProposalStatusBadge status={proposal.status} />
@@ -120,7 +120,7 @@ export default async function ProposalDetailsPage({
           ) : null}
           <Link
             href={`/propostas/${proposal.id}/editar`}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
           >
             <Pencil className="size-4" />
             Editar proposta
@@ -167,7 +167,7 @@ export default async function ProposalDetailsPage({
                   <UserRound className="size-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Cliente
                   </p>
                   <p className="mt-1 font-bold text-ink-950">
@@ -201,7 +201,7 @@ export default async function ProposalDetailsPage({
               <div className="flex gap-3">
                 <CircleDollarSign className="mt-0.5 size-5 text-emerald-600" />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Valor
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -212,7 +212,7 @@ export default async function ProposalDetailsPage({
               <div className="flex gap-3">
                 <CalendarClock className="mt-0.5 size-5 text-amber-600" />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Prazo de validade
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -223,9 +223,9 @@ export default async function ProposalDetailsPage({
                 </div>
               </div>
               <div className="flex gap-3">
-                <CalendarClock className="mt-0.5 size-5 text-slate-400" />
+                <CalendarClock className="mt-0.5 size-5 text-slate-500" />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Criada em
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">

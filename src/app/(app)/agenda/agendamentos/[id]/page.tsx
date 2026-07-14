@@ -91,7 +91,7 @@ export default async function AppointmentDetailsPage({
           </span>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+              <h1 className="text-3xl font-bold text-ink-950 sm:text-4xl">
                 {appointment.title}
               </h1>
               <AppointmentStatusBadge status={appointment.status} />
@@ -111,7 +111,7 @@ export default async function AppointmentDetailsPage({
           ) : null}
           <Link
             href={`/agenda/agendamentos/${appointment.id}/editar`}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
           >
             <Pencil className="size-4" />
             Editar
@@ -244,13 +244,13 @@ function DetailItem({ icon: Icon, label, value, hint }: DetailItemProps) {
         <Icon className="size-5" />
       </span>
       <div className="min-w-0">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+        <p className="text-xs font-bold uppercase text-slate-500">
           {label}
         </p>
         <p className="mt-1 truncate text-sm font-semibold text-ink-950">
           {value}
           {hint ? (
-            <span className="ml-2 font-medium text-slate-400">({hint})</span>
+            <span className="ml-2 font-medium text-slate-500">({hint})</span>
           ) : null}
         </p>
       </div>
@@ -273,7 +273,7 @@ function DetailLink({ icon: Icon, label, value, href, fallback }: DetailLinkProp
         <Icon className="size-5" />
       </span>
       <div className="min-w-0">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+        <p className="text-xs font-bold uppercase text-slate-500">
           {label}
         </p>
         <p className="mt-1 truncate text-sm font-semibold text-ink-950">

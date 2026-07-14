@@ -87,7 +87,7 @@ export function MatriculasTabs() {
   return (
     <nav
       aria-label="Areas de matriculas"
-      className="inline-flex max-w-full snap-x scroll-px-1 overflow-x-auto rounded-xl border border-slate-200 bg-white p-1 shadow-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      className="flex max-w-full snap-x overflow-x-auto border-b border-slate-200 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       {tabs.map((tab) => {
         const Icon = tab.icon;
@@ -100,10 +100,10 @@ export function MatriculasTabs() {
             href={tab.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "inline-flex min-h-11 shrink-0 snap-start items-center gap-2 rounded-lg px-4 text-sm font-semibold transition",
+              "inline-flex min-h-11 shrink-0 snap-start items-center gap-2 border-b-2 px-4 text-sm font-semibold transition-colors",
               active
-                ? "bg-ink-950 text-white"
-                : "text-slate-500 hover:bg-slate-50 hover:text-ink-950",
+                ? "border-brand-600 text-brand-700"
+                : "border-transparent text-slate-500 hover:border-slate-300 hover:text-ink-950",
             )}
           >
             <Icon className="size-4" />

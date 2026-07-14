@@ -44,7 +44,7 @@ export function DiagnosticForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/60 sm:p-7"
+      className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-7"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-bold text-ink-950">
@@ -152,7 +152,7 @@ export function DiagnosticForm() {
         <button
           type="submit"
           disabled={!whatsappNumber}
-          className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 text-base font-black text-white shadow-lg shadow-emerald-950/15 transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-slate-400 disabled:shadow-none sm:w-auto"
+          className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 px-6 text-base font-bold text-white shadow-sm transition-colors hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-slate-400 disabled:shadow-none sm:w-auto"
         >
           {whatsappNumber ? "Enviar pelo WhatsApp" : "Canal indisponivel"}
           <MessageCircle className="size-5" />

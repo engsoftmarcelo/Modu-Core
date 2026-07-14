@@ -61,7 +61,7 @@ export function LeadList({
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[980px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+            <tr className="border-b border-slate-200 text-xs font-bold uppercase text-slate-500">
               <th className="px-6 py-4">Lead</th>
               <th className="px-5 py-4">Contato</th>
               <th className="px-5 py-4">Origem</th>
@@ -99,18 +99,18 @@ export function LeadList({
                   <div className="space-y-1 text-sm text-slate-600">
                     {lead.email && (
                       <p className="flex items-center gap-2">
-                        <Mail className="size-3.5 text-slate-400" />
+                        <Mail className="size-3.5 text-slate-500" />
                         {lead.email}
                       </p>
                     )}
                     {lead.phone && (
                       <p className="flex items-center gap-2">
-                        <Phone className="size-3.5 text-slate-400" />
+                        <Phone className="size-3.5 text-slate-500" />
                         {lead.phone}
                       </p>
                     )}
                     {!lead.email && !lead.phone && (
-                      <span className="text-slate-400">Sem contato</span>
+                      <span className="text-slate-500">Sem contato</span>
                     )}
                   </div>
                 </td>
@@ -128,14 +128,14 @@ export function LeadList({
                     <Link
                       href={`/crm/leads/${lead.id}`}
                       aria-label={`Ver ${lead.name}`}
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-violet-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-violet-700"
                     >
                       <Eye className="size-[18px]" />
                     </Link>
                     <Link
                       href={`/crm/leads/${lead.id}/editar`}
                       aria-label={`Editar ${lead.name}`}
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-violet-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-violet-700"
                     >
                       <Pencil className="size-[18px]" />
                     </Link>

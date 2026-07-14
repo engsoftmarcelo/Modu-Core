@@ -256,7 +256,7 @@ export function WorkOrderAttachments({
           </span>
           <div className="min-w-0">
             <h2 className="font-bold text-ink-950">Fotos e anexos</h2>
-            <p className="mt-0.5 text-xs font-semibold text-slate-400">
+            <p className="mt-0.5 text-xs font-semibold text-slate-500">
               {attachments.length} de {workOrderAttachmentMaxFiles} imagens
             </p>
           </div>
@@ -321,7 +321,7 @@ export function WorkOrderAttachments({
                 ? `Enviar ${selectedFiles.length} foto(s)`
                 : "Enviar fotos"}
           </Button>
-          <p className="col-span-2 text-xs font-semibold text-slate-400 sm:ml-auto">
+          <p className="col-span-2 text-xs font-semibold text-slate-500 sm:ml-auto">
             Ate 5 MB por imagem
           </p>
         </div>
@@ -337,7 +337,7 @@ export function WorkOrderAttachments({
                 <span className="min-w-0 flex-1 truncate text-sm font-semibold text-slate-600">
                   {file.name}
                 </span>
-                <span className="shrink-0 text-xs font-semibold text-slate-400">
+                <span className="shrink-0 text-xs font-semibold text-slate-500">
                   {formatFileSize(file.size)}
                 </span>
               </li>
@@ -376,7 +376,7 @@ export function WorkOrderAttachments({
                 <figure key={attachment.id} className="min-w-0">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-slate-100">
                     {imageBroken ? (
-                      <div className="grid size-full place-items-center text-slate-400">
+                      <div className="grid size-full place-items-center text-slate-500">
                         <ImageOff className="size-7" />
                       </div>
                     ) : (
@@ -416,7 +416,7 @@ export function WorkOrderAttachments({
                     <p className="truncate text-sm font-semibold text-ink-950">
                       {attachment.fileName}
                     </p>
-                    <p className="mt-0.5 text-xs font-semibold text-slate-400">
+                    <p className="mt-0.5 text-xs font-semibold text-slate-500">
                       {formatFileSize(attachment.fileSize)}
                     </p>
                   </figcaption>

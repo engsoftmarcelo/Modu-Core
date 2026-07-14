@@ -115,7 +115,7 @@ export function WorkOrderChecklist({
             </span>
             <div className="min-w-0">
               <h2 className="font-bold text-ink-950">Checklist da visita</h2>
-              <p className="mt-0.5 text-xs font-semibold text-slate-400">
+              <p className="mt-0.5 text-xs font-semibold text-slate-500">
                 {completedCount} de {items.length} etapas concluidas
               </p>
             </div>
@@ -170,7 +170,7 @@ export function WorkOrderChecklist({
                 <span
                   className={cn(
                     "min-w-0 flex-1 text-sm font-semibold text-ink-950",
-                    item.completed && "text-slate-400 line-through",
+                    item.completed && "text-slate-500 line-through",
                   )}
                 >
                   {item.label}

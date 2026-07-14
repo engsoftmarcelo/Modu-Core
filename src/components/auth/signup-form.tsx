@@ -8,7 +8,7 @@ import { initialAuthState } from "@/app/(auth)/auth-state";
 import { SubmitButton } from "@/components/auth/submit-button";
 
 const inputClassName =
-  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100";
+  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100";
 
 export function SignupForm() {
   const [state, formAction] = useActionState(signUpAction, initialAuthState);

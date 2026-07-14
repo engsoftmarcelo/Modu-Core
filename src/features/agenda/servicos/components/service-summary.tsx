@@ -56,10 +56,10 @@ export function ServiceSummary({ stats }: { stats: ServiceStats }) {
                 <Icon className="size-5" />
               </span>
               <div className="min-w-0">
-                <p className="text-xs font-bold uppercase tracking-[0.1em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   {item.label}
                 </p>
-                <p className="mt-1 truncate text-2xl font-bold tracking-[-0.04em] text-ink-950">
+                <p className="mt-1 truncate text-2xl font-bold text-ink-950">
                   {item.value}
                 </p>
               </div>

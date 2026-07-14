@@ -19,11 +19,15 @@ export default async function AppLayout({
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="app-shell min-h-screen bg-[#f7f8fa]">
       <Sidebar organizationName={identity.organizationName} />
-      <div className="lg:pl-72">
-        <Topbar fullName={identity.fullName} email={identity.email} />
-        <main className="mx-auto min-w-0 w-full max-w-[1600px] px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-6 sm:px-6 lg:px-8 lg:pb-10 lg:pt-8">
+      <div className="lg:pl-64">
+        <Topbar
+          fullName={identity.fullName}
+          email={identity.email}
+          organizationName={identity.organizationName}
+        />
+        <main className="mx-auto w-full min-w-0 max-w-[1520px] px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-5 sm:px-6 lg:px-8 lg:pb-10 lg:pt-7">
           {children}
         </main>
       </div>

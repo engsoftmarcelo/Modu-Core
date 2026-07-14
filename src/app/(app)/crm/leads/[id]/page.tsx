@@ -78,7 +78,7 @@ export default async function LeadDetailsPage({
           </span>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="truncate text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+              <h1 className="truncate text-3xl font-bold text-ink-950 sm:text-4xl">
                 {lead.name}
               </h1>
               <LeadStatusBadge status={lead.status} />
@@ -100,7 +100,7 @@ export default async function LeadDetailsPage({
           </Link>
           <Link
             href={`/crm/leads/${lead.id}/editar`}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
           >
             <Pencil className="size-4" />
             Editar lead
@@ -160,7 +160,7 @@ export default async function LeadDetailsPage({
               <div className="flex gap-3">
                 <UserRound className="mt-0.5 size-5 text-violet-600" />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Responsavel
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -171,7 +171,7 @@ export default async function LeadDetailsPage({
               <div className="flex gap-3">
                 <CalendarClock className="mt-0.5 size-5 text-brand-600" />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Criado em
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -180,9 +180,9 @@ export default async function LeadDetailsPage({
                 </div>
               </div>
               <div className="flex gap-3">
-                <CalendarClock className="mt-0.5 size-5 text-slate-400" />
+                <CalendarClock className="mt-0.5 size-5 text-slate-500" />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Ultima atualizacao
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -222,7 +222,7 @@ function InfoItem({ href, icon: Icon, label, value }: InfoItemProps) {
         <Icon className="size-5" />
       </span>
       <div className="min-w-0">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+        <p className="text-xs font-bold uppercase text-slate-500">
           {label}
         </p>
         <p className="mt-1 truncate text-sm font-semibold text-ink-950">

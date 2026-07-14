@@ -70,7 +70,7 @@ export default async function NewEnrollmentPage({
           <BadgeCheck className="size-7" />
         </span>
         <div>
-          <h1 className="text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+          <h1 className="text-3xl font-bold text-ink-950 sm:text-4xl">
             Nova matricula
           </h1>
           <p className="mt-2 text-slate-500">
@@ -104,7 +104,7 @@ export default async function NewEnrollmentPage({
                     defaultClassId ? `&classId=${defaultClassId}` : ""
                   }`
             }
-            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
           >
             {students.length ? "Criar turma" : "Cadastrar aluno"}
           </Link>

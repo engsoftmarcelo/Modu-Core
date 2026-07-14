@@ -49,7 +49,7 @@ export function WorkOrderList({
     <Card className="overflow-hidden">
       <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 sm:px-6">
         <h2 className="font-bold text-ink-950">Ordens de servico</h2>
-        <span className="text-sm font-semibold text-slate-400">
+        <span className="text-sm font-semibold text-slate-500">
           {count} {count === 1 ? "registro" : "registros"}
         </span>
       </div>
@@ -74,7 +74,7 @@ export function WorkOrderList({
               <p className="mt-1 truncate text-sm text-slate-500">
                 {workOrder.customerName ?? "Cliente removido"}
               </p>
-              <p className="mt-1 text-xs font-semibold text-slate-400">
+              <p className="mt-1 text-xs font-semibold text-slate-500">
                 {formatDate(workOrder.visit_date)} - {workOrder.technician_name}
               </p>
               {workOrder.quoted_at ? (
@@ -90,7 +90,7 @@ export function WorkOrderList({
 
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[980px] text-left">
-          <thead className="bg-slate-50 text-xs font-bold uppercase text-slate-400">
+          <thead className="bg-slate-50 text-xs font-bold uppercase text-slate-500">
             <tr>
               <th className="px-6 py-3">Ordem</th>
               <th className="px-6 py-3">Cliente</th>
@@ -111,7 +111,7 @@ export function WorkOrderList({
                   >
                     {workOrder.service_type}
                   </Link>
-                  <p className="mt-1 text-xs font-semibold text-slate-400">
+                  <p className="mt-1 text-xs font-semibold text-slate-500">
                     OS #{workOrderCode(workOrder.id)}
                   </p>
                 </td>
@@ -120,7 +120,7 @@ export function WorkOrderList({
                     {workOrder.customerName ?? "Cliente removido"}
                   </p>
                   {workOrder.customerCompany ? (
-                    <p className="mt-1 text-xs text-slate-400">
+                    <p className="mt-1 text-xs text-slate-500">
                       {workOrder.customerCompany}
                     </p>
                   ) : null}
@@ -137,7 +137,7 @@ export function WorkOrderList({
                       {formatCurrency(workOrder.quote_total, 2)}
                     </p>
                   ) : (
-                    <p className="text-sm font-semibold text-slate-400">
+                    <p className="text-sm font-semibold text-slate-500">
                       Pendente
                     </p>
                   )}
@@ -151,7 +151,7 @@ export function WorkOrderList({
                       href={`/ordens-servico/${workOrder.id}`}
                       aria-label={`Ver ordem de ${workOrder.service_type}`}
                       title="Ver ordem"
-                      className="grid size-11 place-items-center rounded-xl text-slate-400 transition hover:bg-emerald-50 hover:text-emerald-700"
+                      className="grid size-11 place-items-center rounded-xl text-slate-500 transition hover:bg-emerald-50 hover:text-emerald-700"
                     >
                       <Eye className="size-4" />
                     </Link>
@@ -159,7 +159,7 @@ export function WorkOrderList({
                       href={`/ordens-servico/${workOrder.id}/editar`}
                       aria-label={`Editar ordem de ${workOrder.service_type}`}
                       title="Editar ordem"
-                      className="grid size-11 place-items-center rounded-xl text-slate-400 transition hover:bg-slate-100 hover:text-ink-950"
+                      className="grid size-11 place-items-center rounded-xl text-slate-500 transition hover:bg-slate-100 hover:text-ink-950"
                     >
                       <Pencil className="size-4" />
                     </Link>

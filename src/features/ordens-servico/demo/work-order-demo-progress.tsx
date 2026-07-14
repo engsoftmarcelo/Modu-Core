@@ -68,13 +68,13 @@ export function WorkOrderDemoProgress({
       <div className="sm:hidden">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <p className="text-xs font-bold uppercase text-slate-400">
+            <p className="text-xs font-bold uppercase text-slate-500">
               {completed ? "Demo completa" : `Etapa ${currentStep} de 6`}
             </p>
             <p className="mt-1 font-bold text-ink-950">{currentLabel}</p>
           </div>
           {completed ? (
-            <span className="grid size-9 place-items-center rounded-full bg-emerald-600 text-white">
+            <span className="grid size-9 place-items-center rounded-full bg-emerald-700 text-white">
               <Check className="size-5" />
             </span>
           ) : null}
@@ -125,10 +125,10 @@ export function WorkOrderDemoProgress({
                 className={cn(
                   "relative z-10 grid size-8 place-items-center rounded-full border text-xs font-bold",
                   stepCompleted
-                    ? "border-emerald-600 bg-emerald-600 text-white"
+                    ? "border-emerald-700 bg-emerald-700 text-white"
                     : active
                       ? "border-ink-950 bg-ink-950 text-white"
-                      : "border-slate-200 bg-white text-slate-400",
+                      : "border-slate-200 bg-white text-slate-500",
                 )}
               >
                 {stepCompleted ? <Check className="size-4" /> : step}

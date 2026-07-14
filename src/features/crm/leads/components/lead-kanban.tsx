@@ -330,7 +330,7 @@ export function LeadKanban({ leads }: LeadKanbanProps) {
                               ) : null}
                             </div>
 
-                            <label className="mt-4 block">
+                            <label className="relative mt-4 block">
                               <span className="sr-only">
                                 Mover {lead.name} para outra etapa
                               </span>
@@ -354,7 +354,7 @@ export function LeadKanban({ leads }: LeadKanbanProps) {
                       </article>
                     ))
                   ) : (
-                    <div className="flex min-h-36 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white/60 px-4 text-center text-sm text-slate-400">
+                    <div className="flex min-h-36 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white/60 px-4 text-center text-sm text-slate-500">
                       Solte um lead aqui
                     </div>
                   )}

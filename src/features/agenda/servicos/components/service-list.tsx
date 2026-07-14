@@ -51,7 +51,7 @@ export function ServiceList({
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[920px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+            <tr className="border-b border-slate-200 text-xs font-bold uppercase text-slate-500">
               <th className="px-6 py-4">Servico</th>
               <th className="px-5 py-4">Duracao</th>
               <th className="px-5 py-4">Preco</th>
@@ -78,7 +78,7 @@ export function ServiceList({
                 </td>
                 <td className="px-5 py-4">
                   <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                    <Clock className="size-4 text-slate-400" />
+                    <Clock className="size-4 text-slate-500" />
                     {formatDuration(service.duration_minutes)}
                   </p>
                 </td>
@@ -97,14 +97,14 @@ export function ServiceList({
                     <Link
                       href={`/agenda/servicos/${service.id}`}
                       aria-label={`Ver ${service.name}`}
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-violet-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-violet-700"
                     >
                       <Eye className="size-[18px]" />
                     </Link>
                     <Link
                       href={`/agenda/servicos/${service.id}/editar`}
                       aria-label={`Editar ${service.name}`}
-                      className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-violet-700"
+                      className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-violet-700"
                     >
                       <Pencil className="size-[18px]" />
                     </Link>
@@ -133,7 +133,7 @@ export function ServiceList({
               </div>
               <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-semibold text-slate-600">
                 <span className="inline-flex items-center gap-1.5">
-                  <Clock className="size-3.5 text-slate-400" />
+                  <Clock className="size-3.5 text-slate-500" />
                   {formatDuration(service.duration_minutes)}
                 </span>
                 <span className="text-ink-950">

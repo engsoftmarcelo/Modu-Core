@@ -79,7 +79,7 @@ export function ProposalList({
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[1040px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+            <tr className="border-b border-slate-200 text-xs font-bold uppercase text-slate-500">
               <th className="px-6 py-4">Proposta</th>
               <th className="px-5 py-4">Cliente</th>
               <th className="px-5 py-4">Valor</th>
@@ -115,7 +115,7 @@ export function ProposalList({
                         {proposal.customerName}
                       </span>
                     ) : (
-                      <span className="text-sm text-slate-400">
+                      <span className="text-sm text-slate-500">
                         Cliente removido
                       </span>
                     )}
@@ -127,7 +127,7 @@ export function ProposalList({
                   </td>
                   <td className="px-5 py-4">
                     <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                      <CalendarClock className="size-4 text-slate-400" />
+                      <CalendarClock className="size-4 text-slate-500" />
                       {proposal.valid_until
                         ? formatDate(proposal.valid_until)
                         : "Sem prazo"}
@@ -151,14 +151,14 @@ export function ProposalList({
                       <Link
                         href={`/propostas/${proposal.id}`}
                         aria-label={`Ver ${proposal.title}`}
-                        className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-emerald-700"
+                        className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-emerald-700"
                       >
                         <Eye className="size-[18px]" />
                       </Link>
                       <Link
                         href={`/propostas/${proposal.id}/editar`}
                         aria-label={`Editar ${proposal.title}`}
-                        className="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white hover:text-emerald-700"
+                        className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-white hover:text-emerald-700"
                       >
                         <Pencil className="size-[18px]" />
                       </Link>

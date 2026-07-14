@@ -26,19 +26,21 @@ export function MetricCard({
   tone = "blue",
 }: MetricCardProps) {
   return (
-    <Card className="p-5">
+    <Card className="p-4">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-slate-500">{label}</p>
-          <p className="mt-3 text-3xl font-bold tracking-[-0.04em] text-ink-950">
+          <p className="mt-2 text-2xl font-bold text-ink-950 sm:text-3xl">
             {value}
           </p>
         </div>
-        <span className={cn("grid size-11 place-items-center rounded-xl", tones[tone])}>
+        <span className={cn("grid size-9 place-items-center rounded-lg", tones[tone])}>
           <Icon className="size-5" />
         </span>
       </div>
-      <p className="mt-4 text-xs font-medium text-slate-400">{helper}</p>
+      <p className="mt-3 border-t border-slate-100 pt-3 text-xs font-medium text-slate-500">
+        {helper}
+      </p>
     </Card>
   );
 }

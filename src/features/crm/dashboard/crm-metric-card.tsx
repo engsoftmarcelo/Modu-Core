@@ -45,10 +45,10 @@ export function CrmMetricCard({
           <ArrowUpRight className="size-4 text-slate-300 transition group-hover:text-brand-600" />
         </div>
         <p className="mt-5 text-sm font-semibold text-slate-500">{label}</p>
-        <p className="mt-2 truncate text-3xl font-bold tracking-[-0.04em] text-ink-950">
+        <p className="mt-2 truncate text-3xl font-bold text-ink-950">
           {value}
         </p>
-        <p className="mt-3 text-xs font-medium leading-5 text-slate-400">
+        <p className="mt-3 text-xs font-medium leading-5 text-slate-500">
           {helper}
         </p>
       </Card>

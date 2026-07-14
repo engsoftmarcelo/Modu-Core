@@ -28,10 +28,10 @@ export function LeadPipelineSummary({ stats }: { stats: LeadStats }) {
             <div
               className={cn("mb-4 h-1.5 w-10 rounded-full", statusClasses[status])}
             />
-            <p className="text-xs font-bold uppercase tracking-[0.1em] text-slate-400">
+            <p className="text-xs font-bold uppercase text-slate-500">
               {leadStatusLabels[status]}
             </p>
-            <p className="mt-2 text-2xl font-bold tracking-[-0.04em] text-ink-950">
+            <p className="mt-2 text-2xl font-bold text-ink-950">
               {stats[status]}
             </p>
           </Card>

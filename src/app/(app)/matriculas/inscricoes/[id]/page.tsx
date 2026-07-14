@@ -92,7 +92,7 @@ export default async function EnrollmentDetailsPage({
           </div>
           <Link
             href={`/matriculas/frequencia?demo=1&classId=${enrollment.course_class_id}&enrollmentId=${enrollment.id}`}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
           >
             <CalendarCheck2 className="size-4" />
             Registrar frequencia
@@ -107,7 +107,7 @@ export default async function EnrollmentDetailsPage({
             <BadgeCheck className="size-8" />
           </span>
           <div className="min-w-0">
-            <h1 className="truncate text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+            <h1 className="truncate text-3xl font-bold text-ink-950 sm:text-4xl">
               {enrollment.studentName ?? "Matricula"}
             </h1>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -121,7 +121,7 @@ export default async function EnrollmentDetailsPage({
 
         <Link
           href={`/matriculas/inscricoes/${enrollment.id}/editar`}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
         >
           <Pencil className="size-4" />
           Editar matricula
@@ -168,7 +168,7 @@ export default async function EnrollmentDetailsPage({
             <div className="flex gap-3">
               <BadgeCheck className="mt-0.5 size-5 text-emerald-600" />
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   Criada em
                 </p>
                 <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -179,7 +179,7 @@ export default async function EnrollmentDetailsPage({
             <div className="flex gap-3">
               <CalendarClock className="mt-0.5 size-5 text-brand-600" />
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   Ultima atualizacao
                 </p>
                 <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -207,7 +207,7 @@ function InfoItem({ icon: Icon, label, value }: InfoItemProps) {
         <Icon className="size-5" />
       </span>
       <div className="min-w-0">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+        <p className="text-xs font-bold uppercase text-slate-500">
           {label}
         </p>
         <p className="mt-1 truncate text-sm font-semibold text-ink-950">

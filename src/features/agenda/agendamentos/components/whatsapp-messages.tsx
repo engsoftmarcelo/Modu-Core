@@ -28,7 +28,7 @@ export function WhatsappMessages({
         </span>
         <div className="min-w-0">
           <h2 className="font-bold text-ink-950">Mensagens no WhatsApp</h2>
-          <p className="text-xs font-medium text-slate-400">
+          <p className="text-xs font-medium text-slate-500">
             Abre o WhatsApp com o texto ja preenchido.
           </p>
         </div>
@@ -59,7 +59,7 @@ export function WhatsappMessages({
                     {message.description}
                   </p>
                 </div>
-                <ArrowUpRight className="size-4 shrink-0 text-slate-400 transition group-hover:text-emerald-600" />
+                <ArrowUpRight className="size-4 shrink-0 text-slate-500 transition group-hover:text-emerald-600" />
               </a>
             );
           })}
@@ -78,7 +78,7 @@ export function WhatsappMessages({
               Adicionar contato do cliente
             </Link>
           ) : (
-            <p className="mt-2 text-xs font-medium text-slate-400">
+            <p className="mt-2 text-xs font-medium text-slate-500">
               Vincule um cliente ao agendamento para enviar mensagens.
             </p>
           )}

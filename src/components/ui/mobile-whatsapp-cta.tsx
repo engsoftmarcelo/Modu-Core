@@ -14,7 +14,7 @@ export function MobileWhatsAppCta({
         href={href}
         target="_blank"
         rel="noreferrer"
-        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 text-base font-black text-white transition hover:bg-emerald-700"
+        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 px-5 text-base font-black text-white transition hover:bg-emerald-800"
       >
         <MessageCircle className="size-5" />
         {label}

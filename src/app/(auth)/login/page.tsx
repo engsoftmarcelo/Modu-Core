@@ -17,12 +17,12 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   return (
     <>
       <div className="mb-8">
-        <p className="mb-2 text-sm font-bold uppercase tracking-[0.16em] text-brand-600">
+        <p className="mb-2 text-sm font-bold uppercase text-brand-600">
           Bem-vindo de volta
         </p>
-        <h2 className="text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+        <h1 className="font-display text-3xl text-ink-950 sm:text-4xl">
           Entre na sua operacao
-        </h2>
+        </h1>
         <p className="mt-3 text-base leading-7 text-slate-500">
           Acompanhe o que precisa de atencao hoje.
         </p>

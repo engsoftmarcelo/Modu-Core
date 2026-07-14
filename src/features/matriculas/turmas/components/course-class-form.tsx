@@ -41,7 +41,7 @@ type FieldProps = {
 };
 
 const controlClassName =
-  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-400 focus:border-violet-500 focus:ring-4 focus:ring-violet-100";
+  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-4 focus:ring-violet-100";
 
 function Field({ children, error, hint, label, name, required }: FieldProps) {
   return (
@@ -52,7 +52,7 @@ function Field({ children, error, hint, label, name, required }: FieldProps) {
       </label>
       {children}
       {hint && !error?.length ? (
-        <p className="text-xs text-slate-400">{hint}</p>
+        <p className="text-xs text-slate-500">{hint}</p>
       ) : null}
       {error?.map((message) => (
         <p key={message} className="text-sm font-medium text-red-600">

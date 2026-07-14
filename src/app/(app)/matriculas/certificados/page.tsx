@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Award, CheckCircle2, Plus, RotateCcw } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { PageHeader } from "@/components/ui/page-header";
 import { CertificatePreview } from "@/features/matriculas/certificados/components/certificate-preview";
 import { PrintButton } from "@/features/matriculas/certificados/components/print-button";
 import { getCertificateData } from "@/features/matriculas/certificados/queries";
@@ -42,22 +42,15 @@ export default async function CertificatesPage({
         {demoMode ? <CourseDemoProgress currentStep={5} /> : null}
       </div>
 
-      <div className="flex flex-col gap-5 print:hidden sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <Badge tone="violet">
-            <Award className="mr-1.5 size-3.5" />
-            Certificados
-          </Badge>
-          <h1 className="mt-4 text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
-            Certificado simples
-          </h1>
-          <p className="mt-2 max-w-2xl text-base leading-7 text-slate-500">
-            Gere uma tela imprimivel com aluno, curso, carga horaria, data e
-            escola.
-          </p>
-        </div>
-
-        {certificate ? <PrintButton /> : null}
+      <div className="print:hidden">
+        <PageHeader
+          eyebrow="Certificados"
+          icon={Award}
+          tone="violet"
+          title="Certificado simples"
+          description="Gere uma tela imprimivel com aluno, curso, carga horaria, data e escola."
+          actionSlot={certificate ? <PrintButton /> : null}
+        />
       </div>
 
       <Card className="p-5 print:hidden sm:p-6">
@@ -105,7 +98,7 @@ export default async function CertificatesPage({
           <button
             type="submit"
             disabled={!options.length}
-            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
           >
             Gerar certificado
           </button>
@@ -158,7 +151,7 @@ export default async function CertificatesPage({
             {!options.length ? (
               <Link
                 href="/matriculas/inscricoes/novo"
-                className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+                className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
               >
                 <Plus className="size-4" />
                 Criar primeira matricula

@@ -69,7 +69,7 @@ export default async function ProfessionalDetailsPage({
           </span>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="truncate text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+              <h1 className="truncate text-3xl font-bold text-ink-950 sm:text-4xl">
                 {professional.name}
               </h1>
               <ProfessionalStatusBadge active={professional.active} />
@@ -83,7 +83,7 @@ export default async function ProfessionalDetailsPage({
 
         <Link
           href={`/agenda/profissionais/${professional.id}/editar`}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
         >
           <Pencil className="size-4" />
           Editar profissional
@@ -107,7 +107,7 @@ export default async function ProfessionalDetailsPage({
           <Card className="overflow-hidden">
             <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 sm:px-6">
               <h2 className="font-bold text-ink-950">Servicos que realiza</h2>
-              <span className="text-sm font-semibold text-slate-400">
+              <span className="text-sm font-semibold text-slate-500">
                 {professional.services.length}
               </span>
             </div>
@@ -157,7 +157,7 @@ export default async function ProfessionalDetailsPage({
               <div className="flex gap-3">
                 <CalendarClock className="mt-0.5 size-5 text-violet-600" />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Criado em
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -166,9 +166,9 @@ export default async function ProfessionalDetailsPage({
                 </div>
               </div>
               <div className="flex gap-3">
-                <CalendarClock className="mt-0.5 size-5 text-slate-400" />
+                <CalendarClock className="mt-0.5 size-5 text-slate-500" />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Ultima atualizacao
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">

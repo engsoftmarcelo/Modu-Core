@@ -44,7 +44,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat("pt-BR", {
 });
 
 const controlClassName =
-  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100";
+  "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-ink-950 outline-none transition placeholder:text-slate-500 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100";
 
 export function WorkOrderFinishButton({
   checklistCompleted,
@@ -264,7 +264,7 @@ export function WorkOrderFinishButton({
                   <div className="flex items-center gap-3 rounded-xl bg-slate-50 px-4 py-3">
                     <CalendarClock className="size-5 shrink-0 text-emerald-600" />
                     <div>
-                      <p className="text-xs font-bold uppercase text-slate-400">
+                      <p className="text-xs font-bold uppercase text-slate-500">
                         Data e hora
                       </p>
                       <p className="mt-0.5 text-sm font-semibold text-ink-950">

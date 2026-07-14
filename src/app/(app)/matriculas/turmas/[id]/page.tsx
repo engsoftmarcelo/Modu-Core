@@ -86,7 +86,7 @@ export default async function CourseClassDetailsPage({
           </div>
           <Link
             href={`/matriculas/inscricoes/novo?demo=1&classId=${courseClass.id}`}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition hover:bg-brand-700"
           >
             Matricular aluno
             <ArrowRight className="size-4" />
@@ -100,7 +100,7 @@ export default async function CourseClassDetailsPage({
             <CalendarDays className="size-8" />
           </span>
           <div className="min-w-0">
-            <h1 className="truncate text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+            <h1 className="truncate text-3xl font-bold text-ink-950 sm:text-4xl">
               {courseClass.courseName ?? "Turma"}
             </h1>
             <p className="mt-2 text-slate-500">Professor: {courseClass.teacher}</p>
@@ -109,7 +109,7 @@ export default async function CourseClassDetailsPage({
 
         <Link
           href={`/matriculas/turmas/${courseClass.id}/editar`}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
         >
           <Pencil className="size-4" />
           Editar turma
@@ -151,7 +151,7 @@ export default async function CourseClassDetailsPage({
             <div className="flex gap-3">
               <CalendarDays className="mt-0.5 size-5 text-violet-600" />
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   Criado em
                 </p>
                 <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -162,7 +162,7 @@ export default async function CourseClassDetailsPage({
             <div className="flex gap-3">
               <CalendarClock className="mt-0.5 size-5 text-brand-600" />
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                <p className="text-xs font-bold uppercase text-slate-500">
                   Ultima atualizacao
                 </p>
                 <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -190,7 +190,7 @@ function InfoItem({ icon: Icon, label, value }: InfoItemProps) {
         <Icon className="size-5" />
       </span>
       <div className="min-w-0">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+        <p className="text-xs font-bold uppercase text-slate-500">
           {label}
         </p>
         <p className="mt-1 truncate text-sm font-semibold text-ink-950">

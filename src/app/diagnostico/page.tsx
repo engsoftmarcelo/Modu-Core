@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import {
-  CheckCircle2,
-  ClipboardList,
-  MessageCircle,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, ClipboardList, MessageCircle } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import { Logo } from "@/components/ui/logo";
+import { SectionHeading } from "@/components/marketing/section-heading";
+import { SiteFooter } from "@/components/marketing/site-footer";
+import { SiteHeader } from "@/components/marketing/site-header";
 import { MobileWhatsAppCta } from "@/components/ui/mobile-whatsapp-cta";
 import { getSalesWhatsAppHref } from "@/lib/sales-whatsapp";
 
@@ -17,14 +14,8 @@ import { DiagnosticForm } from "./diagnostic-form";
 export const metadata: Metadata = {
   title: "Diagnostico",
   description:
-    "Formulario de diagnostico da ModuCore para entender problema, segmento e modulos ideais do sistema.",
+    "Diagnostico da ModuCore para identificar o problema, o segmento e os modulos ideais do sistema.",
 };
-
-const highlights = [
-  "Entenda o problema principal antes de propor tecnologia.",
-  "Descubra se o cliente ainda depende de planilha.",
-  "Direcione a conversa para agenda, CRM, cobranca, OS ou matricula.",
-];
 
 const whatsappHref = getSalesWhatsAppHref(
   "Ola! Quero fazer um diagnostico rapido para meu negocio.",
@@ -33,71 +24,95 @@ const whatsappHref = getSalesWhatsAppHref(
 
 export default function DiagnosticPage() {
   return (
-    <main className="bg-slate-50 pb-24 text-ink-950 sm:pb-0">
-      <section className="bg-ink-950 text-white">
-        <header className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
-          <Logo className="[&_span:last-child]:text-white" />
-          <Link
-            href="/apresentacao-comercial"
-            className="hidden min-h-11 items-center justify-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-ink-950 transition hover:bg-brand-50 sm:inline-flex"
-          >
-            <ClipboardList className="size-4" />
-            Apresentacao
-          </Link>
-        </header>
-
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 pb-16 pt-8 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:pb-20 lg:pt-14">
-          <div>
-            <Badge className="border border-white/10 bg-white/10 text-brand-100">
-              <Sparkles className="mr-1.5 size-3.5" />
-              Diagnostico comercial
-            </Badge>
-            <h1 className="mt-5 max-w-3xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-              Descubra qual sistema faz sentido antes de vender.
+    <main className="marketing-shell bg-white pb-24 text-ink-950 sm:pb-0">
+      <section className="relative isolate flex min-h-[72svh] overflow-hidden bg-ink-950 text-white">
+        <Image
+          src="/images/product-crm.png"
+          alt="CRM do ModuCore usado como base para o diagnostico"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-left-top"
+        />
+        <div className="absolute inset-0 bg-ink-950/89" />
+        <SiteHeader inverse overlay whatsappHref={whatsappHref} />
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl items-end px-5 pb-12 pt-32 sm:px-8 sm:pb-16 lg:px-10 lg:pb-20">
+          <div className="max-w-4xl">
+            <p className="text-sm font-bold text-sky-300">Conversa orientada</p>
+            <h1 className="font-display mt-4 text-4xl leading-[1.08] sm:text-6xl lg:text-7xl">
+              Diagnostico ModuCore
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-200 sm:text-lg">
-              Responda pelo celular e envie tudo direto no WhatsApp: problema,
-              segmento, planilha atual e modulos da primeira proposta.
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-200 sm:text-xl sm:leading-8">
+              Conte o que mais atrapalha sua rotina e descubra quais modulos
+              fazem sentido para a primeira versao do sistema.
             </p>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/10 p-6">
-            <ClipboardList className="size-10 text-brand-100" />
-            <h2 className="mt-5 text-2xl font-black">
-              O diagnostico prepara a oferta.
-            </h2>
-            <div className="mt-6 space-y-4">
-              {highlights.map((highlight) => (
-                <div key={highlight} className="flex gap-3 text-sm text-slate-200">
-                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-300" />
-                  {highlight}
-                </div>
-              ))}
-            </div>
-            <div className="mt-7 rounded-2xl bg-white p-5 text-ink-950">
-              <MessageCircle className="size-8 text-emerald-600" />
-              <p className="mt-3 text-sm leading-6 text-slate-600">
-                Ao enviar, o site abre o WhatsApp com todas as respostas
-                organizadas em uma mensagem pronta.
-              </p>
-            </div>
+            <a
+              href="#diagnostico"
+              className="mt-7 inline-flex min-h-13 items-center justify-center gap-2 rounded-lg border border-brand-600 bg-brand-600 px-5 font-bold text-white hover:border-brand-700 hover:bg-brand-700"
+            >
+              Comecar diagnostico
+              <ArrowRight className="size-5" />
+            </a>
           </div>
         </div>
       </section>
 
-      <section id="diagnostico" className="scroll-mt-6 px-5 py-16 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-8 max-w-2xl">
-            <p className="text-sm font-bold uppercase text-brand-600">
-              Formulario
-            </p>
-            <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
-              Colete os dados essenciais em poucos minutos.
-            </h2>
+      <section id="diagnostico" className="scroll-mt-16 px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow="Formulario"
+            title="O essencial para preparar uma boa proposta."
+            description="Leva poucos minutos e organiza as respostas para continuar a conversa no WhatsApp."
+          />
+          <div className="mt-9 grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
+            <DiagnosticForm />
+            <aside className="border-y border-slate-200 py-6 lg:sticky lg:top-24">
+              <ClipboardList className="size-8 text-brand-700" />
+              <h2 className="mt-4 text-lg font-bold">O que vamos entender</h2>
+              <div className="mt-4">
+                {[
+                  "Seu segmento e o tamanho do problema atual.",
+                  "Se a equipe ainda depende de planilha.",
+                  "Quais modulos resolvem o primeiro fluxo.",
+                  "Qual demonstracao faz mais sentido mostrar.",
+                ].map((item) => (
+                  <div key={item} className="flex gap-3 border-b border-slate-200 py-3 last:border-0">
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-600" />
+                    <p className="text-sm leading-6 text-slate-600">{item}</p>
+                  </div>
+                ))}
+              </div>
+              <Link
+                href="/precos"
+                className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-brand-700 hover:text-brand-800"
+              >
+                Consultar pacotes
+                <ArrowRight className="size-4" />
+              </Link>
+            </aside>
           </div>
-          <DiagnosticForm />
         </div>
       </section>
+
+      <section className="bg-slate-50 px-5 py-14 sm:px-8 lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 border-y border-slate-200 py-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="font-bold">Prefere explicar por mensagem?</p>
+            <p className="mt-1 text-sm text-slate-600">Converse diretamente e receba orientacao sobre o modelo inicial.</p>
+          </div>
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-13 items-center justify-center gap-2 rounded-lg border border-emerald-700 bg-emerald-700 px-5 font-bold text-white hover:border-emerald-800 hover:bg-emerald-800"
+          >
+            <MessageCircle className="size-5" />
+            Conversar no WhatsApp
+          </a>
+        </div>
+      </section>
+
+      <SiteFooter />
       <MobileWhatsAppCta href={whatsappHref} label="Conversar no WhatsApp" />
     </main>
   );

@@ -91,7 +91,7 @@ export default async function CourseDemoPage({
               ? "/matriculas/cursos/novo?demo=1"
               : "/matriculas/novo?demo=1"
           }
-          className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl bg-ink-950 px-6 text-base font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700"
+          className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-base font-bold text-white shadow-sm transition hover:bg-brand-700"
         >
           {demoStudent ? (
             <PlayCircle className="size-5" />
@@ -121,7 +121,7 @@ export default async function CourseDemoPage({
                     <Icon className="size-5" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-bold uppercase text-slate-400">
+                    <p className="text-xs font-bold uppercase text-slate-500">
                       Etapa {index + 1}
                     </p>
                     <p className="mt-1 font-bold text-ink-950">{step.label}</p>

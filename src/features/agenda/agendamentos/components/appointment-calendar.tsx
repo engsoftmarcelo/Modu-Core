@@ -29,7 +29,7 @@ const blockTones: Record<AppointmentStatus, string> = {
     "border-violet-200 bg-violet-50 text-violet-900 hover:bg-violet-100",
   completed:
     "border-emerald-200 bg-emerald-50 text-emerald-900 hover:bg-emerald-100",
-  cancelled: "border-slate-200 bg-slate-100 text-slate-400 hover:bg-slate-200",
+  cancelled: "border-slate-200 bg-slate-100 text-slate-500 hover:bg-slate-200",
 };
 
 function DayColumn({
@@ -141,7 +141,7 @@ export function AppointmentCalendar({
                       header.isWeekend && "bg-slate-50/60",
                     )}
                   >
-                    <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">
+                    <span className="text-[11px] font-bold uppercase text-slate-500">
                       {header.weekdayShort}
                     </span>
                     <span
@@ -167,7 +167,7 @@ export function AppointmentCalendar({
                 {hourMarks.map((hour) => (
                   <div
                     key={hour}
-                    className="absolute right-2 -translate-y-1/2 text-[11px] font-semibold text-slate-400"
+                    className="absolute right-2 -translate-y-1/2 text-[11px] font-semibold text-slate-500"
                     style={{ top: (hour - DAY_START_HOUR) * HOUR_HEIGHT }}
                   >
                     {String(hour).padStart(2, "0")}:00

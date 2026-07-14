@@ -47,10 +47,10 @@ function EmptyStateLink({
     <Link
       href={action.href}
       className={cn(
-        "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-100",
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border px-4 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-100",
         primary
-          ? "bg-ink-950 text-white shadow-lg shadow-indigo-950/10 hover:bg-brand-700"
-          : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-ink-950",
+          ? "border-brand-600 bg-brand-600 text-white shadow-sm hover:border-brand-700 hover:bg-brand-700"
+          : "border-slate-300 bg-white text-slate-600 hover:bg-slate-50 hover:text-ink-950",
       )}
     >
       {ActionIcon ? <ActionIcon className="size-4" aria-hidden="true" /> : null}
@@ -71,14 +71,14 @@ export function EmptyState({
   return (
     <section
       className={cn(
-        "grid min-h-80 place-items-center rounded-2xl border border-slate-200 bg-white px-5 py-12 text-center shadow-sm sm:px-8",
+        "grid min-h-72 place-items-center rounded-lg border border-dashed border-slate-300 bg-white px-5 py-10 text-center sm:px-8",
         className,
       )}
     >
       <div className="max-w-lg">
         <span
           className={cn(
-            "mx-auto grid size-16 place-items-center rounded-xl ring-8",
+            "mx-auto grid size-13 place-items-center rounded-lg ring-4",
             toneClasses[tone],
           )}
         >

@@ -83,7 +83,7 @@ function QuickAction({
     return (
       <span
         aria-disabled="true"
-        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-slate-100 px-4 text-sm font-bold text-slate-400"
+        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-slate-100 px-4 text-sm font-bold text-slate-500"
       >
         {content}
       </span>
@@ -162,7 +162,7 @@ export default async function WorkOrderDetailsPage({
           <ChevronLeft className="size-4" />
           {demoMode ? "Voltar para a demo" : "Voltar para ordens"}
         </Link>
-        <span className="text-xs font-bold text-slate-400 sm:hidden">
+        <span className="text-xs font-bold text-slate-500 sm:hidden">
           OS #{reference}
         </span>
       </div>
@@ -190,7 +190,7 @@ export default async function WorkOrderDetailsPage({
               </h1>
               <WorkOrderStatusBadge status={workOrder.status} />
             </div>
-            <p className="mt-1.5 hidden text-sm font-semibold text-slate-400 sm:block">
+            <p className="mt-1.5 hidden text-sm font-semibold text-slate-500 sm:block">
               OS #{reference}
             </p>
           </div>
@@ -200,7 +200,7 @@ export default async function WorkOrderDetailsPage({
           href={`/ordens-servico/${workOrder.id}/editar`}
           aria-label="Editar ordem"
           title="Editar ordem"
-          className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-ink-950 text-sm font-bold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-brand-700 sm:h-12 sm:w-auto sm:gap-2 sm:px-5"
+          className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700 sm:h-12 sm:w-auto sm:gap-2 sm:px-5"
         >
           <Pencil className="size-4" />
           <span className="hidden sm:inline">Editar ordem</span>
@@ -211,7 +211,7 @@ export default async function WorkOrderDetailsPage({
         <div className="space-y-5">
           <Card className="overflow-hidden">
             <div className="border-b border-slate-200 px-5 py-4 sm:px-6">
-              <p className="text-xs font-bold uppercase text-slate-400">
+              <p className="text-xs font-bold uppercase text-slate-500">
                 Cliente
               </p>
               {workOrder.customer_id && workOrder.customerName ? (
@@ -250,10 +250,10 @@ export default async function WorkOrderDetailsPage({
                 icon={MessageCircle}
                 label="WhatsApp"
                 external
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 text-sm font-bold text-white transition hover:bg-emerald-700"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-emerald-700 px-4 text-sm font-bold text-white transition hover:bg-emerald-800"
               />
               {!callHref && !whatsappHref ? (
-                <p className="col-span-2 text-xs font-semibold text-slate-400">
+                <p className="col-span-2 text-xs font-semibold text-slate-500">
                   Nenhum telefone foi cadastrado para este cliente.
                 </p>
               ) : null}
@@ -265,7 +265,7 @@ export default async function WorkOrderDetailsPage({
                   <MapPin className="size-5" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs font-bold uppercase text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Endereco
                   </p>
                   <p className="mt-1 text-sm font-semibold leading-6 text-ink-950">
@@ -288,7 +288,7 @@ export default async function WorkOrderDetailsPage({
               <div className="flex gap-3 bg-white px-5 py-4 sm:px-6">
                 <CalendarDays className="mt-0.5 size-5 shrink-0 text-emerald-600" />
                 <div>
-                  <p className="text-xs font-bold uppercase text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Data da visita
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -299,7 +299,7 @@ export default async function WorkOrderDetailsPage({
               <div className="flex gap-3 bg-white px-5 py-4 sm:px-6">
                 <HardHat className="mt-0.5 size-5 shrink-0 text-amber-600" />
                 <div className="min-w-0">
-                  <p className="text-xs font-bold uppercase text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Tecnico responsavel
                   </p>
                   <p className="mt-1 truncate text-sm font-semibold text-ink-950">
@@ -340,7 +340,7 @@ export default async function WorkOrderDetailsPage({
                 <div className="flex gap-3 bg-white px-5 py-4 sm:px-6">
                   <UserCheck className="mt-0.5 size-5 shrink-0 text-emerald-600" />
                   <div className="min-w-0">
-                    <p className="text-xs font-bold uppercase text-slate-400">
+                    <p className="text-xs font-bold uppercase text-slate-500">
                       Aprovado por
                     </p>
                     <p className="mt-1 break-words text-sm font-semibold text-ink-950">
@@ -351,7 +351,7 @@ export default async function WorkOrderDetailsPage({
                 <div className="flex gap-3 bg-white px-5 py-4 sm:px-6">
                   <CalendarClock className="mt-0.5 size-5 shrink-0 text-indigo-600" />
                   <div>
-                    <p className="text-xs font-bold uppercase text-slate-400">
+                    <p className="text-xs font-bold uppercase text-slate-500">
                       Data e hora
                     </p>
                     <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -362,9 +362,9 @@ export default async function WorkOrderDetailsPage({
               </div>
               {workOrder.completion_notes ? (
                 <div className="flex gap-3 border-t border-slate-200 px-5 py-4 sm:px-6">
-                  <MessageSquareText className="mt-0.5 size-5 shrink-0 text-slate-400" />
+                  <MessageSquareText className="mt-0.5 size-5 shrink-0 text-slate-500" />
                   <div className="min-w-0">
-                    <p className="text-xs font-bold uppercase text-slate-400">
+                    <p className="text-xs font-bold uppercase text-slate-500">
                       Observacao final
                     </p>
                     <p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-slate-600">
@@ -396,7 +396,7 @@ export default async function WorkOrderDetailsPage({
                 </span>
                 <div>
                   <h2 className="font-bold text-ink-950">Orcamento da O.S.</h2>
-                  <p className="mt-0.5 text-xs font-semibold text-slate-400">
+                  <p className="mt-0.5 text-xs font-semibold text-slate-500">
                     {workOrder.quoted_at
                       ? `Emitido em ${formatDateTime(workOrder.quoted_at)}`
                       : "Aguardando emissao"}
@@ -448,9 +448,9 @@ export default async function WorkOrderDetailsPage({
             <h2 className="font-bold text-ink-950">Registro</h2>
             <div className="mt-5 space-y-5">
               <div className="flex gap-3">
-                <Clock3 className="mt-0.5 size-5 text-slate-400" />
+                <Clock3 className="mt-0.5 size-5 text-slate-500" />
                 <div>
-                  <p className="text-xs font-bold uppercase text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Criada em
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">
@@ -459,9 +459,9 @@ export default async function WorkOrderDetailsPage({
                 </div>
               </div>
               <div className="flex gap-3">
-                <Clock3 className="mt-0.5 size-5 text-slate-400" />
+                <Clock3 className="mt-0.5 size-5 text-slate-500" />
                 <div>
-                  <p className="text-xs font-bold uppercase text-slate-400">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Ultima atualizacao
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink-950">

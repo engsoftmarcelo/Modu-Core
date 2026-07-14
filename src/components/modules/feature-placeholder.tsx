@@ -17,7 +17,7 @@ export function FeaturePlaceholder({ module }: { module: ModuleConfig }) {
             <span className="grid size-12 place-items-center rounded-2xl bg-white text-brand-700 shadow-sm">
               <Icon className="size-6" />
             </span>
-            <h1 className="text-3xl font-bold tracking-[-0.04em] text-ink-950 sm:text-4xl">
+            <h1 className="text-3xl font-bold text-ink-950 sm:text-4xl">
               {module.name}
             </h1>
           </div>
@@ -47,7 +47,7 @@ export function FeaturePlaceholder({ module }: { module: ModuleConfig }) {
                 ) : (
                   <Check className="size-5 text-slate-300" />
                 )}
-                <span className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
+                <span className="text-xs font-bold uppercase text-slate-500">
                   Etapa {index + 1}
                 </span>
               </div>

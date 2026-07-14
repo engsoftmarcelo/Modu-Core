@@ -70,7 +70,7 @@ export function AttendanceForm({
           >
             <div className="min-w-0">
               <p className="truncate font-bold text-ink-950">{student.studentName}</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
+              <p className="mt-1 text-xs font-semibold uppercase text-slate-500">
                 Aluno matriculado
               </p>
             </div>
